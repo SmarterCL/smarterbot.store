@@ -96,6 +96,20 @@ body {
   overflow-x: hidden;
 }
 
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 /* Animated Background */
 body::before {
   content: '';
@@ -462,6 +476,22 @@ h3 {
   animation: spin 1s linear infinite;
 }
 
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  body::before {
+    animation: none !important;
+  }
+}
+
 /* Utility Classes */
 .text-center {
   text-align: center;
@@ -531,6 +561,62 @@ h3 {
   margin-bottom: var(--spacing-lg);
 }
 
+/* Background Color Utilities */
+.bg-bg-primary {
+  background-color: var(--color-bg-primary);
+}
+
+.bg-bg-secondary {
+  background-color: var(--color-bg-secondary);
+}
+
+.bg-bg-tertiary {
+  background-color: var(--color-bg-tertiary);
+}
+
+.bg-bg-card {
+  background-color: var(--color-bg-card);
+}
+
+.bg-bg-card-hover {
+  background-color: var(--color-bg-card-hover);
+}
+
+/* Text Color Utilities */
+.text-text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-text-tertiary {
+  color: var(--color-text-tertiary);
+}
+
+.text-text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-primary-light {
+  color: var(--color-primary-light);
+}
+
+/* Border Utilities */
+.border-border {
+  border-color: var(--color-border);
+}
+
+.border-primary {
+  border-color: var(--color-primary);
+}
+
+/* Shadow Utilities */
+.shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   :root {
@@ -548,6 +634,55 @@ h3 {
   
   .section-lg {
     padding: 4rem 0;
+  }
+  
+  /* Mobile-specific improvements */
+  .btn {
+    min-height: 44px; /* iOS touch target minimum */
+    padding: 0.875rem 1.5rem;
+  }
+  
+  .btn-icon {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  /* Improve mobile text readability */
+  body {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  
+  /* Prevent horizontal scroll on mobile */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+  
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Ensure touch targets are large enough for mobile */
+@media (hover: none) and (pointer: coarse) {
+  button, 
+  a.btn,
+  .btn,
+  .card-interactive {
+    min-height: 44px;
+    min-width: 44px;
   }
 }
 
