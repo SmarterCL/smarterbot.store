@@ -30,10 +30,10 @@ const Footer = () => {
     };
 
     const socialLinks = [
-        { icon: Github, href: 'https://github.com/Zie619', label: 'GitHub' },
+        { icon: Github, href: 'https://github.com/SmarterCL', label: 'GitHub' },
         { icon: Twitter, href: '#', label: 'Twitter' },
         { icon: Linkedin, href: '#', label: 'LinkedIn' },
-        { icon: Mail, href: 'mailto:contact@smarterbot.store', label: 'Email' },
+        { icon: Mail, href: 'mailto:smarterbotcl@gmail.com', label: 'Email' },
     ];
 
     return (

@@ -119,7 +119,7 @@ const Workflows = () => {
                     <p className="text-xl text-text-secondary max-w-3xl mx-auto">
                         Browse our collection of 4,343+ production-ready workflows from the{' '}
                         <a
-                            href="https://github.com/Zie619/n8n-workflows"
+                            href="https://github.com/SmarterCL/n8n-workflows"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-primary-light hover:underline inline-flex items-center gap-1"
@@ -247,7 +247,7 @@ const Workflows = () => {
                         Explore our complete collection of 4,343+ workflows on GitHub. Star the repo to stay updated!
                     </p>
                     <a
-                        href="https://github.com/Zie619/n8n-workflows"
+                        href="https://github.com/SmarterCL/n8n-workflows"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn btn-primary inline-flex items-center gap-2"

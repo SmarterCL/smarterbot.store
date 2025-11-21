@@ -197,7 +197,7 @@ Warning:   #f59e0b (Amber)
 ## 📞 Repository Links
 
 **GitHub Repository (n8n workflows):**
-https://github.com/Zie619/n8n-workflows
+https://github.com/SmarterCL/n8n-workflows
 
 **Deployment Platform:**
 - Dokploy

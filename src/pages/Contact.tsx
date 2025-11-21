@@ -30,10 +30,10 @@ const Contact = () => {
                                     <div>
                                         <div className="font-semibold mb-1">Email</div>
                                         <a
-                                            href="mailto:contact@smarterbot.store"
+                                            href="mailto:smarterbotcl@gmail.com"
                                             className="text-text-secondary hover:text-primary-light transition-colors"
                                         >
-                                            contact@smarterbot.store
+                                            smarterbotcl@gmail.com
                                         </a>
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@ const Contact = () => {
                             <h3 className="text-xl font-bold mb-6">Follow Us</h3>
                             <div className="flex gap-3">
                                 <a
-                                    href="https://github.com/Zie619"
+                                    href="https://github.com/SmarterCL"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="w-12 h-12 rounded-lg bg-bg-tertiary border border-border flex items-center justify-center text-text-secondary hover:text-primary-light hover:border-primary transition-all hover:shadow-glow"
