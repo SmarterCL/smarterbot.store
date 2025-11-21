@@ -21,14 +21,14 @@ const Workflows = () => {
     const workflows: Workflow[] = [
         {
             id: '1',
-            name: 'Shopify Order Automation',
-            description: 'Automatically process new orders, send confirmations, and update inventory',
+            name: 'Odoo Order Automation',
+            description: 'Automatically process new orders, send confirmations, and update inventory in Odoo',
             category: 'E-commerce',
             nodes: 12,
             downloads: '2.5K',
             rating: 4.8,
             lastUpdated: '2 days ago',
-            tags: ['Shopify', 'E-commerce', 'Automation'],
+            tags: ['Odoo', 'E-commerce', 'Automation'],
         },
         {
             id: '2',
@@ -158,8 +158,8 @@ const Workflows = () => {
                             <button
                                 key={category}
                                 className={`px-4 py-2 rounded-lg font-medium transition-all ${selectedCategory === category
-                                        ? 'bg-primary text-white shadow-glow'
-                                        : 'bg-bg-tertiary text-text-secondary hover:bg-bg-card-hover border border-border'
+                                    ? 'bg-primary text-white shadow-glow'
+                                    : 'bg-bg-tertiary text-text-secondary hover:bg-bg-card-hover border border-border'
                                     }`}
                                 onClick={() => setSelectedCategory(category)}
                             >

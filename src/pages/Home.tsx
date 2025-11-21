@@ -28,7 +28,7 @@ const Home = () => {
         {
             icon: ShoppingCart,
             title: 'E-commerce Ready',
-            description: 'Seamless Shopify and Odoo integrations for your online store',
+            description: 'Seamless Odoo integrations for your online store and business',
             gradient: 'from-blue-500 to-cyan-500',
         },
         {
@@ -67,10 +67,10 @@ const Home = () => {
     const integrations = [
         { name: 'n8n', color: 'bg-gradient-to-br from-purple-500 to-pink-500' },
         { name: 'Odoo', color: 'bg-gradient-to-br from-blue-500 to-indigo-500' },
-        { name: 'Shopify', color: 'bg-gradient-to-br from-green-500 to-emerald-500' },
         { name: 'Meta', color: 'bg-gradient-to-br from-blue-600 to-purple-600' },
         { name: 'Hostinger', color: 'bg-gradient-to-br from-orange-500 to-red-500' },
         { name: 'Dokploy', color: 'bg-gradient-to-br from-cyan-500 to-blue-500' },
+        { name: 'Caddy', color: 'bg-gradient-to-br from-green-500 to-emerald-500' },
     ];
 
     const benefits = [
@@ -101,7 +101,7 @@ const Home = () => {
                         </h1>
 
                         <p className="text-xl text-text-secondary mb-8 max-w-2xl mx-auto animate-fade-in">
-                            Deploy powerful n8n workflows, integrate Odoo & Shopify, scale with VPS hosting,
+                            Deploy powerful n8n workflows, integrate Odoo, scale with VPS hosting,
                             and supercharge your marketing with Meta Ads. All in one platform.
                         </p>
 

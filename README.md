@@ -2,12 +2,12 @@
 
 **Automation Workflows & Business Solutions Platform**
 
-Deploy powerful n8n workflows, integrate Odoo & Shopify, scale with VPS hosting, and supercharge your marketing with Meta Ads. 4,343+ production-ready workflows.
+Deploy powerful n8n workflows, integrate Odoo & scale with VPS hosting, and supercharge your marketing with Meta Ads. 4,343+ production-ready workflows.
 
 ## ✨ Features
 
 - 🔄 **4,343+ n8n Workflows** - Production-ready automation workflows
-- 🛍️ **E-commerce Integration** - Seamless Shopify & Odoo connections
+- 🛍️ **E-commerce Integration** - Seamless Odoo connections
 - 📊 **Meta Ads Automation** - Powerful marketing campaign management
 - 🖥️ **VPS Hosting** - Enterprise-grade hosting with Hostinger
 - 🌐 **Domain Services** - Premium domain registration and management

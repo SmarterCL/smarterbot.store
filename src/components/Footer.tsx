@@ -14,7 +14,6 @@ const Footer = () => {
         integrations: [
             { name: 'n8n', path: '/integrations/n8n' },
             { name: 'Odoo', path: '/integrations/odoo' },
-            { name: 'Shopify', path: '/integrations/shopify' },
             { name: 'Meta Ads', path: '/integrations/meta' },
         ],
         company: [
@@ -55,7 +54,7 @@ const Footer = () => {
                         </Link>
                         <p className="text-text-secondary text-sm mb-6 max-w-sm">
                             Automation workflows and integrations for modern businesses. Deploy powerful
-                            n8n workflows, connect Odoo, Shopify, Meta Ads, and more.
+                            n8n workflows, connect Odoo, Meta Ads, and more.
                         </p>
                         <div className="flex gap-3">
                             {socialLinks.map((social) => (

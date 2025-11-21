@@ -5,7 +5,7 @@
 **SmarterBOT.store** is a comprehensive automation platform that showcases:
 - n8n workflow collection (4,343+ workflows)
 - Business services (VPS, domains, automation)
-- Integration marketplace (Odoo, Shopify, Meta Ads)
+- Integration marketplace (Odoo, Meta Ads)
 - Premium landing page and portfolio
 
 ## 📁 Project Structure
