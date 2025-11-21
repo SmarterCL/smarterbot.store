@@ -102,14 +102,6 @@ body {
   outline-offset: 2px;
 }
 
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
 /* Animated Background */
 body::before {
   content: '';
@@ -652,12 +644,6 @@ h3 {
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
   }
-  
-  /* Prevent horizontal scroll on mobile */
-  html, body {
-    overflow-x: hidden;
-    width: 100%;
-  }
 }
 
 /* Tablet breakpoint */
@@ -672,17 +658,6 @@ h3 {
   
   .grid-4 {
     grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Ensure touch targets are large enough for mobile */
-@media (hover: none) and (pointer: coarse) {
-  button, 
-  a.btn,
-  .btn,
-  .card-interactive {
-    min-height: 44px;
-    min-width: 44px;
   }
 }
 
