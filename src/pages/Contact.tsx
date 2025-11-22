@@ -1,6 +1,47 @@
+import { useState } from 'react';
 import { Mail, Phone, MapPin, Send, MessageSquare, Twitter, Linkedin, Github } from 'lucide-react';
 
 const Contact = () => {
+    const [loading, setLoading] = useState(false);
+    const [ok, setOk] = useState<null | boolean>(null);
+    const [error, setError] = useState<string | null>(null);
+
+    async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        setLoading(true);
+        setOk(null);
+        setError(null);
+        const form = e.currentTarget;
+        const formData = new FormData(form);
+        const firstName = formData.get('firstName');
+        const lastName = formData.get('lastName');
+        const name = `${firstName} ${lastName}`.trim();
+        const email = formData.get('email');
+        const phone = formData.get('phone') || null;
+        const subject = formData.get('subject');
+        const message = formData.get('message');
+        const body = `${subject}\n\n${message}`;
+        try {
+            const res = await fetch('https://app.smarterbot.cl/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, message: body, phone, source: 'smarterbot.store' }),
+            });
+            setOk(res.ok);
+            if (!res.ok) {
+                const t = await res.text();
+                setError(t || 'Error al enviar el formulario');
+            } else {
+                form.reset();
+            }
+        } catch (err: any) {
+            setOk(false);
+            setError(err?.message || 'Error de red');
+        } finally {
+            setLoading(false);
+        }
+    }
+
     return (
         <div className="min-h-screen pt-24 pb-16">
             <div className="container">
@@ -121,7 +162,7 @@ const Contact = () => {
                         <div className="card">
                             <h3 className="text-2xl font-bold mb-6">Send us a Message</h3>
 
-                            <form className="space-y-6">
+                            <form onSubmit={onSubmit} className="space-y-6">
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div>
                                         <label htmlFor="firstName" className="block text-sm font-medium mb-2">
@@ -223,10 +264,18 @@ const Contact = () => {
                                     </label>
                                 </div>
 
-                                <button type="submit" className="btn btn-primary w-full md:w-auto">
+                                <button type="submit" className="btn btn-primary w-full md:w-auto" disabled={loading}>
                                     <Send className="w-5 h-5" />
-                                    Send Message
+                                    {loading ? 'Sending...' : 'Send Message'}
                                 </button>
+                                {ok === true && (
+                                    <p className="text-green-400 text-center">
+                                        ¡Gracias! Hemos recibido tu mensaje.
+                                    </p>
+                                )}
+                                {ok === false && error && (
+                                    <p className="text-red-400 text-center">{error}</p>
+                                )}
                             </form>
                         </div>
 
