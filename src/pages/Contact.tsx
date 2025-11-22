@@ -22,7 +22,7 @@ const Contact = () => {
         const message = formData.get('message');
         const body = `${subject}\n\n${message}`;
         try {
-            const res = await fetch('https://app.smarterbot.cl/api/contact', {
+            const res = await fetch('https://api.smarterbot.cl/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, message: body, phone, source: 'smarterbot.store' }),
