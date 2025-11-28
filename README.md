@@ -94,7 +94,7 @@ Create a `.env` file for local development:
 
 ```env
 VITE_API_URL=https://api.smarterbot.store
-VITE_GITHUB_REPO=https://github.com/SmarterCL/n8n-workflows
+VITE_GITHUB_REPO=https://n8n.smarterbot.store
 ```
 
 ## 📁 Project Structure
@@ -132,7 +132,7 @@ The application uses a custom design system with:
 
 ## 🔗 Integration with n8n Workflows
 
-This platform showcases workflows from the [n8n-workflows repository](https://github.com/SmarterCL/n8n-workflows):
+This platform showcases workflows from the [n8n platform](https://n8n.smarterbot.store):
 
 - 4,343 Production-Ready Workflows
 - 365 Unique Integrations
