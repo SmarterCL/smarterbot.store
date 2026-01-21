@@ -5,26 +5,26 @@ const Docs = () => {
     const sections = [
         {
             icon: Book,
-            title: 'Getting Started',
-            description: 'Learn the basics of SmarterBOT, installation, and initial setup.',
+            title: 'Comenzando',
+            description: 'Aprende lo básico de SmarterBOT, instalación y configuración inicial.',
             link: '#'
         },
         {
             icon: Code,
-            title: 'API Reference',
-            description: 'Detailed API documentation for developers and integrators.',
+            title: 'Referencia de API',
+            description: 'Documentación detallada de la API para desarrolladores e integradores.',
             link: '#'
         },
         {
             icon: Terminal,
-            title: 'Workflows Guide',
-            description: 'How to create, import, and manage n8n workflows.',
+            title: 'Guía de Flujos',
+            description: 'Cómo crear, importar y gestionar flujos de trabajo de n8n.',
             link: '#'
         },
         {
             icon: Globe,
-            title: 'Hosting & Deployment',
-            description: 'Guides on deploying to VPS, Docker, and managing domains.',
+            title: 'Hosting y Despliegue',
+            description: 'Guías para desplegar en VPS, Docker y gestión de dominios.',
             link: '#'
         }
     ];
@@ -35,10 +35,10 @@ const Docs = () => {
                 <div className="max-w-5xl mx-auto">
                     <div className="text-center mb-16">
                         <h1 className="text-4xl font-bold mb-6">
-                            Documentation
+                            Documentación
                         </h1>
                         <p className="text-xl text-text-secondary max-w-2xl mx-auto">
-                            Everything you need to build, deploy, and scale with SmarterBOT.
+                            Todo lo que necesitas para construir, desplegar y escalar con SmarterBOT.
                         </p>
                     </div>
 
@@ -67,31 +67,31 @@ const Docs = () => {
                     </div>
 
                     <div className="card bg-bg-secondary/30 border border-border p-8 rounded-2xl">
-                        <h2 className="text-2xl font-bold mb-6">Popular Topics</h2>
+                        <h2 className="text-2xl font-bold mb-6">Temas Populares</h2>
                         <div className="grid md:grid-cols-3 gap-4">
                             <a href="#" className="flex items-center gap-2 text-text-secondary hover:text-primary-light transition-colors">
                                 <FileText className="w-4 h-4" />
-                                Setting up Odoo Integration
+                                Configuración de Integración Odoo
                             </a>
                             <a href="#" className="flex items-center gap-2 text-text-secondary hover:text-primary-light transition-colors">
                                 <FileText className="w-4 h-4" />
-                                WhatsApp API Setup
+                                Configuración de WhatsApp API
                             </a>
                             <a href="#" className="flex items-center gap-2 text-text-secondary hover:text-primary-light transition-colors">
                                 <FileText className="w-4 h-4" />
-                                VPS Security Best Practices
+                                Buenas Prácticas de Seguridad VPS
                             </a>
                             <a href="#" className="flex items-center gap-2 text-text-secondary hover:text-primary-light transition-colors">
                                 <FileText className="w-4 h-4" />
-                                Custom Workflow Nodes
+                                Nodos de Flujo Personalizados
                             </a>
                             <a href="#" className="flex items-center gap-2 text-text-secondary hover:text-primary-light transition-colors">
                                 <FileText className="w-4 h-4" />
-                                Managing API Keys
+                                Gestión de Claves API
                             </a>
                             <a href="#" className="flex items-center gap-2 text-text-secondary hover:text-primary-light transition-colors">
                                 <FileText className="w-4 h-4" />
-                                Backup & Restore
+                                Respaldo y Restauración
                             </a>
                         </div>
                     </div>
