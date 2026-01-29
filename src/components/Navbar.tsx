@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Zap, Search } from 'lucide-react';
+import { Menu, X, Zap, Search, Globe } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Navbar = () => {
+    const { language, setLanguage, t } = useLanguage();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isLangOpen, setIsLangOpen] = useState(false);
     const location = useLocation();
 
     useEffect(() => {
@@ -17,12 +20,12 @@ const Navbar = () => {
     }, []);
 
     const navLinks = [
-        { name: 'Home', path: '/' },
-        { name: 'Workflows', path: '/workflows' },
-        { name: 'Services', path: '/services' },
-        { name: 'Integrations', path: '/integrations' },
-        { name: 'Pricing', path: '/pricing' },
-        { name: 'Contact', path: '/contact' },
+        { name: t('nav.home'), path: '/' },
+        { name: t('nav.workflows'), path: '/workflows' },
+        { name: t('nav.services'), path: '/services' },
+        { name: t('nav.integrations'), path: '/integrations' },
+        { name: t('nav.pricing'), path: '/pricing' },
+        { name: t('nav.contact'), path: '/contact' },
     ];
 
     return (
@@ -44,21 +47,21 @@ const Navbar = () => {
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-8">
+                    <div className="hidden md:flex items-center gap-6">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.path}
                                 to={link.path}
                                 className={`text-sm font-medium transition-colors relative group ${location.pathname === link.path
-                                        ? 'text-primary-light'
-                                        : 'text-text-secondary hover:text-text-primary'
+                                    ? 'text-primary-light'
+                                    : 'text-text-secondary hover:text-text-primary'
                                     }`}
                             >
                                 {link.name}
                                 <span
                                     className={`absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-primary transform transition-transform ${location.pathname === link.path
-                                            ? 'scale-x-100'
-                                            : 'scale-x-0 group-hover:scale-x-100'
+                                        ? 'scale-x-100'
+                                        : 'scale-x-0 group-hover:scale-x-100'
                                         }`}
                                 />
                             </Link>
@@ -67,38 +70,74 @@ const Navbar = () => {
 
                     {/* Desktop Actions */}
                     <div className="hidden md:flex items-center gap-4">
+                        {/* Language Selector */}
+                        <div className="relative">
+                            <button
+                                className="btn-icon btn-secondary flex items-center gap-2 px-3 w-auto"
+                                onClick={() => setIsLangOpen(!isLangOpen)}
+                            >
+                                <Globe className="w-4 h-4" />
+                                <span className="text-xs uppercase font-bold">{language}</span>
+                            </button>
+                            {isLangOpen && (
+                                <div className="absolute top-full right-0 mt-2 w-32 glass border border-border rounded-xl p-2 shadow-xl animate-scale-in origin-top-right">
+                                    <button
+                                        className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${language === 'es' ? 'bg-primary/20 text-primary-light' : 'hover:bg-bg-tertiary text-text-secondary'}`}
+                                        onClick={() => { setLanguage('es'); setIsLangOpen(false); }}
+                                    >
+                                        Español
+                                    </button>
+                                    <button
+                                        className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${language === 'en' ? 'bg-primary/20 text-primary-light' : 'hover:bg-bg-tertiary text-text-secondary'}`}
+                                        onClick={() => { setLanguage('en'); setIsLangOpen(false); }}
+                                    >
+                                        English
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+
                         <button className="btn-icon btn-secondary">
                             <Search className="w-5 h-5" />
                         </button>
                         <Link to="/demo" className="btn btn-primary">
-                            Get Started
+                            {t('nav.getStarted')}
                         </Link>
                     </div>
 
                     {/* Mobile Menu Button */}
-                    <button
-                        className="md:hidden btn-icon btn-secondary"
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    >
-                        {isMobileMenuOpen ? (
-                            <X className="w-6 h-6" />
-                        ) : (
-                            <Menu className="w-6 h-6" />
-                        )}
-                    </button>
+                    <div className="flex items-center gap-2 md:hidden">
+                        <button
+                            className="btn-icon btn-secondary flex items-center gap-1 px-2 w-auto h-10"
+                            onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
+                        >
+                            <Globe className="w-4 h-4" />
+                            <span className="text-xs uppercase font-bold">{language}</span>
+                        </button>
+                        <button
+                            className="btn-icon btn-secondary"
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        >
+                            {isMobileMenuOpen ? (
+                                <X className="w-6 h-6" />
+                            ) : (
+                                <Menu className="w-6 h-6" />
+                            )}
+                        </button>
+                    </div>
                 </div>
 
                 {/* Mobile Menu */}
                 {isMobileMenuOpen && (
                     <div className="md:hidden py-4 animate-fade-in">
-                        <div className="flex flex-col gap-4">
+                        <div className="flex flex-col gap-2">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.path}
                                     to={link.path}
                                     className={`text-base font-medium transition-colors px-4 py-2 rounded-lg ${location.pathname === link.path
-                                            ? 'bg-bg-tertiary text-primary-light'
-                                            : 'text-text-secondary hover:text-text-primary hover:bg-bg-tertiary'
+                                        ? 'bg-bg-tertiary text-primary-light'
+                                        : 'text-text-secondary hover:text-text-primary hover:bg-bg-tertiary'
                                         }`}
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
@@ -114,7 +153,7 @@ const Navbar = () => {
                                     className="btn btn-primary flex-1 justify-center"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
-                                    Get Started
+                                    {t('nav.getStarted')}
                                 </Link>
                             </div>
                         </div>

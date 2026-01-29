@@ -1,15 +1,18 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Zap, Github, Twitter, Linkedin, Mail, Heart } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Footer = () => {
+    const { t } = useLanguage();
     const currentYear = new Date().getFullYear();
 
     const footerLinks = {
         product: [
-            { name: 'Workflows', path: '/workflows' },
-            { name: 'Services', path: '/services' },
-            { name: 'Integrations', path: '/integrations' },
-            { name: 'Pricing', path: '/pricing' },
+            { name: t('nav.workflows'), path: '/workflows' },
+            { name: t('nav.services'), path: '/services' },
+            { name: t('nav.integrations'), path: '/integrations' },
+            { name: t('nav.pricing'), path: '/pricing' },
         ],
         integrations: [
             { name: 'n8n', path: '/integrations/n8n' },
@@ -17,15 +20,15 @@ const Footer = () => {
             { name: 'Meta Ads', path: '/integrations/meta' },
         ],
         company: [
-            { name: 'About', path: '/about' },
-            { name: 'Blog', path: '/blog' },
-            { name: 'Contact', path: '/contact' },
-            { name: 'Support', path: '/support' },
+            { name: t('footer.about'), path: '/about' },
+            { name: t('footer.blog'), path: '/blog' },
+            { name: t('nav.contact'), path: '/contact' },
+            { name: t('footer.support'), path: '/support' },
         ],
         legal: [
-            { name: 'Privacy Policy', path: '/privacy' },
-            { name: 'Terms of Service', path: '/terms' },
-            { name: 'Cookie Policy', path: '/cookies' },
+            { name: t('footer.privacy'), path: '/privacy' },
+            { name: t('footer.terms'), path: '/terms' },
+            { name: t('footer.cookies'), path: '/cookies' },
         ],
     };
 
@@ -53,8 +56,7 @@ const Footer = () => {
                             </div>
                         </Link>
                         <p className="text-text-secondary text-sm mb-6 max-w-sm">
-                            Automation workflows and integrations for modern businesses. Deploy powerful
-                            n8n workflows, connect Odoo, Meta Ads, and more.
+                            {t('footer.description')}
                         </p>
                         <div className="flex gap-3">
                             {socialLinks.map((social) => (
@@ -74,7 +76,7 @@ const Footer = () => {
 
                     {/* Product Links */}
                     <div>
-                        <h4 className="font-semibold text-text-primary mb-4">Product</h4>
+                        <h4 className="font-semibold text-text-primary mb-4">{t('footer.product')}</h4>
                         <ul className="space-y-3">
                             {footerLinks.product.map((link) => (
                                 <li key={link.path}>
@@ -91,7 +93,7 @@ const Footer = () => {
 
                     {/* Integrations Links */}
                     <div>
-                        <h4 className="font-semibold text-text-primary mb-4">Integrations</h4>
+                        <h4 className="font-semibold text-text-primary mb-4">{t('footer.integrations')}</h4>
                         <ul className="space-y-3">
                             {footerLinks.integrations.map((link) => (
                                 <li key={link.path}>
@@ -108,7 +110,7 @@ const Footer = () => {
 
                     {/* Company Links */}
                     <div>
-                        <h4 className="font-semibold text-text-primary mb-4">Company</h4>
+                        <h4 className="font-semibold text-text-primary mb-4">{t('footer.company')}</h4>
                         <ul className="space-y-3">
                             {footerLinks.company.map((link) => (
                                 <li key={link.path}>
@@ -125,7 +127,7 @@ const Footer = () => {
 
                     {/* Legal Links */}
                     <div>
-                        <h4 className="font-semibold text-text-primary mb-4">Legal</h4>
+                        <h4 className="font-semibold text-text-primary mb-4">{t('footer.legal')}</h4>
                         <ul className="space-y-3">
                             {footerLinks.legal.map((link) => (
                                 <li key={link.path}>
@@ -145,11 +147,10 @@ const Footer = () => {
                 <div className="border-t border-border py-6">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="text-text-tertiary text-sm">
-                            © {currentYear} SmarterBOT.store. All rights reserved.
+                            © {currentYear} SmarterBOT.store. {t('footer.rights')}
                         </p>
                         <p className="text-text-tertiary text-sm flex items-center gap-1">
-                            Made with <Heart className="w-4 h-4 text-secondary animate-pulse" /> by the
-                            SmarterBOT team
+                            {t('footer.madeWith')} <Heart className="w-4 h-4 text-secondary animate-pulse" /> {t('footer.by')}
                         </p>
                     </div>
                 </div>

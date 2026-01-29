@@ -1,13 +1,17 @@
-import { CheckCircle, AlertCircle, Activity } from 'lucide-react';
+import React from 'react';
+import { CheckCircle, Activity } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Status = () => {
+    const { t } = useLanguage();
+
     const services = [
-        { name: 'Sitio Web y API', status: 'operativo' },
-        { name: 'Motor de Flujos', status: 'operativo' },
-        { name: 'Clusters de Base de Datos', status: 'operativo' },
-        { name: 'Servicio de Almacenamiento', status: 'operativo' },
-        { name: 'Envío de Correos', status: 'operativo' },
-        { name: 'Integraciones de Terceros', status: 'operativo' },
+        { name: t('status.services.web'), status: t('status.operational') },
+        { name: t('status.services.engine'), status: t('status.operational') },
+        { name: t('status.services.db'), status: t('status.operational') },
+        { name: t('status.services.storage'), status: t('status.operational') },
+        { name: t('status.services.email'), status: t('status.operational') },
+        { name: t('status.services.integrations'), status: t('status.operational') },
     ];
 
     const incidents = [
@@ -19,10 +23,10 @@ const Status = () => {
             <div className="container">
                 <div className="max-w-4xl mx-auto">
                     <div className="flex items-center justify-between mb-8">
-                        <h1 className="text-4xl font-bold">Estado del Sistema</h1>
+                        <h1 className="text-4xl font-bold">{t('status.title')}</h1>
                         <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20">
                             <Activity className="w-5 h-5 text-green-500 animate-pulse" />
-                            <span className="text-green-500 font-medium">Todos los sistemas operativos</span>
+                            <span className="text-green-500 font-medium">{t('status.allOperational')}</span>
                         </div>
                     </div>
 
@@ -38,10 +42,10 @@ const Status = () => {
                         ))}
                     </div>
 
-                    <h2 className="text-2xl font-bold mb-6">Incidentes Pasados</h2>
+                    <h2 className="text-2xl font-bold mb-6">{t('status.pastIncidents')}</h2>
                     {incidents.length > 0 ? (
                         <div className="space-y-4">
-                            {incidents.map((incident, index) => (
+                            {incidents.map((incident: any, index: number) => (
                                 <div key={index} className="card bg-bg-secondary/30 p-6">
                                     <div className="flex items-center justify-between mb-2">
                                         <h3 className="font-bold">{incident.title}</h3>
@@ -54,7 +58,7 @@ const Status = () => {
                     ) : (
                         <div className="card glass p-8 text-center text-text-secondary">
                             <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
-                            <p>No se han reportado incidentes en los últimos 90 días.</p>
+                            <p>{t('status.noIncidents')}</p>
                         </div>
                     )}
                 </div>

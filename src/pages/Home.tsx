@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {
     Zap,
@@ -16,52 +17,55 @@ import {
     Shield,
     Clock,
 } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Home = () => {
+    const { language, t } = useLanguage();
+
     const features = [
         {
             icon: Workflow,
-            title: 'n8n Workflows',
-            description: '4,343+ production-ready automation workflows from our curated collection',
+            title: t('home.features.n8n.title'),
+            description: t('home.features.n8n.description'),
             gradient: 'from-purple-500 to-pink-500',
         },
         {
             icon: ShoppingCart,
-            title: 'E-commerce Ready',
-            description: 'Seamless Odoo integrations for your online store and business',
+            title: t('home.features.ecommerce.title'),
+            description: t('home.features.ecommerce.description'),
             gradient: 'from-blue-500 to-cyan-500',
         },
         {
             icon: TrendingUp,
-            title: 'Meta Ads Integration',
-            description: 'Powerful marketing automation with Meta Ads campaigns',
+            title: t('home.features.meta.title'),
+            description: t('home.features.meta.description'),
             gradient: 'from-green-500 to-emerald-500',
         },
         {
             icon: Server,
-            title: 'VPS & Hosting',
-            description: 'Enterprise-grade hosting solutions powered by Hostinger',
+            title: t('home.features.vps.title'),
+            description: t('home.features.vps.description'),
             gradient: 'from-orange-500 to-red-500',
         },
         {
             icon: Code,
-            title: 'Custom Development',
-            description: 'Tailored automation solutions for your unique business needs',
+            title: t('home.features.custom.title'),
+            description: t('home.features.custom.description'),
             gradient: 'from-indigo-500 to-purple-500',
         },
         {
             icon: Globe,
-            title: 'Global Domains',
-            description: 'Premium domain registration and management services',
+            title: t('home.features.domains.title'),
+            description: t('home.features.domains.description'),
             gradient: 'from-pink-500 to-rose-500',
         },
     ];
 
     const stats = [
-        { value: '4,343+', label: 'Workflows', icon: Workflow },
-        { value: '365+', label: 'Integrations', icon: Zap },
-        { value: '10,000+', label: 'Active Users', icon: Users },
-        { value: '99.9%', label: 'Uptime', icon: Shield },
+        { value: '4,343+', label: t('home.stats.workflows'), icon: Workflow },
+        { value: '365+', label: t('home.stats.integrations'), icon: Zap },
+        { value: '10,000+', label: t('home.stats.users'), icon: Users },
+        { value: '99.9%', label: t('home.stats.uptime'), icon: Shield },
     ];
 
     const integrations = [
@@ -73,14 +77,7 @@ const Home = () => {
         { name: 'Caddy', color: 'bg-gradient-to-br from-green-500 to-emerald-500' },
     ];
 
-    const benefits = [
-        'Lightning-fast deployment',
-        'Enterprise-grade security',
-        '24/7 support',
-        'Automatic updates',
-        'Scalable infrastructure',
-        'Custom integrations',
-    ];
+    const benefits = t('home.benefits.items');
 
     return (
         <div className="min-h-screen">
@@ -91,28 +88,27 @@ const Home = () => {
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-primary/30 mb-8 animate-fade-in">
                             <Sparkles className="w-4 h-4 text-primary-light" />
                             <span className="text-sm font-medium text-primary-light">
-                                Trusted by 10,000+ businesses worldwide
+                                {t('home.hero.badge')}
                             </span>
                         </div>
 
                         <h1 className="mb-6 animate-fade-in">
-                            Automate Your Business with{' '}
+                            {t('home.hero.title')}{' '}
                             <span className="gradient-text">SmarterBOT</span>
                         </h1>
 
                         <p className="text-xl text-text-secondary mb-8 max-w-2xl mx-auto animate-fade-in">
-                            Deploy powerful n8n workflows, integrate Odoo, scale with VPS hosting,
-                            and supercharge your marketing with Meta Ads. All in one platform.
+                            {t('home.hero.description')}
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in">
                             <Link to="/workflows" className="btn btn-primary">
-                                Browse Workflows
+                                {t('home.hero.ctaWorkflows')}
                                 <ArrowRight className="w-5 h-5" />
                             </Link>
                             <Link to="/demo" className="btn btn-outline">
                                 <Rocket className="w-5 h-5" />
-                                Get Started Free
+                                {t('home.hero.ctaDemo')}
                             </Link>
                         </div>
 
@@ -142,10 +138,10 @@ const Home = () => {
                 <div className="container">
                     <div className="text-center mb-12">
                         <h2 className="mb-4">
-                            Everything You Need to <span className="gradient-text">Automate</span>
+                            {t('home.features.title')} <span className="gradient-text">{t('home.features.titleAccent')}</span>
                         </h2>
                         <p className="text-xl text-text-secondary max-w-2xl mx-auto">
-                            From workflows to hosting, we've got you covered with enterprise-grade solutions
+                            {t('home.features.description')}
                         </p>
                     </div>
 
@@ -162,7 +158,7 @@ const Home = () => {
                                 <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
                                 <p className="text-text-secondary mb-4">{feature.description}</p>
                                 <div className="flex items-center gap-2 text-primary-light font-medium group-hover:gap-3 transition-all">
-                                    Learn more
+                                    {t('home.features.learnMore')}
                                     <ArrowRight className="w-4 h-4" />
                                 </div>
                             </div>
@@ -176,10 +172,10 @@ const Home = () => {
                 <div className="container">
                     <div className="text-center mb-12">
                         <h2 className="mb-4">
-                            Powerful <span className="gradient-text-secondary">Integrations</span>
+                            {t('home.integrations.title')} <span className="gradient-text-secondary">{t('home.integrations.titleAccent')}</span>
                         </h2>
                         <p className="text-xl text-text-secondary max-w-2xl mx-auto">
-                            Connect with the tools you already use and love
+                            {t('home.integrations.description')}
                         </p>
                     </div>
 
@@ -200,7 +196,7 @@ const Home = () => {
 
                     <div className="text-center mt-8">
                         <Link to="/integrations" className="btn btn-secondary">
-                            View All Integrations
+                            {t('home.integrations.viewAll')}
                             <ArrowRight className="w-5 h-5" />
                         </Link>
                     </div>
@@ -215,21 +211,20 @@ const Home = () => {
                             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-accent/30 mb-6">
                                 <Clock className="w-4 h-4 text-accent" />
                                 <span className="text-sm font-medium text-accent">
-                                    Deploy in minutes, not days
+                                    {t('home.benefits.badge')}
                                 </span>
                             </div>
 
                             <h2 className="mb-6">
-                                Why Choose <span className="gradient-text">SmarterBOT</span>?
+                                {t('home.benefits.title')} <span className="gradient-text">SmarterBOT</span>?
                             </h2>
 
                             <p className="text-lg text-text-secondary mb-8">
-                                We make automation accessible, powerful, and affordable for businesses of all sizes.
-                                Join thousands of companies already automating with SmarterBOT.
+                                {t('home.benefits.description')}
                             </p>
 
                             <div className="space-y-4 mb-8">
-                                {benefits.map((benefit, index) => (
+                                {benefits.map((benefit: string, index: number) => (
                                     <div key={index} className="flex items-center gap-3">
                                         <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
                                         <span className="text-text-secondary">{benefit}</span>
@@ -238,7 +233,7 @@ const Home = () => {
                             </div>
 
                             <Link to="/pricing" className="btn btn-primary">
-                                View Pricing
+                                {t('home.benefits.cta')}
                                 <ArrowRight className="w-5 h-5" />
                             </Link>
                         </div>
@@ -250,7 +245,7 @@ const Home = () => {
                                 </div>
                                 <div>
                                     <div className="text-2xl font-bold gradient-text mb-1">4.9/5</div>
-                                    <div className="text-sm text-text-tertiary">Customer Rating</div>
+                                    <div className="text-sm text-text-tertiary">{t('home.benefits.rating')}</div>
                                 </div>
                             </div>
 
@@ -260,7 +255,7 @@ const Home = () => {
                                 </div>
                                 <div>
                                     <div className="text-2xl font-bold gradient-text-secondary mb-1">100ms</div>
-                                    <div className="text-sm text-text-tertiary">Response Time</div>
+                                    <div className="text-sm text-text-tertiary">{t('home.benefits.responseTime')}</div>
                                 </div>
                             </div>
 
@@ -270,7 +265,7 @@ const Home = () => {
                                 </div>
                                 <div>
                                     <div className="text-2xl font-bold gradient-text mb-1">10K+</div>
-                                    <div className="text-sm text-text-tertiary">Active Users</div>
+                                    <div className="text-sm text-text-tertiary">{t('home.stats.users')}</div>
                                 </div>
                             </div>
 
@@ -280,7 +275,7 @@ const Home = () => {
                                 </div>
                                 <div>
                                     <div className="text-2xl font-bold gradient-text mb-1">99.9%</div>
-                                    <div className="text-sm text-text-tertiary">Uptime SLA</div>
+                                    <div className="text-sm text-text-tertiary">{t('home.benefits.uptime')}</div>
                                 </div>
                             </div>
                         </div>
@@ -294,18 +289,18 @@ const Home = () => {
                     <div className="card glass-strong text-center py-16 px-8 relative overflow-hidden">
                         <div className="relative z-10">
                             <h2 className="mb-6">
-                                Ready to <span className="gradient-text">Automate</span> Your Business?
+                                {t('home.cta.title')} <span className="gradient-text">{t('home.cta.titleAccent')}</span> {language === 'es' ? 'tu Negocio' : 'Your Business'}?
                             </h2>
                             <p className="text-xl text-text-secondary mb-8 max-w-2xl mx-auto">
-                                Start with our free tier and scale as you grow. No credit card required.
+                                {t('home.cta.description')}
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                 <Link to="/demo" className="btn btn-primary">
                                     <Rocket className="w-5 h-5" />
-                                    Start Free Trial
+                                    {t('home.cta.button')}
                                 </Link>
                                 <Link to="/contact" className="btn btn-secondary">
-                                    Talk to Sales
+                                    {t('home.cta.sales')}
                                 </Link>
                             </div>
                         </div>
