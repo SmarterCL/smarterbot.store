@@ -1,36 +1,53 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Security Headers -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Content-Security-Policy" 
+    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.smarterbot.cl;" />
+
   <!-- SEO Meta Tags -->
-  <title>SmarterBOT.store - Automation Workflows & Business Solutions</title>
+  <title>SmarterBOT.store - Automatización de Flujos & Soluciones Empresariales</title>
   <meta name="description"
-    content="Deploy powerful n8n workflows, integrate Odoo, scale with VPS hosting, and supercharge your marketing with Meta Ads. 4,343+ production-ready workflows." />
+    content="Despliega potentes flujos de n8n, integra Odoo, escala con hosting VPS y potencia tu marketing con Meta Ads. Más de 4,343 flujos listos para producción." />
   <meta name="keywords"
-    content="n8n workflows, automation, Odoo, VPS hosting, Meta Ads, business automation, workflow marketplace" />
+    content="n8n workflows, automatización, Odoo, VPS hosting, Meta Ads, automatización empresarial, marketplace de flujos" />
   <meta name="author" content="SmarterBOT Team" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://smarterbot.store" />
 
   <!-- Open Graph Tags -->
-  <meta property="og:title" content="SmarterBOT.store - Automation Workflows & Business Solutions" />
+  <meta property="og:title" content="SmarterBOT.store - Automatización de Flujos & Soluciones Empresariales" />
   <meta property="og:description"
-    content="Deploy powerful n8n workflows, integrate Odoo, scale with VPS hosting. 4,343+ production-ready workflows." />
+    content="Despliega potentes flujos de n8n, integra Odoo, escala con hosting VPS. Más de 4,343 flujos listos para producción." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://smarterbot.store" />
+  <meta property="og:locale" content="es_CL" />
+  <meta property="og:site_name" content="SmarterBOT.store" />
 
   <!-- Twitter Card Tags -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="SmarterBOT.store - Automation Workflows" />
-  <meta name="twitter:description" content="Deploy powerful n8n workflows and automation solutions" />
+  <meta name="twitter:title" content="SmarterBOT.store - Automatización de Flujos" />
+  <meta name="twitter:description" content="Despliega potentes flujos de n8n y soluciones de automatización" />
 
   <!-- Theme Color -->
   <meta name="theme-color" content="#6366f1" />
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 </head>
 
 <body>
+  <noscript>
+    <p>Esta aplicación requiere JavaScript para funcionar correctamente.</p>
+  </noscript>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
