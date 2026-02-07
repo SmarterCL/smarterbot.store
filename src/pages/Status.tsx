@@ -1,4 +1,3 @@
-import React from 'react';
 import { CheckCircle, Activity } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -14,7 +13,14 @@ const Status = () => {
         { name: t('status.services.integrations'), status: t('status.operational') },
     ];
 
-    const incidents = [
+    interface Incident {
+        date: string;
+        title: string;
+        status: string;
+        description: string;
+    }
+
+    const incidents: Incident[] = [
         // { date: '15 de Ene, 2026', title: 'Mantenimiento Programado', status: 'completado', description: 'Actualización de base de datos completada exitosamente.' }
     ];
 
@@ -45,7 +51,7 @@ const Status = () => {
                     <h2 className="text-2xl font-bold mb-6">{t('status.pastIncidents')}</h2>
                     {incidents.length > 0 ? (
                         <div className="space-y-4">
-                            {incidents.map((incident: any, index: number) => (
+                            {incidents.map((incident, index) => (
                                 <div key={index} className="card bg-bg-secondary/30 p-6">
                                     <div className="flex items-center justify-between mb-2">
                                         <h3 className="font-bold">{incident.title}</h3>

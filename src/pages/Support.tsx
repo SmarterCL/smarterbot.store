@@ -1,4 +1,3 @@
-import React from 'react';
 import { Mail, MessageCircle, HelpCircle } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 

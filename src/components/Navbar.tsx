@@ -30,65 +30,63 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'glass-strong shadow-lg' : 'bg-transparent'
-                }`}
+            className={`navbar navbar-expand-lg fixed-top transition-all duration-300 ${isScrolled ? 'glass-strong shadow-lg' : 'bg-transparent'}`}
+            style={{ backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.85)' : 'transparent' }}
         >
-            <div className="container">
-                <div className="flex items-center justify-between h-20">
-                    {/* Logo */}
-                    <Link to="/" className="flex items-center gap-2 group">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center shadow-glow">
-                            <Zap className="w-6 h-6 text-white" />
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-xl font-bold gradient-text">SmarterBOT</span>
-                            <span className="text-xs text-text-tertiary">.store</span>
-                        </div>
-                    </Link>
-
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-6">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.path}
-                                to={link.path}
-                                className={`text-sm font-medium transition-colors relative group ${location.pathname === link.path
-                                    ? 'text-primary-light'
-                                    : 'text-text-secondary hover:text-text-primary'
-                                    }`}
-                            >
-                                {link.name}
-                                <span
-                                    className={`absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-primary transform transition-transform ${location.pathname === link.path
-                                        ? 'scale-x-100'
-                                        : 'scale-x-0 group-hover:scale-x-100'
-                                        }`}
-                                />
-                            </Link>
-                        ))}
+            <div className="container-fluid">
+                <Link to="/" className="navbar-brand d-flex align-items-center">
+                    <div className="me-2">
+                        <Zap className="text-warning" />
                     </div>
+                    <div>
+                        <span className="fw-bold text-gradient">SmarterBOT</span>
+                        <small className="text-muted">.store</small>
+                    </div>
+                </Link>
 
-                    {/* Desktop Actions */}
-                    <div className="hidden md:flex items-center gap-4">
+                <button 
+                    className="navbar-toggler border-0" 
+                    type="button" 
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                >
+                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+
+                <div className={`collapse navbar-collapse ${isMobileMenuOpen ? 'show' : ''}`}>
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        {navLinks.map((link) => (
+                            <li className="nav-item" key={link.path}>
+                                <Link
+                                    to={link.path}
+                                    className={`nav-link ${location.pathname === link.path ? 'text-warning fw-bold' : 'text-secondary'}`}
+                                >
+                                    {link.name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+
+                    <div className="d-flex align-items-center gap-3">
                         {/* Language Selector */}
-                        <div className="relative">
+                        <div className="dropdown">
                             <button
-                                className="btn-icon btn-secondary flex items-center gap-2 px-3 w-auto"
+                                className="btn btn-sm btn-outline-secondary dropdown-toggle"
+                                type="button"
                                 onClick={() => setIsLangOpen(!isLangOpen)}
                             >
-                                <Globe className="w-4 h-4" />
-                                <span className="text-xs uppercase font-bold">{language}</span>
+                                <Globe size={16} className="me-1" />
+                                {language.toUpperCase()}
                             </button>
                             {isLangOpen && (
-                                <div className="absolute top-full right-0 mt-2 w-32 glass border border-border rounded-xl p-2 shadow-xl animate-scale-in origin-top-right">
+                                <div className="dropdown-menu show position-absolute end-0 mt-1">
                                     <button
-                                        className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${language === 'es' ? 'bg-primary/20 text-primary-light' : 'hover:bg-bg-tertiary text-text-secondary'}`}
+                                        className={`dropdown-item ${language === 'es' ? 'active' : ''}`}
                                         onClick={() => { setLanguage('es'); setIsLangOpen(false); }}
                                     >
                                         Español
                                     </button>
                                     <button
-                                        className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${language === 'en' ? 'bg-primary/20 text-primary-light' : 'hover:bg-bg-tertiary text-text-secondary'}`}
+                                        className={`dropdown-item ${language === 'en' ? 'active' : ''}`}
                                         onClick={() => { setLanguage('en'); setIsLangOpen(false); }}
                                     >
                                         English
@@ -97,68 +95,15 @@ const Navbar = () => {
                             )}
                         </div>
 
-                        <button className="btn-icon btn-secondary">
-                            <Search className="w-5 h-5" />
+                        <button className="btn btn-sm btn-outline-secondary">
+                            <Search size={18} />
                         </button>
-                        <Link to="/demo" className="btn btn-primary">
+                        
+                        <Link to="/demo" className="btn btn-warning text-dark fw-medium">
                             {t('nav.getStarted')}
                         </Link>
                     </div>
-
-                    {/* Mobile Menu Button */}
-                    <div className="flex items-center gap-2 md:hidden">
-                        <button
-                            className="btn-icon btn-secondary flex items-center gap-1 px-2 w-auto h-10"
-                            onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
-                        >
-                            <Globe className="w-4 h-4" />
-                            <span className="text-xs uppercase font-bold">{language}</span>
-                        </button>
-                        <button
-                            className="btn-icon btn-secondary"
-                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        >
-                            {isMobileMenuOpen ? (
-                                <X className="w-6 h-6" />
-                            ) : (
-                                <Menu className="w-6 h-6" />
-                            )}
-                        </button>
-                    </div>
                 </div>
-
-                {/* Mobile Menu */}
-                {isMobileMenuOpen && (
-                    <div className="md:hidden py-4 animate-fade-in">
-                        <div className="flex flex-col gap-2">
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.path}
-                                    to={link.path}
-                                    className={`text-base font-medium transition-colors px-4 py-2 rounded-lg ${location.pathname === link.path
-                                        ? 'bg-bg-tertiary text-primary-light'
-                                        : 'text-text-secondary hover:text-text-primary hover:bg-bg-tertiary'
-                                        }`}
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                    {link.name}
-                                </Link>
-                            ))}
-                            <div className="flex gap-2 px-4 mt-2">
-                                <button className="btn-icon btn-secondary flex-1">
-                                    <Search className="w-5 h-5" />
-                                </button>
-                                <Link
-                                    to="/demo"
-                                    className="btn btn-primary flex-1 justify-center"
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                    {t('nav.getStarted')}
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                )}
             </div>
         </nav>
     );

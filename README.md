@@ -175,6 +175,20 @@ This project is proprietary software. All rights reserved © 2025 SmarterBOT.sto
 - [Dokploy](https://dokploy.com) - Deployment platform
 - The amazing open-source community
 
+## 🔒 Security First Approach
+
+This application implements enterprise-grade security measures:
+
+- **Content Security Policy (CSP)** with strict directives
+- **X-Frame-Options**, **X-Content-Type-Options**, and other security headers
+- **HSTS** (HTTP Strict Transport Security) with long max-age
+- **Permissions-Policy** restricting sensitive APIs
+- **Referrer-Policy** for privacy protection
+- **Non-root user execution** in containers
+- **Secure nginx configuration** with enhanced security headers
+
+For detailed security information, see our [Security Policy](SECURITY.md).
+
 ---
 
 **Made with ❤️ by the SmarterBOT team**

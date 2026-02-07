@@ -16,14 +16,8 @@ export default defineConfig({
         },
       },
     },
-    // Security: Minify for production
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
+    // Security: Minify for production using esbuild instead of terser
+    minify: 'esbuild',
   },
   server: {
     // Security headers for development

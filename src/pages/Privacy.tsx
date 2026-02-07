@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const Privacy = () => {
@@ -18,7 +17,7 @@ const Privacy = () => {
                             {data.intro}
                         </p>
 
-                        {data.sections.map((section: any, index: number) => (
+                        {data.sections.map((section: { title: string; content: string; list?: string[] }, index: number) => (
                             <div key={index}>
                                 <h2 className="text-2xl font-bold text-text-primary mt-8 mb-4">{section.title}</h2>
                                 <p className="mb-4">
