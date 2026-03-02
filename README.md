@@ -15,12 +15,12 @@ Deploy powerful n8n workflows, integrate Odoo & scale with VPS hosting, and supe
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React 18 + TypeScript
-- **Build Tool**: Vite
-- **Routing**: React Router v6
+- **Frontend**: Next.js 16 + React 19 + TypeScript
+- **Framework**: Next.js App Router
+- **Build Tool**: Next.js Turbopack
 - **Icons**: Lucide React
-- **Styling**: Custom CSS with Design System
-- **Deployment**: Docker + Nginx
+- **Styling**: Bootstrap 5 + Custom CSS with Design System
+- **Deployment**: Docker + Node.js 24 Standalone
 
 ## 🚀 Quick Start
 
@@ -30,14 +30,14 @@ Deploy powerful n8n workflows, integrate Odoo & scale with VPS hosting, and supe
 # Install dependencies
 npm install
 
-# Start development server
+# Start development server with Turbopack
 npm run dev
 
 # Build for production
 npm run build
 
-# Preview production build
-npm run preview
+# Start production server
+npm start
 ```
 
 ### Docker Deployment
@@ -48,8 +48,10 @@ docker-compose up -d
 
 # Or build manually
 docker build -t smarterbot-store .
-docker run -p 80:80 smarterbot-store
+docker run -p 80:3000 smarterbot-store
 ```
+
+The Docker container runs Next.js standalone mode on port 3000, mapped to host port 80.
 
 ## 📦 Deployment to Dokploy
 
@@ -102,22 +104,31 @@ VITE_GITHUB_REPO=https://n8n.smarterbot.store
 ```
 smarterbot-store/
 ├── src/
-│   ├── components/       # Reusable UI components
+│   ├── app/                # Next.js App Router
+│   │   ├── api/           # API routes
+│   │   │   └── health/    # Health check endpoint
+│   │   ├── contact/       # Contact page
+│   │   ├── docs/          # Documentation page
+│   │   ├── privacy/       # Privacy page
+│   │   ├── services/      # Services page
+│   │   ├── status/        # Status page
+│   │   ├── support/       # Support page
+│   │   ├── terms/         # Terms page
+│   │   ├── workflows/     # Workflows page
+│   │   ├── layout.tsx     # Root layout
+│   │   └── page.tsx       # Home page
+│   ├── components/        # Reusable UI components
 │   │   ├── Navbar.tsx
 │   │   └── Footer.tsx
-│   ├── pages/           # Page components
-│   │   ├── Home.tsx
-│   │   ├── Workflows.tsx
-│   │   ├── Services.tsx
-│   │   └── Contact.tsx
-│   ├── App.tsx          # Main app component
-│   ├── main.tsx         # Entry point
-│   └── index.css        # Global styles & design system
-├── public/              # Static assets
-├── Dockerfile           # Docker configuration
-├── docker-compose.yml   # Docker Compose configuration
-├── nginx.conf          # Nginx server configuration
-└── package.json        # Dependencies
+│   ├── contexts/          # React contexts
+│   │   └── LanguageContext.tsx
+│   └── index.css          # Global styles
+├── public/                # Static assets
+├── Dockerfile             # Docker configuration (Next.js standalone)
+├── docker-compose.yml     # Docker Compose configuration
+├── next.config.ts         # Next.js configuration
+├── tsconfig.json          # TypeScript configuration
+└── package.json           # Dependencies
 ```
 
 ## 🎨 Design System

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Language = 'es' | 'en';
@@ -12,15 +14,27 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     // Default to Spanish as requested
-    const [language, setLanguage] = useState<Language>(() => {
-        const saved = localStorage.getItem('language');
-        return (saved as Language) || 'es';
-    });
+    const [language, setLanguageState] = useState<Language>('es');
+    const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
-        localStorage.setItem('language', language);
-        document.documentElement.lang = language;
-    }, [language]);
+        const saved = localStorage.getItem('language');
+        if (saved === 'es' || saved === 'en') {
+            setLanguageState(saved);
+        }
+        setIsMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (isMounted) {
+            localStorage.setItem('language', language);
+            document.documentElement.lang = language;
+        }
+    }, [language, isMounted]);
+
+    const setLanguage = (lang: Language) => {
+        setLanguageState(lang);
+    };
 
     // Simple translation function that nested keys like 'home.hero.title'
     const t = (path: string) => {

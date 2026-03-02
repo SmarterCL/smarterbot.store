@@ -1,6 +1,8 @@
-import { useLanguage } from '../contexts/LanguageContext';
+'use client';
 
-const Terms = () => {
+import { useLanguage } from '@/contexts/LanguageContext';
+
+export default function Terms() {
     const { t } = useLanguage();
     const data = t('terms');
 
@@ -18,7 +20,7 @@ const Terms = () => {
                         </p>
 
                         {data.sections.map((section: { title: string; content: string; extra?: string }, index: number) => (
-                            <div key={index}>
+                            <div key={index} className="mb-8">
                                 <h2 className="text-2xl font-bold text-text-primary mt-8 mb-4">{section.title}</h2>
                                 <p className="mb-4">
                                     {section.content}
@@ -30,15 +32,9 @@ const Terms = () => {
                                 )}
                             </div>
                         ))}
-
-                        <p className="font-semibold text-text-primary">
-                            support@smarterbot.store
-                        </p>
                     </div>
                 </div>
             </div>
         </div>
     );
-};
-
-export default Terms;
+}

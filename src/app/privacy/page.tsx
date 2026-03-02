@@ -1,6 +1,8 @@
-import { useLanguage } from '../contexts/LanguageContext';
+'use client';
 
-const Privacy = () => {
+import { useLanguage } from '@/contexts/LanguageContext';
+
+export default function Privacy() {
     const { t } = useLanguage();
     const data = t('privacy');
 
@@ -18,7 +20,7 @@ const Privacy = () => {
                         </p>
 
                         {data.sections.map((section: { title: string; content: string; list?: string[] }, index: number) => (
-                            <div key={index}>
+                            <div key={index} className="mb-8">
                                 <h2 className="text-2xl font-bold text-text-primary mt-8 mb-4">{section.title}</h2>
                                 <p className="mb-4">
                                     {section.content}
@@ -32,15 +34,9 @@ const Privacy = () => {
                                 )}
                             </div>
                         ))}
-
-                        <p className="font-semibold text-text-primary">
-                            support@smarterbot.store
-                        </p>
                     </div>
                 </div>
             </div>
         </div>
     );
-};
-
-export default Privacy;
+}

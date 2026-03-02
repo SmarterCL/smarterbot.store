@@ -1,5 +1,5 @@
 # Build stage
-FROM node:20-alpine AS builder
+FROM node:24-alpine AS builder
 
 WORKDIR /app
 
@@ -12,31 +12,40 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build the application
+# Build the application (Next.js standalone output)
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_STANDALONE=true
 RUN npm run build
 
-# Production stage
-FROM nginx:alpine
+# Production stage - minimal image with Node.js runtime
+FROM node:24-alpine AS runner
+
+WORKDIR /app
 
 # Create a non-root user for security
-RUN addgroup -g 1001 -S nginx-user && \
-    adduser -S nginx-user -u 1001 -G nginx-user
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nextjs -u 1001 -G nodejs
 
 # Copy built files from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Copy nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Change ownership to non-root user
-RUN chown -R nginx-user:nginx-user /usr/share/nginx/html && \
-    chmod -R 755 /usr/share/nginx/html
+# Set environment variables
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV HOSTNAME=0.0.0.0
+ENV PORT=3000
 
 # Switch to non-root user
-USER nginx-user
+USER nextjs
 
 # Expose port
-EXPOSE 80
+EXPOSE 3000
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD wget --quiet --tries=1 --spider http://localhost:3000/api/health || exit 1
+
+# Start Next.js server
+CMD ["node", "server.js"]

@@ -1,5 +1,8 @@
+'use client';
+
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X, Zap, Search, Globe } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -8,7 +11,7 @@ const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLangOpen, setIsLangOpen] = useState(false);
-    const location = useLocation();
+    const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -34,7 +37,7 @@ const Navbar = () => {
             style={{ backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.85)' : 'transparent' }}
         >
             <div className="container-fluid">
-                <Link to="/" className="navbar-brand d-flex align-items-center">
+                <Link href="/" className="navbar-brand d-flex align-items-center">
                     <div className="me-2">
                         <Zap className="text-warning" />
                     </div>
@@ -57,8 +60,8 @@ const Navbar = () => {
                         {navLinks.map((link) => (
                             <li className="nav-item" key={link.path}>
                                 <Link
-                                    to={link.path}
-                                    className={`nav-link ${location.pathname === link.path ? 'text-warning fw-bold' : 'text-secondary'}`}
+                                    href={link.path}
+                                    className={`nav-link ${pathname === link.path ? 'text-warning fw-bold' : 'text-secondary'}`}
                                 >
                                     {link.name}
                                 </Link>
@@ -98,8 +101,8 @@ const Navbar = () => {
                         <button className="btn btn-sm btn-outline-secondary">
                             <Search size={18} />
                         </button>
-                        
-                        <Link to="/demo" className="btn btn-warning text-dark fw-medium">
+
+                        <Link href="/demo" className="btn btn-warning text-dark fw-medium">
                             {t('nav.getStarted')}
                         </Link>
                     </div>

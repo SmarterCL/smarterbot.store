@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
 import { Zap, Github, Twitter, Linkedin, Mail, Heart } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -45,7 +47,7 @@ const Footer = () => {
                 <div className="grid grid-cols-2 md:grid-cols-6 gap-8 py-12">
                     {/* Brand Section */}
                     <div className="col-span-2">
-                        <Link to="/" className="flex items-center gap-2 mb-4">
+                        <Link href="/" className="flex items-center gap-2 mb-4">
                             <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center shadow-glow">
                                 <Zap className="w-6 h-6 text-white" />
                             </div>
@@ -80,7 +82,7 @@ const Footer = () => {
                             {footerLinks.product.map((link) => (
                                 <li key={link.path}>
                                     <Link
-                                        to={link.path}
+                                        href={link.path}
                                         className="text-text-secondary hover:text-primary-light text-sm transition-colors"
                                     >
                                         {link.name}
@@ -97,7 +99,7 @@ const Footer = () => {
                             {footerLinks.integrations.map((link) => (
                                 <li key={link.path}>
                                     <Link
-                                        to={link.path}
+                                        href={link.path}
                                         className="text-text-secondary hover:text-primary-light text-sm transition-colors"
                                     >
                                         {link.name}
@@ -114,7 +116,7 @@ const Footer = () => {
                             {footerLinks.company.map((link) => (
                                 <li key={link.path}>
                                     <Link
-                                        to={link.path}
+                                        href={link.path}
                                         className="text-text-secondary hover:text-primary-light text-sm transition-colors"
                                     >
                                         {link.name}
@@ -131,7 +133,7 @@ const Footer = () => {
                             {footerLinks.legal.map((link) => (
                                 <li key={link.path}>
                                     <Link
-                                        to={link.path}
+                                        href={link.path}
                                         className="text-text-secondary hover:text-primary-light text-sm transition-colors"
                                     >
                                         {link.name}
