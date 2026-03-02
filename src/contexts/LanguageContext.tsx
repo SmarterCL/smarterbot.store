@@ -98,7 +98,7 @@ const translations: Record<Language, any> = {
             hero: {
                 badge: 'Con la confianza de más de 10.000 empresas',
                 title: 'Automatiza tu Negocio con',
-                description: 'Despliega potentes flujos de n8n, integra Odoo, escala con hosting VPS y potencia tu marketing con Meta Ads. Todo en una sola plataforma.',
+                description: 'Smarter workflows de n8n te permiten adaptar y reconfigurar tu "Empresa como MCP". Recorrido asistido: si eres Startup → Pyme → Empresa, donde cada módulo se activa según crecimiento, sin rehacer nada.',
                 ctaWorkflows: 'Ver Flujos',
                 ctaDemo: 'Empezar Gratis',
             },
@@ -310,7 +310,7 @@ const translations: Record<Language, any> = {
             hero: {
                 badge: 'Trusted by 10,000+ businesses worldwide',
                 title: 'Automate Your Business with',
-                description: 'Deploy powerful n8n workflows, integrate Odoo, scale with VPS hosting, and supercharge your marketing with Meta Ads. All in one platform.',
+                description: 'Smarter n8n workflows let you adapt and reconfigure your "MCP Company". Assisted journey: from Startup → SME → Enterprise, where each module activates as you grow, no rebuilding needed.',
                 ctaWorkflows: 'Browse Workflows',
                 ctaDemo: 'Get Started Free',
             },
