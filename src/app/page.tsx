@@ -16,6 +16,7 @@ import {
     Users,
     Shield,
     Clock,
+    Cpu,
 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -93,7 +94,11 @@ export default function Home() {
                             </p>
 
                             <div className="d-flex flex-column flex-md-row justify-content-center gap-3 mb-5 animate-fade-in">
-                                <Link href="/workflows" className="btn btn-warning text-dark d-flex align-items-center justify-content-center gap-2">
+                                <Link href="/claw-os" className="btn btn-warning text-dark d-flex align-items-center justify-content-center gap-2">
+                                    <Cpu size={18} />
+                                    Explore Claw OS
+                                </Link>
+                                <Link href="/workflows" className="btn btn-outline-light d-flex align-items-center justify-content-center gap-2">
                                     {t('home.hero.ctaWorkflows')}
                                     <ArrowRight size={18} />
                                 </Link>
