@@ -86,7 +86,7 @@ export default function Home() {
 
                             <h1 className="display-3 fw-bold mb-4 animate-fade-in">
                                 {t('home.hero.title')}{' '}
-                                <span className="text-gradient">SmarterBOT</span>
+                                <span className="text-warning">Smarter Claw OS</span>
                             </h1>
 
                             <p className="lead text-secondary mb-5 animate-fade-in">
@@ -194,7 +194,7 @@ export default function Home() {
                                 {t('home.benefits.badge')}
                             </div>
                             <h2 className="display-6 fw-bold mb-4">
-                                {t('home.benefits.title')} <span className="text-gradient">SmarterBOT</span>?
+                                {t('home.benefits.title')} <span className="text-warning">Smarter Claw OS</span>?
                             </h2>
                             <p className="lead text-secondary mb-5">
                                 {t('home.benefits.description')}

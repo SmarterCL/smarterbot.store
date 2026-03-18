@@ -71,6 +71,7 @@ const translations: Record<Language, any> = {
     es: {
         nav: {
             home: 'Inicio',
+            clawOs: 'Claw OS',
             workflows: 'Flujos',
             services: 'Servicios',
             integrations: 'Integraciones',
@@ -79,14 +80,14 @@ const translations: Record<Language, any> = {
             getStarted: 'Empezar',
         },
         footer: {
-            description: 'Flujos de automatización e integraciones para empresas modernas. Despliega potentes flujos de n8n, conecta Odoo, Meta Ads y más.',
+            description: 'Ecosistema de IA soberana y automatización para empresas modernas. Despliega tu propio Claw OS, conecta Odoo, Chatwoot y más.',
             product: 'Producto',
             integrations: 'Integraciones',
             company: 'Empresa',
             legal: 'Legal',
             rights: 'Todos los derechos reservados.',
             madeWith: 'Hecho con',
-            by: 'por el equipo de SmarterBOT',
+            by: 'por el equipo de Smarter Claw OS',
             about: 'Saber más',
             blog: 'Blog',
             support: 'Soporte',
@@ -96,79 +97,80 @@ const translations: Record<Language, any> = {
         },
         home: {
             hero: {
-                badge: 'Con la confianza de más de 10.000 empresas',
+                badge: 'IA soberana lista para usar en un clic',
                 title: 'Automatiza tu Negocio con',
-                description: 'Smarter workflows de n8n te permiten adaptar y reconfigurar tu "Empresa como MCP". Recorrido asistido: si eres Startup → Pyme → Empresa, donde cada módulo se activa según crecimiento, sin rehacer nada.',
-                ctaWorkflows: 'Ver Flujos',
-                ctaDemo: 'Empezar Gratis',
+                description: 'La infraestructura de IA privada que evoluciona contigo. De Startup a Gran Empresa, escala tu propio stack de agentes sin configuraciones complejas.',
+                ctaWorkflows: 'Claw OS Store',
+                ctaDemo: 'Carga tu VPS',
             },
             stats: {
-                workflows: 'Flujos',
-                integrations: 'Integraciones',
-                users: 'Usuarios Activos',
-                uptime: 'Tiempo de Actividad',
+                workflows: 'Agentes Activos',
+                integrations: 'Módulos OS',
+                users: 'Nodos Privados',
+                uptime: 'Disponibilidad',
             },
             features: {
-                title: 'Todo lo que Necesitas para',
-                titleAccent: 'Automatizar',
-                description: 'Desde flujos de trabajo hasta hosting, te cubrimos con soluciones de nivel empresarial',
+                title: 'Todo lo que necesitas para',
+                titleAccent: 'Escalar',
+                description: 'Desde agentes de IA hasta hosting soberano, te cubrimos con soluciones de nivel empresarial.',
                 n8n: {
-                    title: 'Flujos n8n',
-                    description: 'Más de 4.343 flujos listos para producción de nuestra colección curada',
+                    title: 'Claw OS App Grid',
+                    description: 'Accede a Odoo, Chatwoot, y FastAPI pre-configurados en tu propia infraestructura.',
                 },
                 ecommerce: {
-                    title: 'Listo para E-commerce',
-                    description: 'Integraciones fluidas con Odoo para tu tienda online y negocio',
+                    title: 'Listo para Odoo',
+                    description: 'Integraciones fluidas con el ERP líder para tu negocio en tiempo real.',
                 },
                 meta: {
-                    title: 'Integración Meta Ads',
-                    description: 'Potente automatización de marketing con campañas de Meta Ads',
+                    title: 'Marketing Intelligence',
+                    description: 'Automatiza tus campañas de Meta Ads con agentes de IA especializados.',
                 },
                 vps: {
-                    title: 'VPS y Hosting',
-                    description: 'Soluciones de hosting de nivel empresarial impulsadas por Hostinger',
+                    title: 'Hosting Soberano',
+                    description: 'VPS optimizados para IA con despliegue instantáneo.',
                 },
                 custom: {
-                    title: 'Desarrollo a Medida',
-                    description: 'Soluciones de automatización personalizadas para tus necesidades únicas',
+                    title: 'Modelos a Medida',
+                    description: 'Ajuste fino de LLMs y flujos personalizados para tu vertical.',
                 },
                 domains: {
-                    title: 'Dominios Globales',
-                    description: 'Registro de dominios premium y servicios de gestión',
+                    title: 'Dominios IA',
+                    description: 'Gestión de dominios premium para tus agentes de IA.',
                 },
                 learnMore: 'Saber más',
             },
             integrations: {
                 title: 'Potentes',
                 titleAccent: 'Integraciones',
-                description: 'Conéctate con las herramientas que ya usas y amas',
-                viewAll: 'Ver Todas las Integraciones',
+                description: 'Conectamos tu Claw OS con las herramientas que ya dominas.',
+                viewAll: 'Ver Todo el Ecosistema',
             },
             benefits: {
                 badge: 'Despliega en minutos, no días',
                 title: '¿Por qué elegir',
-                description: 'Hacemos que la automatización sea accesible, potente y asequible para empresas de todos los tamaños. Únete a miles de empresas que ya automatizan con SmarterBOT.',
+                description: 'Hacemos que la IA privada sea accesible, potente y asequible. Únete a la revolución soberana con Smarter Claw OS.',
                 items: [
                     'Despliegue ultra rápido',
-                    'Seguridad de nivel empresarial',
-                    'Soporte 24/7',
-                    'Actualizaciones automáticas',
-                    'Infraestructura escalable',
-                    'Integraciones personalizadas',
+                    'Privacidad total (Self-hosted)',
+                    'Soporte 24/7 en español',
+                    'Actualizaciones del OS',
+                    'Hardware-ready (Mac Mini & VPS)',
+                    'Smarter App Store',
                 ],
                 cta: 'Ver Precios',
                 rating: 'Calificación',
-                responseTime: 'Tiempo de respuesta',
-                uptime: 'SLA de disponibilidad',
+                responseTime: 'Soporte Directo',
+                uptime: 'SLA Privado',
             },
             cta: {
-                title: '¿Listo para',
-                titleAccent: 'Automatizar',
-                description: 'Empieza con nuestro plan gratuito y escala a medida que creces. No se requiere tarjeta de crédito.',
-                button: 'Prueba Gratis',
+                title: '¿Listo para tu',
+                titleAccent: 'Claw OS',
+                description: 'Empieza con tu propio nodo de IA privada hoy mismo. Garantía de reembolso de 30 días.',
+                button: 'Crear mi Nodo',
                 sales: 'Hablar con Ventas',
             },
         },
+        // ... rest stays consistent or can be updated as needed
         support: {
             title: 'Centro de Soporte',
             description: 'Estamos aquí para ayudar. Elige la mejor forma de contactarnos.',
@@ -184,106 +186,63 @@ const translations: Record<Language, any> = {
         privacy: {
             title: 'Política de Privacidad',
             updated: 'Última actualización: 21 de enero, 2026',
-            intro: 'En SmarterBOT, nos tomamos su privacidad muy en serio. Esta Política de Privacidad explica cómo recopilamos, usamos, divulgamos y protegemos su información cuando visita nuestro sitio web smarterbot.store, incluyendo cualquier otro medio, canal de medios, sitio web móvil o aplicación móvil relacionada o conectada.',
+            intro: 'En Smarter Claw OS, nos tomamos su privacidad muy en serio. Esta Política de Privacidad explica cómo recopilamos, usamos, divulgamos y protegemos su información cuando visita nuestro sitio web smarterbot.store.',
             sections: [
                 {
                     title: '1. Recopilación de su Información',
                     content: 'Podemos recopilar información sobre usted de varias maneras. La información que podemos recopilar en el Sitio incluye:',
                     list: [
-                        '<strong>Datos Personales:</strong> Información de identificación personal, como su nombre, dirección de envío, dirección de correo electrónico y número de teléfono, que nos proporciona voluntariamente cuando se registra en el Sitio.',
-                        '<strong>Datos Derivados:</strong> Información que nuestros servidores recopilan automáticamente cuando accede al Sitio, como su dirección IP, tipo de navegador, sistema operativo, tiempos de acceso y las páginas que ha visto directamente antes y después de acceder al Sitio.'
+                        '<strong>Datos Personales:</strong> Información de identificación personal, como su nombre y correo electrónico.',
+                        '<strong>Datos Derivados:</strong> Información que nuestros servidores recopilan automáticamente.'
                     ]
                 },
                 {
                     title: '2. Uso de su Información',
-                    content: 'Tener información precisa sobre usted nos permite brindarle una experiencia fluida, eficiente y personalizada. Específicamente, podemos usar la información recopilada sobre usted a través del Sitio para:',
+                    content: 'Específicamente, podemos usar la información recopilada para administrar su cuenta, procesar pagos y enviarle actualizaciones críticas.',
                     list: [
                         'Crear y administrar su cuenta.',
                         'Procesar sus pedidos y pagos.',
-                        'Enviarle correos electrónicos sobre su cuenta o pedido.',
-                        'Cumplir y gestionar compras, pedidos, pagos y otras transacciones relacionadas con el Sitio.',
-                        'Enviarle un boletín informativo.',
-                        'Solicitar comentarios y contactarlo sobre su uso del Sitio.'
+                        'Fomentar la soberanía de sus datos.'
                     ]
-                },
-                {
-                    title: '3. Divulgación de su Información',
-                    content: 'Podemos compartir la información que hemos recopilado sobre usted en ciertas situaciones. Su información puede ser divulgada de la siguiente manera:',
-                    list: [
-                        '<strong>Por Ley o para Proteger Derechos:</strong> Si creemos que la divulgación de información sobre usted es necesaria para responder a procesos legales, investigar o remediar posibles violaciones de nuestras políticas, o proteger los derechos, propiedad y seguridad de otros.',
-                        '<strong>Proveedores de Servicios Externos:</strong> Podemos compartir su información con terceros que realizan servicios para nosotros o en nuestro nombre, incluido el procesamiento de pagos, análisis de datos, entrega de correo electrónico, servicios de alojamiento, servicio al cliente y asistencia de marketing.'
-                    ]
-                },
-                {
-                    title: '4. Seguridad de su Información',
-                    content: 'Utilizamos medidas de seguridad administrativas, técnicas y físicas para ayudar a proteger su información personal. Si bien hemos tomado medidas razonables para proteger la información personal que nos proporciona, tenga en cuenta que a pesar de nuestros esfuerzos, ninguna medida de seguridad es perfecta o impenetrable, y ningún método de transmisión de datos puede garantizarse contra cualquier intercepción u otro tipo de uso indebido.'
                 },
                 {
                     title: '5. Contáctenos',
-                    content: 'Si tiene preguntas o comentarios sobre esta Política de Privacidad, contáctenos en:'
+                    content: 'Si tiene preguntas o comentarios, contáctenos en smarterbotcl@gmail.com'
                 }
             ]
         },
         terms: {
             title: 'Términos de Servicio',
             updated: 'Última actualización: 21 de Enero de 2026',
-            intro: 'Estos Términos de Servicio ("Términos") rigen su acceso y uso del sitio web y los servicios de SmarterBOT. Al acceder o utilizar nuestros servicios, usted acepta estar sujeto a estos Términos y nuestra Política de Privacidad.',
+            intro: 'Estos Términos rigen su acceso al ecosistema Smarter Claw OS.',
             sections: [
                 {
                     title: '1. Uso de los Servicios',
-                    content: 'Puede utilizar nuestros servicios solo para fines legales. Usted acepta no utilizar nuestros servicios de ninguna manera que viole cualquier ley o regulación local, nacional o internacional aplicable.'
-                },
-                {
-                    title: '2. Cuentas',
-                    content: 'Cuando crea una cuenta con nosotros, debe proporcionar información precisa, completa y actual en todo momento. El no hacerlo constituye un incumplimiento de los Términos, lo que puede resultar en la terminación inmediata de su cuenta en nuestro Servicio.',
-                    extra: 'Usted es responsable de proteger la contraseña que utiliza para acceder al Servicio y de cualquier actividad o acción bajo su contraseña.'
-                },
-                {
-                    title: '3. Propiedad Intelectual',
-                    content: 'El Servicio y su contenido original, características y funcionalidad son y seguirán siendo propiedad exclusiva de SmarterBOT y sus licenciantes. El Servicio está protegido por derechos de autor, marcas registradas y otras leyes tanto de Chile como de países extranjeros.'
-                },
-                {
-                    title: '4. Enlaces a Otros Sitios Web',
-                    content: 'Nuestro Servicio puede contener enlaces a sitios web o servicios de terceros que no son propiedad ni están controlados por SmarterBOT. SmarterBOT no tiene control ni asume responsabilidad por el contenido, las políticas de privacidad o las prácticas de sitios web o servicios de terceros.'
-                },
-                {
-                    title: '5. Terminación',
-                    content: 'Podemos terminar o suspender su cuenta inmediatamente, sin previo aviso o responsabilidad, por cualquier motivo, incluido, entre otros, si incumple los Términos. Tras la terminación, su derecho a utilizar el Servicio cesará inmediatamente.'
-                },
-                {
-                    title: '6. Limitación de Responsabilidad',
-                    content: 'En ningún caso SmarterBOT, ni sus directores, empleados, socios, agentes, proveedores o afiliados, serán responsables de daños indirectos, incidentales, especiales, consecuentes o punitivos, incluidos, entre otros, pérdida de ganancias, datos, uso, buena voluntad u otras pérdidas intangibles.'
-                },
-                {
-                    title: '7. Cambios',
-                    content: 'Nos reservamos el derecho, a nuestra sola discreción, de modificar o reemplazar estos Términos en cualquier momento. Si una revisión es importante, intentaremos proporcionar un aviso de al menos 30 días antes de que entren en vigor los nuevos términos.'
-                },
-                {
-                    title: '8. Contáctenos',
-                    content: 'Si tiene alguna pregunta sobre estos Términos, contáctenos en:'
+                    content: 'Usted es el dueño de su servidor. El software se entrega tal cual para su despliegue soberano.'
                 }
             ]
         },
         status: {
             title: 'Estado del Sistema',
-            allOperational: 'Todos los sistemas operativos',
+            allOperational: 'Todos los nexos operativos',
             pastIncidents: 'Incidentes Pasados',
             noIncidents: 'No se han reportado incidentes en los últimos 90 días.',
             services: {
-                web: 'Sitio Web y API',
-                engine: 'Motor de Flujos',
-                db: 'Clusters de Base de Datos',
-                storage: 'Servicio de Almacenamiento',
-                email: 'Envío de Correos',
-                integrations: 'Integraciones de Terceros'
+                web: 'Portal Smarter Store',
+                engine: 'Gestor de Nodos',
+                db: 'Nexos de Datos',
+                storage: 'Almacenamiento Soberano',
+                email: 'Gestión de Alertas',
+                integrations: 'Integraciones Externas'
             },
-            operational: 'operativo'
+            operational: 'disponible'
         }
     },
     en: {
         nav: {
             home: 'Home',
-            workflows: 'Workflows',
+            clawOs: 'Claw OS',
+            workflows: 'Flows',
             services: 'Services',
             integrations: 'Integrations',
             pricing: 'Pricing',
@@ -291,14 +250,14 @@ const translations: Record<Language, any> = {
             getStarted: 'Get Started',
         },
         footer: {
-            description: 'Automation workflows and integrations for modern businesses. Deploy powerful n8n workflows, connect Odoo, Meta Ads, and more.',
+            description: 'Sovereign AI ecosystem and automation for modern businesses. Deploy your own Claw OS, connect Odoo, Chatwoot, and more.',
             product: 'Product',
             integrations: 'Integrations',
             company: 'Company',
             legal: 'Legal',
             rights: 'All rights reserved.',
             madeWith: 'Made with',
-            by: 'by the SmarterBOT team',
+            by: 'by the Smarter Claw OS team',
             about: 'About',
             blog: 'Blog',
             support: 'Support',
@@ -308,76 +267,76 @@ const translations: Record<Language, any> = {
         },
         home: {
             hero: {
-                badge: 'Trusted by 10,000+ businesses worldwide',
+                badge: 'Sovereign AI ready in one click',
                 title: 'Automate Your Business with',
-                description: 'Smarter n8n workflows let you adapt and reconfigure your "MCP Company". Assisted journey: from Startup → SME → Enterprise, where each module activates as you grow, no rebuilding needed.',
-                ctaWorkflows: 'Browse Workflows',
-                ctaDemo: 'Get Started Free',
+                description: 'The private AI infrastructure that grows with you. From Startup to Enterprise, scale your own agent stack without complex setups.',
+                ctaWorkflows: 'Claw OS Store',
+                ctaDemo: 'Deploy VPS',
             },
             stats: {
-                workflows: 'Workflows',
-                integrations: 'Integrations',
-                users: 'Active Users',
-                uptime: 'Uptime',
+                workflows: 'Active Agents',
+                integrations: 'OS Modules',
+                users: 'Private Nodes',
+                uptime: 'Availability',
             },
             features: {
                 title: 'Everything You Need to',
-                titleAccent: 'Automate',
-                description: 'From workflows to hosting, we\'ve got you covered with enterprise-grade solutions',
+                titleAccent: 'Scale',
+                description: 'From AI agents to sovereign hosting, we cover you with enterprise-grade solutions.',
                 n8n: {
-                    title: 'n8n Workflows',
-                    description: '4,343+ production-ready automation workflows from our curated collection',
+                    title: 'Claw OS App Grid',
+                    description: 'Access Odoo, Chatwoot, and FastAPI pre-configured in your own infrastructure.',
                 },
                 ecommerce: {
-                    title: 'E-commerce Ready',
-                    description: 'Seamless Odoo integrations for your online store and business',
+                    title: 'Odoo Ready',
+                    description: 'Seamless integrations with the leading ERP for your business in real-time.',
                 },
                 meta: {
-                    title: 'Meta Ads Integration',
-                    description: 'Powerful marketing automation with Meta Ads campaigns',
+                    title: 'Marketing Intelligence',
+                    description: 'Automate your Meta Ads campaigns with specialized AI agents.',
                 },
                 vps: {
-                    title: 'VPS & Hosting',
-                    description: 'Enterprise-grade hosting solutions powered by Hostinger',
+                    title: 'Sovereign Hosting',
+                    description: 'IA-optimized VPS with instant deployment.',
                 },
                 custom: {
-                    title: 'Custom Development',
-                    description: 'Tailored automation solutions for your unique business needs',
+                    title: 'Custom Models',
+                    description: 'LLM fine-tuning and custom flows for your specific vertical.',
                 },
                 domains: {
-                    title: 'Global Domains',
-                    description: 'Premium domain registration and management services',
+                    title: 'AI Domains',
+                    description: 'Premium domain management for your AI agents.',
                 },
                 learnMore: 'Learn more',
             },
             integrations: {
                 title: 'Powerful',
                 titleAccent: 'Integrations',
-                description: 'Connect with the tools you already use and love',
-                viewAll: 'View All Integrations',
+                description: 'We connect your Claw OS with the tools you already master.',
+                viewAll: 'View All Ecosystem',
             },
             benefits: {
                 badge: 'Deploy in minutes, not days',
                 title: 'Why Choose',
-                description: 'We make automation accessible, powerful, and affordable for businesses of all sizes. Join thousands of companies already automating with SmarterBOT.',
+                description: 'We make private AI accessible, powerful, and affordable. Join the sovereign revolution with Smarter Claw OS.',
                 items: [
-                    'Lightning-fast deployment',
-                    'Enterprise-grade security',
-                    '24/7 support',
-                    'Automatic updates',
-                    'Scalable infrastructure',
-                    'Custom integrations',
+                    'Ultra-fast deployment',
+                    'Total privacy (Self-hosted)',
+                    '24/7 Spanish support',
+                    'OS Updates',
+                    'Hardware-ready (Mac Mini & VPS)',
+                    'Smarter App Store',
                 ],
                 cta: 'View Pricing',
-                rating: 'Customer Rating',
-                responseTime: 'Response Time',
-                uptime: 'Uptime SLA',
+                rating: 'Rating',
+                responseTime: 'Direct Support',
+                uptime: 'Private SLA',
             },
             cta: {
-                title: 'Ready to',
-                titleAccent: 'Automate',
-                description: 'Start with our free tier and scale as you grow. No credit card required.',
-                button: 'Start Free Trial',
+                title: 'Ready for your',
+                titleAccent: 'Claw OS',
+                description: 'Start with your own private AI node today. 30-day money-back guarantee.',
+                button: 'Create My Node',
                 sales: 'Talk to Sales',
             },
         },
@@ -396,100 +355,33 @@ const translations: Record<Language, any> = {
         privacy: {
             title: 'Privacy Policy',
             updated: 'Last updated: January 21, 2026',
-            intro: 'At SmarterBOT, we take your privacy very seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website smarterbot.store, including any other media form, media channel, mobile website, or mobile application related or connected thereto.',
+            intro: 'At Smarter Claw OS, we take your privacy very seriously. This Privacy Policy explains how we collect and protect your information.',
             sections: [
                 {
                     title: '1. Collection of Your Information',
-                    content: 'We may collect information about you in a variety of ways. The information we may collect on the Site includes:',
-                    list: [
-                        '<strong>Personal Data:</strong> Personally identifiable information, such as your name, shipping address, email address, and telephone number, that you voluntarily give to us when you register with the Site.',
-                        '<strong>Derivative Data:</strong> Information our servers automatically collect when you access the Site, such as your IP address, your browser type, your operating system, your access times, and the pages you have viewed directly before and after accessing the Site.'
-                    ]
-                },
-                {
-                    title: '2. Use of Your Information',
-                    content: 'Having accurate information about you permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the Site to:',
-                    list: [
-                        'Create and manage your account.',
-                        'Process your orders and payments.',
-                        'Email you regarding your account or order.',
-                        'Fulfill and manage purchases, orders, payments, and other transactions related to the Site.',
-                        'Send you a newsletter.',
-                        'Solicit feedback and contact you about your use of the Site.'
-                    ]
-                },
-                {
-                    title: '3. Disclosure of Your Information',
-                    content: 'We may share information we have collected about you in certain situations. Your information may be disclosed as follows:',
-                    list: [
-                        '<strong>By Law or to Protect Rights:</strong> If we believe the release of information about you is necessary to respond to legal process, to investigate or remedy potential violations of our policies, or to protect the rights, property, and safety of others.',
-                        '<strong>Third-Party Service Providers:</strong> We may share your information with third parties that perform services for us or on our behalf, including payment processing, data analysis, email delivery, hosting services, customer service, and marketing assistance.'
-                    ]
-                },
-                {
-                    title: '4. Security of Your Information',
-                    content: 'We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse.'
-                },
-                {
-                    title: '5. Contact Us',
-                    content: 'If you have questions or comments about this Privacy Policy, please contact us at:'
+                    content: 'We collect minimal data to ensure your sovereign deployment works perfectly.'
                 }
             ]
         },
         terms: {
             title: 'Terms of Service',
             updated: 'Last updated: January 21, 2026',
-            intro: 'These Terms of Service ("Terms") govern your access and use of the SmarterBOT website and services. By accessing or using our services, you agree to be bound by these Terms and our Privacy Policy.',
-            sections: [
-                {
-                    title: '1. Use of Services',
-                    content: 'You may use our services only for lawful purposes. You agree not to use our services in any way that violates any applicable local, national, or international law or regulation.'
-                },
-                {
-                    title: '2. Accounts',
-                    content: 'When you create an account with us, you must provide information that is accurate, complete, and current at all times. Failure to do so constitutes a breach of the Terms, which may result in immediate termination of your account on our Service.',
-                    extra: 'You are responsible for safeguarding the password that you use to access the Service and for any activities or actions under your password.'
-                },
-                {
-                    title: '3. Intellectual Property',
-                    content: 'The Service and its original content, features, and functionality are and will remain the exclusive property of SmarterBOT and its licensors. The Service is protected by copyright, trademark, and other laws of both Chile and foreign countries.'
-                },
-                {
-                    title: '4. Links to Other Web Sites',
-                    content: 'Our Service may contain links to third-party web sites or services that are not owned or controlled by SmarterBOT. SmarterBOT has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services.'
-                },
-                {
-                    title: '5. Termination',
-                    content: 'We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms. Upon termination, your right to use the Service will immediately cease.'
-                },
-                {
-                    title: '6. Limitation of Liability',
-                    content: 'In no event shall SmarterBOT, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses.'
-                },
-                {
-                    title: '7. Changes',
-                    content: 'We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to provide at least 30 days\' notice prior to any new terms taking effect.'
-                },
-                {
-                    title: '8. Contact Us',
-                    content: 'If you have any questions about these Terms, please contact us at:'
-                }
-            ]
+            intro: 'These Terms govern your access to Smarter Claw OS.'
         },
         status: {
             title: 'System Status',
-            allOperational: 'All systems operational',
+            allOperational: 'All nodes operational',
             pastIncidents: 'Past Incidents',
             noIncidents: 'No incidents reported in the last 90 days.',
             services: {
-                web: 'Website and API',
-                engine: 'Flow Engine',
-                db: 'Database Clusters',
-                storage: 'Storage Service',
-                email: 'Email Delivery',
-                integrations: 'Third-party Integrations'
+                web: 'Smarter Store Portal',
+                engine: 'Node Manager',
+                db: 'Data Nexus',
+                storage: 'Sovereign Storage',
+                email: 'Alert Management',
+                integrations: 'External Integrations'
             },
-            operational: 'operational'
+            operational: 'available'
         }
     }
 };
