@@ -1,14 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { 
-    Cpu, 
-    Cloud, 
-    Zap, 
-    Shield, 
-    ArrowRight, 
-    CheckCircle2, 
-    Terminal, 
+import {
+    Cloud,
+    Zap,
+    Shield,
+    ArrowRight,
+    CheckCircle2,
+    Terminal,
     Box,
     Bot,
     MessageSquare,
