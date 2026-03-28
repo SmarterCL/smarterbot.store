@@ -18,34 +18,52 @@
 - SmarterOS - CRON Auto-Actualización
 - SmarterOS - Facturación Electrónica DTE
 
-**Motivo:** Requieren credencial PostgreSQL configurada en nodos Supabase
+**Motivo:** Requieren credencial de **Supabase** configurada en nodos Supabase
 
 ---
 
 ## 🎯 PASOS PARA ACTIVAR (5 minutos)
 
-### Paso 1: Ir a n8n Settings
+### Paso 1: Obtener Credenciales de Supabase
+
+1. Ir a https://supabase.com/dashboard/project/rjfcmmzjlguiititkmyh
+2. Click en **Settings** (engranaje abajo izquierda)
+3. Click en **Database**
+4. Copiar datos de conexión:
+
+```
+Host: db.rjfcmmzjlguiititkmyh.supabase.co
+Database: postgres
+User: postgres
+Password: *** (ver en Settings → Database → Password)
+Port: 5432
+SSL: true
+```
+
+### Paso 2: Ir a n8n Settings
 
 ```
 https://n8n.smarterbot.cl/settings/credentials
 ```
 
-### Paso 2: Crear Credencial PostgreSQL
+### Paso 3: Crear Credencial PostgreSQL/Supabase
 
 1. Click en **"Add Credential"**
-2. Buscar **"PostgreSQL"**
+2. Buscar **"PostgreSQL"** (o "Supabase" si existe)
 3. Completar datos:
 
 | Campo | Valor |
 |-------|-------|
-| **Host** | `smarteros-postgres` |
-| **Database** | `smarteros` |
+| **Host** | `db.rjfcmmzjlguiititkmyh.supabase.co` |
+| **Database** | `postgres` |
 | **User** | `postgres` |
-| **Password** | `postgres` |
+| **Password** | *(tu password de Supabase)* |
 | **Port** | `5432` |
-| **SSL** | `false` (o `true` si está habilitado) |
+| **SSL** | `true` ✅ |
+| **Reject Unauthorized** | `false` |
 
 4. Click en **"Save"**
+5. Nombrar: `supabase-smarteros`
 
 ### Paso 3: Actualizar Workflows
 
@@ -122,27 +140,30 @@ curl -X POST "https://n8n.smarterbot.cl/webhook/mcp-decision" \
 
 ---
 
-## 🔒 Supabase Vault (Opcional - Producción)
+## 🔒 Supabase Vault (Recomendado para Producción)
 
-Para producción, usar Supabase Vault en lugar de credenciales fijas:
+Para producción, usar **Supabase Vault** para almacenar credenciales de forma segura:
 
 ### SQL para crear Vault
 
 ```sql
+-- Conectarse a Supabase → SQL Editor
 -- Habilitar extensión
 create extension if not exists vault;
 
--- Guardar credencial
+-- Guardar credencial de PostgreSQL
 select vault.create_secret(
-  'tu-host.supabase.co',
-  'postgres',
-  'postgres',
-  'password-seguro',
-  '5432'
+  'db.rjfcmmzjlguiititkmyh.supabase.co',  -- host
+  'postgres',                              -- database
+  'postgres',                              -- user
+  'tu-password-seguro',                    -- password
+  '5432'                                   -- port
 );
 ```
 
 ### MCP para acceder a Vault
+
+En tu configuración de MCP (`~/.qwen/mcp.json`):
 
 ```json
 {
@@ -151,12 +172,46 @@ select vault.create_secret(
       "command": "npx",
       "args": ["-y", "@smarteros/mcp-supabase"],
       "env": {
-        "SUPABASE_URL": "https://tu-projecto.supabase.co",
-        "SUPABASE_SERVICE_KEY": "eyJ...tu-service-key"
+        "SUPABASE_URL": "https://rjfcmmzjlguiititkmyh.supabase.co",
+        "SUPABASE_SERVICE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJqZmNtbXpqbGd1aWl0aXRrbXloIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MTc5OTczNSwiZXhwIjoyMDc3Mzc1NzM1fQ.euZnn-7AVUMwuVX1ayA9Vpl1sYfkrKbuh4NZIrgRmwg"
       }
     }
   }
 }
+```
+
+### Tablas requeridas en Supabase
+
+```sql
+-- Schema SmarterOS
+create schema if not exists smarteros;
+
+-- Tabla de eventos
+create table if not exists smarter_events (
+  id bigint primary key generated always as identity,
+  metadata jsonb,
+  payload jsonb,
+  trust_score numeric,
+  timestamp timestamptz,
+  lifecycle text,
+  decision jsonb,
+  decided_at timestamptz,
+  created_at timestamptz default now()
+);
+
+-- Tabla de patrones
+create table if not exists smarter_patterns (
+  id bigint primary key generated always as identity,
+  pattern_name text,
+  pattern_data jsonb,
+  confidence numeric,
+  created_at timestamptz default now()
+);
+
+-- Índices para rendimiento
+create index idx_events_lifecycle on smarter_events(lifecycle);
+create index idx_events_timestamp on smarter_events(timestamp desc);
+create index idx_patterns_confidence on smarter_patterns(confidence desc);
 ```
 
 ---
