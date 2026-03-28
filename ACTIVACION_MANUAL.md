@@ -5,65 +5,51 @@
 
 ---
 
-## 📊 Estado Actual
+## 🚨 ERROR ACTUAL
 
-### ✅ Workflows Activos (4)
-- SmarterOS - Ingesta Universal
-- SmarterOS - Respuesta Automática B2B
-- SmarterOS - Picoclaw Onboarding
-- SmarterOS - Email Ingestion (Mailgun)
+**Problema:** Los workflows tienen referencia a credencial `supabase-smarteros` que no existe.
 
-### ⏸️ Workflows Pendientes (3)
-- SmarterOS - MCP Decision Engine
-- SmarterOS - CRON Auto-Actualización
-- SmarterOS - Facturación Electrónica DTE
-
-**Motivo:** Requieren credencial de **Supabase** configurada en nodos Supabase
+**Solución:** Actualizar manualmente los nodos para usar `Supabase account` (ID: DjZe7OmCMXyKoqxa)
 
 ---
 
-## 🎯 PASOS PARA ACTIVAR (5 minutos)
+## 🎯 PASOS PARA ACTIVAR (10 minutos)
 
-### Paso 1: Obtener Credenciales de Supabase
+### Paso 1: Abrir Workflow
 
-1. Ir a https://supabase.com/dashboard/project/rjfcmmzjlguiititkmyh
-2. Click en **Settings** (engranaje abajo izquierda)
-3. Click en **Database**
-4. Copiar datos de conexión:
+1. Ir a: https://n8n.smarterbot.cl/workflows
+2. Buscar workflow pendiente (ej: "SmarterOS - Respuesta Automática B2B")
+3. Click para editar
 
-```
-Host: db.rjfcmmzjlguiititkmyh.supabase.co
-Database: postgres
-User: postgres
-Password: *** (ver en Settings → Database → Password)
-Port: 5432
-SSL: true
-```
+### Paso 2: Actualizar Credenciales en Nodos
 
-### Paso 2: Ir a n8n Settings
+Para cada nodo que usa PostgreSQL/Supabase:
 
-```
-https://n8n.smarterbot.cl/settings/credentials
-```
+1. Click en el nodo (ej: "Fetch Eventos Pendientes")
+2. En **Credential**, cambiar de `supabase-smarteros` a `Supabase account`
+3. Click en "Save"
 
-### Paso 3: Crear Credencial PostgreSQL/Supabase
+**Nodos a actualizar por workflow:**
 
-1. Click en **"Add Credential"**
-2. Buscar **"PostgreSQL"** (o "Supabase" si existe)
-3. Completar datos:
+#### SmarterOS - Respuesta Automática B2B (5FTYtHeoLEVLrcFT)
+- [ ] Fetch Eventos Pendientes → Cambiar a `Supabase account`
+- [ ] Actualizar Evento a Respondido → Cambiar a `Supabase account`
 
-| Campo | Valor |
-|-------|-------|
-| **Host** | `db.rjfcmmzjlguiititkmyh.supabase.co` |
-| **Database** | `postgres` |
-| **User** | `postgres` |
-| **Password** | *(tu password de Supabase)* |
-| **Port** | `5432` |
-| **SSL** | `true` ✅ |
-| **Reject Unauthorized** | `false` |
+#### SmarterOS - MCP Decision Engine (jRWHFYLwR2VxD3pY)
+- [ ] Actualizar en Supabase → Cambiar a `Supabase account`
 
-4. Click en **"Save"**
-5. Nombrar: `supabase-smarteros`
+#### SmarterOS - CRON Auto-Actualización (JKsfUHfTJuf4a2z5)
+- [ ] Obtener eventos nuevos → Cambiar a `Supabase account`
+- [ ] Guardar en Supabase → Cambiar a `Supabase account`
+
+#### SmarterOS - Facturación Electrónica DTE (lKXLlxZNFijhFfSH)
+- [ ] Actualizar en Supabase → Cambiar a `Supabase account`
+
+### Paso 3: Activar Workflow
+
+1. Click en toggle **"Inactive"** (esquina superior derecha)
+2. Cambiar a **"Active"**
+3. Verificar que no haya errores
 
 ### Paso 3: Actualizar Workflows
 
