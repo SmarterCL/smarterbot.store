@@ -1,0 +1,287 @@
+{
+  "name": "SmarterOS - Picoclaw Onboarding",
+  "description": "Workflow exportado desde n8n.smarterbot.cl\n\n⚠️ REQUIERE CONFIGURACIÓN:\n- Configurar credenciales de PostgreSQL/Supabase\n- Actualizar URLs de webhooks según entorno\n- Revisar nodos HTTP con autenticación",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "picoclaw-lead",
+        "responseMode": "onReceived",
+        "options": {},
+        "url": ""
+      },
+      "id": "webhook-onboarding",
+      "name": "Webhook Lead Validado",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "picoclaw-lead"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ============================================\n// DECISIÓN DE ONBOARDING SEGÚN TIPO\n// ============================================\n\nconst lead = $input.item.json;\nconst partnerId = lead.partner_id;\nconst tipo = lead.tipo || 'basico';\n\n// Definir acciones por tipo\nconst onboardingConfig = {\n  basico: {\n    enviar_email: true,\n    crear_tarea: true,\n    prioridad: 'baja',\n    dias_seguimiento: 7\n  },\n  premium: {\n    enviar_email: true,\n    crear_tarea: true,\n    enviar_whatsapp: true,\n    prioridad: 'media',\n    dias_seguimiento: 3\n  },\n  enterprise: {\n    enviar_email: true,\n    crear_tarea: true,\n    enviar_whatsapp: true,\n    agendar_llamado: true,\n    prioridad: 'alta',\n    dias_seguimiento: 1\n  }\n};\n\nconst config = onboardingConfig[tipo] || onboardingConfig.basico;\n\n// Construir payload para acciones\nconst actions = {\n  partner_id: partnerId,\n  tipo: tipo,\n  acciones: config,\n  timestamp: new Date().toISOString()\n};\n\nreturn { json: actions };",
+        "url": ""
+      },
+      "id": "decide-onboarding",
+      "name": "Decidir Onboarding",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:5678/sms-validated",
+        "sendHeaders": {
+          "Content-Type": "application/json"
+        },
+        "options": {}
+      },
+      "id": "log-onboarding",
+      "name": "Registrar en Picoclaw",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.acciones.enviar_email }}",
+              "operation": "equal",
+              "value2": true
+            }
+          ]
+        },
+        "url": ""
+      },
+      "id": "check-email",
+      "name": "¿Enviar email?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mailgun.net/v3/smarterbot.cl/messages",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "options": {}
+      },
+      "id": "send-email",
+      "name": "Enviar Email Onboarding",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1050,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.acciones.crear_tarea }}",
+              "operation": "equal",
+              "value2": true
+            }
+          ]
+        },
+        "url": ""
+      },
+      "id": "check-tarea",
+      "name": "¿Crear tarea?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://odoo-smarterbot-store:8069/xmlrpc/2/object",
+        "sendHeaders": {
+          "Content-Type": "text/xml"
+        },
+        "options": {}
+      },
+      "id": "create-task-odoo",
+      "name": "Crear Tarea en Odoo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1250,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "schema": "public",
+        "table": "smarter_events",
+        "columns": "metadata,payload,trust_score,timestamp,lifecycle",
+        "returnFields": "id",
+        "url": ""
+      },
+      "id": "supabase-log",
+      "name": "Guardar en Supabase",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"success\": true,\n  \"partner_id\": \"={{ $json.partner_id }}\",\n  \"onboarding_tipo\": \"={{ $json.tipo }}\",\n  \"acciones\": \"={{ JSON.stringify($json.acciones) }}\",\n  \"message\": \"Onboarding iniciado\"\n}",
+        "options": {},
+        "url": ""
+      },
+      "id": "response-ok",
+      "name": "Responder OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1650,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Lead Validado": {
+      "main": [
+        [
+          {
+            "node": "Decidir Onboarding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Decidir Onboarding": {
+      "main": [
+        [
+          {
+            "node": "Registrar en Picoclaw",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Registrar en Picoclaw": {
+      "main": [
+        [
+          {
+            "node": "¿Enviar email?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Enviar email?": {
+      "main": [
+        [
+          {
+            "node": "Enviar Email Onboarding",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿Crear tarea?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar Email Onboarding": {
+      "main": [
+        [
+          {
+            "node": "¿Crear tarea?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Crear tarea?": {
+      "main": [
+        [
+          {
+            "node": "Crear Tarea en Odoo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Guardar en Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Tarea en Odoo": {
+      "main": [
+        [
+          {
+            "node": "Guardar en Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar en Supabase": {
+      "main": [
+        [
+          {
+            "node": "Responder OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": true
+  },
+  "staticData": null,
+  "pinData": null,
+  "versionCounter": 6,
+  "triggerCount": 1,
+  "tags": []
+}
