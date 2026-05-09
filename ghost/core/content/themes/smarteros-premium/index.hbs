@@ -1,0 +1,56 @@
+{{!< default}}
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">El Sistema Operativo para tu Negocio Digital</h1>
+            <p class="hero-description">Integra WhatsApp, Odoo y Automatizaciones con IA en una sola plataforma sólida y escalable.</p>
+            <div class="hero-cta">
+                <a href="https://flow.smarterbot.store/" class="button primary large">Comenzar ahora</a>
+                <a href="#features" class="button secondary large">Ver funciones</a>
+            </div>
+        </div>
+        {{#if @site.cover_image}}
+        <div class="hero-image">
+            <img src="{{@site.cover_image}}" alt="{{@site.title}}" />
+        </div>
+        {{/if}}
+    </div>
+</section>
+
+<section id="features" class="features">
+    <div class="container">
+        <h2 class="section-title">Todo lo que necesitas para escalar</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>Bots de WhatsApp</h3>
+                <p>Automatiza tus ventas y soporte con IA conectada a tus datos reales.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3>Workflows con n8n</h3>
+                <p>Conecta tus herramientas favoritas sin escribir una sola línea de código.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Integración con Odoo</h3>
+                <p>Gestiona tu inventario, CRM y facturación de forma sincronizada.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="knowledge-hub">
+    <div class="container">
+        <h2 class="section-title">Centro de Conocimiento</h2>
+        <div class="post-feed">
+            {{#foreach posts}}
+                {{> "post-card"}}
+            {{/foreach}}
+        </div>
+        <div class="pagination-wrapper">
+            {{pagination}}
+        </div>
+    </div>
+</section>
