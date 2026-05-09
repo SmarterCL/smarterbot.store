@@ -1,14 +1,28 @@
 <article class="post-card {{post_class}}">
-    <a href="{{url}}">
-        {{#if feature_image}}
-            <img class="post-card-image" src="{{img_url feature_image size="m"}}" alt="{{title}}" />
-        {{/if}}
-        <div class="post-card-content">
-            {{#if primary_tag}}
-                <span class="post-card-tag">{{primary_tag.name}}</span>
-            {{/if}}
-            <h2 class="post-card-title">{{title}}</h2>
-            <p class="post-card-excerpt">{{excerpt words="30"}}...</p>
-        </div>
+    {{#if feature_image}}
+    <a class="post-card-image-link" href="{{url}}">
+        <img class="post-card-image"
+            src="{{img_url feature_image size="m"}}"
+            alt="{{title}}"
+        />
     </a>
+    {{/if}}
+
+    <div class="post-card-content">
+        <a class="post-card-content-link" href="{{url}}">
+            <header class="post-card-header">
+                {{#if primary_tag}}
+                    <span class="post-card-primary-tag">{{primary_tag.name}}</span>
+                {{/if}}
+                <h2 class="post-card-title">{{title}}</h2>
+            </header>
+            <section class="post-card-excerpt">
+                <p>{{excerpt words="33"}}</p>
+            </section>
+        </a>
+        <footer class="post-card-meta">
+            <time class="post-full-meta-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMM YYYY"}}</time>
+            <span class="post-card-readtime">{{reading_time minutes="1 min" more="mins"}}</span>
+        </footer>
+    </div>
 </article>
