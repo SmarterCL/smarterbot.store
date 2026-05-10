@@ -268,7 +268,7 @@
     },
     "theme": {
         "active_theme": {
-            "defaultValue": "source",
+            "defaultValue": "smarteros-premium",
             "flags": "RO",
             "type": "string"
         }

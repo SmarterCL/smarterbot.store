@@ -1,0 +1,23 @@
+{{!< default}}
+
+{{#post}}
+<article class="article-shell page-shell">
+    <div class="container article-container">
+        {{#if @page.show_title_and_feature_image}}
+            <header class="article-header">
+                <h1 class="article-title">{{title}}</h1>
+                {{#if custom_excerpt}}
+                    <p class="article-excerpt">{{custom_excerpt}}</p>
+                {{/if}}
+                {{#if feature_image}}
+                    <img class="article-feature-image" src="{{img_url feature_image size="xl"}}" alt="{{title}}" />
+                {{/if}}
+            </header>
+        {{/if}}
+
+        <section class="article-content kg-content">
+            {{content}}
+        </section>
+    </div>
+</article>
+{{/post}}

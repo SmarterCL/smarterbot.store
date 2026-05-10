@@ -46,7 +46,7 @@ export default [
     setting('site', 'twitter_description', null),
 
     // THEME
-    setting('theme', 'active_theme', 'source'),
+    setting('theme', 'active_theme', 'smarteros-premium'),
 
     // PRIVATE
     setting('private', 'is_private', false),

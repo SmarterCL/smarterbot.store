@@ -1,0 +1,28 @@
+{{!< default}}
+
+{{#post}}
+<article class="article-shell">
+    <div class="container article-container">
+        <header class="article-header">
+            {{#if primary_tag}}
+                <a class="article-tag" href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+            {{/if}}
+            <h1 class="article-title">{{title}}</h1>
+            {{#if custom_excerpt}}
+                <p class="article-excerpt">{{custom_excerpt}}</p>
+            {{/if}}
+            <div class="article-meta">
+                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMM YYYY"}}</time>
+                <span>{{reading_time minutes="1 min" more="mins"}}</span>
+            </div>
+            {{#if feature_image}}
+                <img class="article-feature-image" src="{{img_url feature_image size="xl"}}" alt="{{title}}" />
+            {{/if}}
+        </header>
+
+        <section class="article-content kg-content">
+            {{content}}
+        </section>
+    </div>
+</article>
+{{/post}}

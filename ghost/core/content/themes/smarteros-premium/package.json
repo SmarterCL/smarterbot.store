@@ -2,6 +2,16 @@
   "name": "smarteros-premium",
   "description": "Premium SaaS Theme for SmarterOS. Optimized for Knowledge Base and Marketing.",
   "version": "1.0.0",
+  "author": {
+    "name": "SmarterOS",
+    "email": "hello@smarteros.ai"
+  },
+  "keywords": [
+    "ghost-theme",
+    "saas",
+    "knowledge-base",
+    "marketing"
+  ],
   "engines": {
     "ghost": ">=5.0.0"
   },
