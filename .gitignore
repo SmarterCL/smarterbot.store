@@ -169,6 +169,10 @@ Caddyfile
 /ghost/*/build
 # Typescript build artifacts
 tsconfig.tsbuildinfo
+next-env.d.ts
+
+# Next.js build output
+.next/
 
 # Admin X
 /apps/admin-x-settings/dist
@@ -212,3 +216,5 @@ yalc.lock
 .env.tinybird
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
+.vercel
+.env*.local
