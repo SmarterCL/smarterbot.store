@@ -203,13 +203,23 @@ export default function SupabaseAuth({
 
   return (
     <div className="bg-white rounded-3xl p-8 shadow-xl border border-light text-center">
+      <div className="d-inline-flex align-items-center justify-content-center rounded-pill border border-success-subtle bg-success-subtle text-success px-3 py-2 mb-3">
+        <Sparkles size={14} className="me-2" />
+        <span className="text-[10px] font-black uppercase tracking-widest">Acceso seguro</span>
+      </div>
       <h3 className="font-black text-2xl mb-2">Accede a SmarterOS</h3>
-      <p className="text-secondary text-sm font-bold mb-3">
+      <p className="text-secondary text-sm font-bold mb-2">
         Inicia sesión para entrar al panel y continuar tu operación comercial desde un solo lugar.
       </p>
-      <p className="text-secondary opacity-75 text-[11px] font-bold mb-6">
+      <p className="text-secondary opacity-75 text-[11px] font-bold mb-4">
         Después del login te enviaremos a <span className="text-dark">{normalizeNextPath(redirectTo)}</span>.
       </p>
+      <div className="rounded-4 border border-light bg-light-subtle px-3 py-3 mb-6 text-start">
+        <div className="text-[10px] font-black text-uppercase tracking-widest text-success mb-1">Incluye</div>
+        <p className="text-secondary text-[11px] font-bold mb-0">
+          Acceso a dashboard, CRM, conversaciones y automatizaciones desde una única sesión.
+        </p>
+      </div>
 
       {message ? <p className="text-danger text-[11px] font-bold mb-4">{message}</p> : null}
 
