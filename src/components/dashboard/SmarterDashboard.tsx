@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import styles from '@/app/dashboard/dashboard.module.css';
 import type { DashboardData } from '@/lib/dashboard';
+import WahaStatusWidget from './WahaStatusWidget';
 
 function toneClass(tone: string) {
   return {
@@ -230,6 +231,7 @@ export default function SmarterDashboard({ data }: SmarterDashboardProps) {
               </div>
             </div>
             <div className="col-xl-5">
+              <WahaStatusWidget tenantId={tenantId} />
               <div className={styles.panelCard}>
                 <div className={styles.panelHeader}>
                   <div>

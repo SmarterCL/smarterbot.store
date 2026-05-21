@@ -52,6 +52,18 @@ function AuthCallbackContent() {
           throw new Error('No se encontró una sesión activa después del callback.');
         }
 
+        const user = session.user;
+        const currentTenant = user.user_metadata?.tenant_id || user.app_metadata?.tenant_id;
+        
+        if (!currentTenant) {
+           const emailPrefix = user.email ? user.email.split('@')[0].replace(/[^a-zA-Z0-9]/g, '').toLowerCase() : 'tenant';
+           const newTenantId = `${emailPrefix}_${Math.random().toString(36).substring(2, 6)}`;
+           
+           await supabase.auth.updateUser({
+             data: { tenant_id: newTenantId }
+           });
+        }
+
         setStatus('success');
         setMessage('Sesión iniciada. Redirigiendo...');
         router.replace(nextPath);

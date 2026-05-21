@@ -1,0 +1,177 @@
+{
+  "name": "SmarterOS - Respuesta Automática B2B",
+  "description": "Workflow exportado desde n8n.smarterbot.cl\n\n⚠️ REQUIERE CONFIGURACIÓN:\n- Configurar credenciales de PostgreSQL/Supabase\n- Actualizar URLs de webhooks según entorno\n- Revisar nodos HTTP con autenticación",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {},
+        "url": ""
+      },
+      "id": "trigger-event",
+      "name": "Trigger: Nuevo Evento",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "smarter-events-poll"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "table": "smarter_events",
+        "columns": "id,payload,lifecycle",
+        "where": "lifecycle='ingested' AND payload->'data'->>'channel'='email'",
+        "limit": 10,
+        "options": {},
+        "url": ""
+      },
+      "id": "fetch-events",
+      "name": "Fetch Eventos Pendientes",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ============================================\n// CLASIFICACIÓN DE INTENT Y PLANTILLA\n// ============================================\n\nconst events = $input.all();\nconst responses = [];\n\nfor (const event of events) {\n  const payload = event.json.payload;\n  const email = payload.data?.email;\n  const subject = payload.data?.subject || '';\n  const intent = payload.data?.intent || 'general_inquiry';\n  const businessName = payload.data?.business_name || '';\n  \n  if (!email) continue;\n  \n  // Seleccionar plantilla según intent\n  let emailSubject = '';\n  let emailBody = '';\n  \n  if (intent === 'demo_request') {\n    emailSubject = '🚀 Tu demo de SmarterOS está lista';\n    emailBody = `Hola ${businessName || 'equipo'},\n\n¡Gracias por tu interés en SmarterOS!\n\nVimos que quieres una demo de nuestro CRM con automatización.\n\n📅 **Opciones:**\n\n1. **Demo Guiada (15 min)** → Agenda aquí: https://cal.com/smarterbot/demo\n2. **Demo Auto-guiada** → Video de 5 min: https://loom.com/smarteros-demo\n3. **Activación Directa** → Respondé este email y lo activamos ya\n\n💰 **Plan recomendado: PRO**\n- CRM con Odoo incluido\n- Automatización de ventas\n- Integración con email, WhatsApp, web\n- $150.000/mes\n\n¿Cuál opción preferís?\n\n—\nEquipo SmarterOS\nhttps://smarterbot.cl`;\n  }\n  else if (intent === 'pricing_request') {\n    emailSubject = '💰 Propuesta SmarterOS - Automatización B2B';\n    emailBody = `Hola ${businessName || 'equipo'},\n\nGracias por consultar por nuestros planes!\n\n📊 **Nuestros Planes:**\n\n┌─────────────────────────────────────────┐\n│ BÁSICO - $50.000/mes                    │\n├─────────────────────────────────────────┤\n│ • Captura de leads (web + email)        │\n│ • Validación automática                 │\n│ • Registro en PostgreSQL                │\n│ • Soporte básico                        │\n└─────────────────────────────────────────┘\n\n┌─────────────────────────────────────────┐\n│ PRO - $150.000/mes ⭐ RECOMENDADO       │\n├─────────────────────────────────────────┤\n│ • Todo lo del Básico +                  │\n│ • CRM en Odoo                           │\n│ • Scoring de leads                      │\n│ • Pipeline de ventas                    │\n│ • Integración WhatsApp                  │\n└─────────────────────────────────────────┘\n\n┌─────────────────────────────────────────┐\n│ ENTERPRISE - $300.000/mes               │\n├─────────────────────────────────────────┤\n│ • Todo lo del Pro +                     │\n│ • DTE automático (facturación)          │\n│ • Onboarding con Picoclaw               │\n│ • Auto-learning                         │\n│ • Analytics avanzado                    │\n│ • Soporte prioritario 24/7              │\n└─────────────────────────────────────────┘\n\n🎯 **¿Cuál se ajusta más a tu necesidad?**\n\nRespondé este email y te ayudo a activarlo.\n\n—\nEquipo SmarterOS\nhttps://smarterbot.cl`;\n  }\n  else if (intent === 'enterprise_inquiry') {\n    emailSubject = '🏢 SmarterOS Enterprise - Contacto Directo';\n    emailBody = `Hola ${businessName || 'equipo'},\n\n¡Excelente! Veo que estás interesado en nuestra solución Enterprise.\n\n🎯 **Para empresas que buscan:**\n- Automatización completa\n- Facturación electrónica (DTE)\n- Múltiples canales (web, email, WhatsApp, Telegram)\n- Analytics en tiempo real\n- Soporte prioritario\n\n💼 **Plan Enterprise: $300.000/mes**\n\nIncluye:\n- Todo lo del Plan Pro\n- DTE automático (SII)\n- Onboarding personalizado\n- Auto-learning (mejora continua)\n- Dashboard analytics\n- Soporte 24/7\n\n📞 **¿Agendamos una llamada de 15 min?**\n\nCalendario: https://cal.com/smarterbot/enterprise\n\nO respondé este email con tu horario preferido.\n\n—\nEquipo SmarterOS\nhttps://smarterbot.cl`;\n  }\n  else {\n    emailSubject = '👋 Gracias por contactar SmarterOS';\n    emailBody = `Hola ${businessName || 'equipo'},\n\n¡Gracias por tu mensaje!\n\n🤖 **SmarterOS** es tu asistente de automatización B2B.\n\n📌 **Te ayudo con:**\n- Captura automática de leads\n- CRM con Odoo\n- Automatización de ventas\n- Integración con email, WhatsApp, web\n- Facturación electrónica (DTE)\n\n💬 **¿En qué puedo ayudarte?**\n\nRespondé este email y te asisto.\n\n—\nEquipo SmarterOS\nhttps://smarterbot.cl`;\n  }\n  \n  responses.push({\n    json: {\n      event_id: event.json.id,\n      to: email,\n      subject: emailSubject,\n      body: emailBody,\n      intent: intent\n    }\n  });\n}\n\nreturn responses;",
+        "url": ""
+      },
+      "id": "classify-intent",
+      "name": "Clasificar Intent y Preparar Email",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        650,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.mailgun.net/v3/smarterbot.cl/messages",
+        "genericAuthType": "httpBasicAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "from",
+              "value": "SmarterOS <no-reply@smarterbot.cl>"
+            },
+            {
+              "name": "to",
+              "value": "={{ $json.to }}"
+            },
+            {
+              "name": "subject",
+              "value": "={{ $json.subject }}"
+            },
+            {
+              "name": "text",
+              "value": "={{ $json.body }}"
+            },
+            {
+              "name": "h:Reply-To",
+              "value": "hola@smarterbot.cl"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "send-email",
+      "name": "Enviar Email de Respuesta (Mailgun)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        850,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "table": "smarter_events",
+        "updateKey": "id",
+        "updateValue": "={{ $json.event_id }}",
+        "columns": "lifecycle,decided_at",
+        "options": {},
+        "url": ""
+      },
+      "id": "update-event",
+      "name": "Actualizar Evento a Respondido",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1050,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Trigger: Nuevo Evento": {
+      "main": [
+        [
+          {
+            "node": "Fetch Eventos Pendientes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Eventos Pendientes": {
+      "main": [
+        [
+          {
+            "node": "Clasificar Intent y Preparar Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clasificar Intent y Preparar Email": {
+      "main": [
+        [
+          {
+            "node": "Enviar Email de Respuesta (Mailgun)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar Email de Respuesta (Mailgun)": {
+      "main": [
+        [
+          {
+            "node": "Actualizar Evento a Respondido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": true
+  },
+  "staticData": {
+    "node:Trigger: Nuevo Evento": {
+      "recurrenceRules": []
+    }
+  },
+  "pinData": null,
+  "versionCounter": 7,
+  "triggerCount": 1,
+  "tags": []
+}

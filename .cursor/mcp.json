@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "smarteros-local": {
+      "command": "node",
+      "args": ["scripts/smarteros-mcp-server.mjs"]
+    },
+    "supabase": {
+      "url": "https://mcp.supabase.com/mcp?project_ref=rjfcmmzjlguiititkmyh"
+    },
+    "vercel": {
+      "url": "https://mcp.vercel.com"
+    }
+  }
+}
