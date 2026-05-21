@@ -37,6 +37,7 @@ build/Release
 
 # Dependency directories
 node_modules/
+node_modules/.cache
 jspm_packages/
 
 # Typescript v1 declaration files
@@ -173,6 +174,8 @@ next-env.d.ts
 
 # Next.js build output
 .next/
+.next
+.temp_restore
 
 # Admin X
 /apps/admin-x-settings/dist
