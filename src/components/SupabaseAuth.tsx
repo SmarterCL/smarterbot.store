@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { AlertCircle, Loader2, LogIn, LogOut } from 'lucide-react';
+import { Loader2, LogIn, LogOut, Sparkles } from 'lucide-react';
 import {
   getAuthCallbackUrl,
   hasSupabaseEnv,
@@ -126,14 +126,25 @@ export default function SupabaseAuth({
 
   if (!hasSupabaseEnv) {
     return (
-      <div className="bg-white rounded-3xl p-8 shadow-xl border border-warning-subtle text-center">
-        <div className="d-inline-flex align-items-center justify-content-center rounded-circle bg-warning-subtle text-warning p-3 mb-4">
-          <AlertCircle size={18} />
+      <div className="bg-white rounded-3xl p-8 shadow-xl border border-light text-center">
+        <div className="d-inline-flex align-items-center justify-content-center rounded-circle bg-success-subtle text-success p-3 mb-4">
+          <Sparkles size={24} className="text-success animate-pulse" />
         </div>
-        <h3 className="font-black text-2xl mb-2">Login no configurado</h3>
-        <p className="text-secondary text-sm font-bold mb-3">{supabaseEnvError}</p>
-        <p className="text-secondary opacity-75 text-[11px] font-bold mb-0">
-          Configura `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` para activar Supabase Auth.
+        <h3 className="font-black text-2xl mb-2">Accede a SmarterOS</h3>
+        <p className="text-secondary text-sm font-bold mb-4">
+          El entorno de autenticación de Supabase no está disponible públicamente en este servidor.
+        </p>
+        
+        <Link
+          href="/dashboard"
+          className="btn btn-black rounded-full w-100 py-3 text-xs font-black uppercase tracking-widest d-inline-flex align-items-center justify-content-center gap-3 transition-all hover-scale"
+        >
+          <LogIn size={16} />
+          Acceder en modo demo
+        </Link>
+        
+        <p className="text-secondary opacity-75 text-[10px] font-bold mt-4 mb-0">
+          * Puedes explorar el panel con datos simulados de alta fidelidad.
         </p>
       </div>
     );
@@ -193,7 +204,7 @@ export default function SupabaseAuth({
       <button
         onClick={signInWithGoogle}
         disabled={pending}
-        className="btn btn-black rounded-full w-100 py-3 text-xs font-black uppercase tracking-widest d-inline-flex align-items-center justify-content-center gap-3 transition-all hover-scale"
+        className="btn btn-black rounded-full w-100 py-3 text-xs font-black uppercase tracking-widest d-inline-flex align-items-center justify-content-center gap-3 transition-all hover-scale mb-3"
       >
         {pending ? (
           <Loader2 className="animate-spin" size={16} />
@@ -219,6 +230,20 @@ export default function SupabaseAuth({
         )}
         {pending ? 'Redirigiendo...' : 'Continuar con Google'}
       </button>
+
+      <div className="d-flex align-items-center justify-content-center my-3 text-muted text-[10px] font-bold uppercase tracking-widest">
+        <span className="border-bottom w-25"></span>
+        <span className="px-2">O bien</span>
+        <span className="border-bottom w-25"></span>
+      </div>
+
+      <Link
+        href="/dashboard"
+        className="btn btn-outline-dark rounded-full w-100 py-3 text-xs font-black uppercase tracking-widest d-inline-flex align-items-center justify-content-center gap-2 transition-all hover-scale"
+      >
+        <Sparkles size={14} className="text-success" />
+        Probar en Modo Demo
+      </Link>
 
       <p className="text-secondary opacity-50 text-[10px] font-bold mt-6 mb-0">
         Al continuar, aceptas nuestros <Link href="/terminos" className="underline">Términos</Link> y{' '}

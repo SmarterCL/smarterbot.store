@@ -50,7 +50,7 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https:",
-              "connect-src 'self' https://api.smarterbot.cl https://n8n.smarterbot.store https://www.google-analytics.com https://www.googletagmanager.com https://connect.facebook.net",
+              "connect-src 'self' https://*.supabase.co https://api.smarterbot.cl https://n8n.smarterbot.store https://www.google-analytics.com https://www.googletagmanager.com https://connect.facebook.net",
               "frame-src 'self' https://www.facebook.com https://web.facebook.com https://telegram.org",
               "object-src 'none'",
               "base-uri 'self'",
@@ -77,6 +77,14 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.supabase.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
       },
     ],
     formats: ['image/avif', 'image/webp'],

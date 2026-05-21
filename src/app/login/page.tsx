@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { BarChart3, Database, MessageCircle, Zap } from 'lucide-react';
 import SupabaseAuth from '@/components/SupabaseAuth';
 import { normalizeNextPath, supabase } from '@/lib/supabase';
 
@@ -68,16 +69,43 @@ function LoginPageContent() {
       <div className="row justify-content-center align-items-center g-4">
         <div className="col-12 col-lg-6">
           <div className="pe-lg-4">
-            <span className="badge text-bg-dark rounded-pill px-3 py-2 mb-3">SmarterOS Login</span>
-            <h1 className="display-5 fw-black mb-3">Entra a tu operación comercial conversacional.</h1>
-            <p className="text-secondary fs-5 mb-4">
-              Accede a tu stack de ventas, atención y automatización desde una sola sesión.
-            </p>
-            <div className="d-flex flex-column gap-2 text-secondary fw-semibold">
-              <span>WhatsApp multiagente</span>
-              <span>CRM y seguimiento</span>
-              <span>Automatizaciones conectadas</span>
-              <span>Dashboards y operación centralizada</span>
+            <div className="row row-cols-1 row-cols-md-2 g-4 mb-4">
+              <div className="col">
+                <div className="card h-100 border-0 bg-light">
+                  <div className="card-body text-center">
+                    <MessageCircle className="mb-3" size={32} />
+                    <h5 className="card-title fw-bold">WhatsApp multiagente</h5>
+                    <p className="card-text text-secondary">Comunicación omnicanal integrada.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="col">
+                <div className="card h-100 border-0 bg-light">
+                  <div className="card-body text-center">
+                    <Database className="mb-3" size={32} />
+                    <h5 className="card-title fw-bold">CRM y seguimiento</h5>
+                    <p className="card-text text-secondary">Gestión de clientes y oportunidades.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="col">
+                <div className="card h-100 border-0 bg-light">
+                  <div className="card-body text-center">
+                    <Zap className="mb-3" size={32} />
+                    <h5 className="card-title fw-bold">Automatizaciones conectadas</h5>
+                    <p className="card-text text-secondary">Flujos de trabajo sincode.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="col">
+                <div className="card h-100 border-0 bg-light">
+                  <div className="card-body text-center">
+                    <BarChart3 className="mb-3" size={32} />
+                    <h5 className="card-title fw-bold">Dashboards centralizados</h5>
+                    <p className="card-text text-secondary">Visibilidad operativa en tiempo real.</p>
+                  </div>
+                </div>
+              </div>
             </div>
             <p className="text-secondary small mt-4 mb-0">
               ¿Aún no tienes acceso? <Link href="/" className="link-dark fw-bold">Solicita una demo</Link>.

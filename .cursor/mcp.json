@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "smarteros-local": {
-      "command": "node",
-      "args": ["scripts/smarteros-mcp-server.mjs"]
+      "command": "zsh",
+      "args": ["/Users/mac/dev/2026/smarterbot.store/scripts/smarteros-antigravity-local.sh"]
     },
     "supabase": {
       "url": "https://mcp.supabase.com/mcp?project_ref=rjfcmmzjlguiititkmyh"

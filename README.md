@@ -52,6 +52,13 @@ pnpm install
 pnpm dev
 ```
 
+## MCP local
+
+El repo expone un launcher estable en `scripts/smarteros-antigravity-local.sh`.
+Las configs locales de MCP (`.mcp.json`, `.cursor/mcp.json`, `.vscode/mcp.json`, `opencode.json`) deben apuntar a ese script y no a `node scripts/smarteros-mcp-server.mjs` directo.
+
+Eso evita fallos de arranque cuando el cliente MCP se inicia con otro directorio de trabajo.
+
 ## Build
 
 ```bash

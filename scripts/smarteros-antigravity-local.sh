@@ -1,7 +1,8 @@
 #!/bin/zsh
 set -euo pipefail
 
-REPO_ROOT="/Users/mac/dev/2026/smarterbot.store"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 TUNNEL_SCRIPT="/Users/mac/.agents/start-smarteros-vps-tunnel.sh"
 SERVER_SCRIPT="$REPO_ROOT/scripts/smarteros-mcp-server.mjs"
 
