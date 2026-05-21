@@ -11,7 +11,7 @@ type LoginPageProps = {
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {
   const resolvedSearchParams = searchParams ? await searchParams : undefined;
-  const nextPath = normalizeNextPath(resolvedSearchParams?.next);
+  const nextPath = normalizeNextPath(resolvedSearchParams?.next) ?? '/onboarding';
   const message = resolvedSearchParams?.message ?? null;
   const error = resolvedSearchParams?.error ?? null;
 

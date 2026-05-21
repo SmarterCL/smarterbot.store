@@ -48,11 +48,7 @@ export default function FacebookLoginButton({
       <button
         onClick={handleLogin}
         disabled={status === 'loading'}
-        className={`
-          flex items-center justify-center gap-3 px-6 py-3 rounded-xl font-bold transition-all
-          ${status === 'loading' ? 'bg-blue-600/50 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-600/20'}
-          text-white w-full
-        `}
+        className={`flex items-center justify-center gap-3 px-6 py-3 rounded-xl font-bold transition-all ${status === 'loading' ? 'bg-blue-600/50 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-600/20'} text-white w-full`}
       >
         {status === 'loading' ? (
           <Loader2 className="w-5 h-5 animate-spin" />

@@ -208,7 +208,7 @@ export default function ChatWidget() {
                         data-telegram-login={BOT_USERNAME}
                         data-size="medium"
                         data-radius="8"
-                        data-onauth="onTelegramAuth(user)"
+
                         data-request-access="write"
                       />
                     </div>

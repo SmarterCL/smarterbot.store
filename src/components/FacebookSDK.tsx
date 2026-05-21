@@ -16,31 +16,21 @@ export default function FacebookSDK() {
   return (
     <>
       <Script
-        id="facebook-jssdk-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.fbAsyncInit = function() {
-              FB.init({
-                appId      : '${appId}',
-                cookie     : true,
-                xfbml      : true,
-                version    : '${apiVersion}'
-              });
-                
-              FB.AppEvents.logPageView();   
-            };
-
-            (function(d, s, id){
-               var js, fjs = d.getElementsByTagName(s)[0];
-               if (d.getElementById(id)) {return;}
-               js = d.createElement(s); js.id = id;
-               js.src = "https://connect.facebook.net/en_US/sdk.js";
-               fjs.parentNode.insertBefore(js, fjs);
-             }(document, 'script', 'facebook-jssdk'));
-          `,
-        }}
-      />
+      src="https://connect.facebook.net/en_US/sdk.js"
+      strategy="afterInteractive"
+      onLoad={() => {
+        // Initialize Facebook SDK after script loads
+        (window as any).fbAsyncInit = function () {
+          (window as any).FB.init({
+            appId: appId,
+            cookie: true,
+            xfbml: true,
+            version: apiVersion,
+          });
+          (window as any).FB.AppEvents.logPageView();
+        };
+      }}
+    />
     </>
   );
 }

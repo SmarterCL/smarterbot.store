@@ -126,15 +126,14 @@ export default function TelegramAuth() {
 
         {/* Telegram Widget */}
         <div className="flex justify-center mb-8 py-4 bg-soft rounded-3xl border border-light overflow-hidden">
-          <Script
-            src="https://telegram.org/js/telegram-widget.js?22"
-            strategy="afterInteractive"
-            data-telegram-login={BOT_USERNAME}
-            data-size="large"
-            data-radius="12"
-            data-onauth="onTelegramAuth(user)"
-            data-request-access="write"
-          />
+            <Script
+              src="https://telegram.org/js/telegram-widget.js?22"
+              strategy="afterInteractive"
+              data-telegram-login={BOT_USERNAME}
+              data-size="large"
+              data-radius="12"
+              data-request-access="write"
+            />
           {/* Fallback loader if script takes time */}
           <div className="flex flex-col items-center gap-2 py-2">
             <Loader2 className="animate-spin text-success" />

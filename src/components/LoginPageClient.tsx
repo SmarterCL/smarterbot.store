@@ -45,7 +45,8 @@ export default function LoginPageClient({
         window.clearTimeout(unlockTimer);
 
         if (data.session) {
-          router.replace(nextPath);
+          // document.cookie = 'studio_access=Demo2026@; domain=claw3d.smarterbot.store; path=/; secure; samesite=lax';
+router.replace(nextPath);
           return;
         }
 
@@ -70,6 +71,7 @@ export default function LoginPageClient({
         <div className="col-12 col-lg-6">
           <div className="pe-lg-4">
             <div className="position-relative overflow-hidden rounded-4 shadow-lg border border-light bg-black text-white mb-4">
+              <div className="ratio ratio-16x9">
               <Image
                 src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1400&q=80"
                 alt="Equipo operando automatizaciones y agentes"
@@ -77,6 +79,7 @@ export default function LoginPageClient({
                 sizes="(max-width: 992px) 100vw, 50vw"
                 className="object-fit-cover"
               />
+            </div>
               <div
                 className="position-absolute top-0 start-0 w-100 h-100"
                 style={{ background: 'linear-gradient(135deg, rgba(3,7,18,0.85) 0%, rgba(15,23,42,0.55) 50%, rgba(22,163,74,0.28) 100%)' }}
@@ -107,7 +110,7 @@ export default function LoginPageClient({
                 </div>
                 <div className="row g-3 mb-4">
                   <div className="col-12 col-md-7">
-                    <div className="rounded-4 bg-white bg-opacity-10 border border-light-subtle p-3 p-lg-4 h-100">
+                    <div className="rounded-4 bg-white bg-opacity-10 border border-light-subtle p-3 p-lg-4 h-100 text-dark">
                       <div className="d-flex align-items-center justify-content-between gap-3 mb-3">
                         <div>
                           <div className="text-uppercase small fw-black text-white-50 mb-1">Operación centralizada</div>
@@ -156,43 +159,32 @@ export default function LoginPageClient({
                         ))}
                       </div>
                       <div className="position-relative overflow-hidden rounded-4 border border-light-subtle" style={{ minHeight: '168px' }}>
-                        <Image
+                        <img
                           src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80"
                           alt="Panel operativo con métricas y conversaciones de clientes"
-                          fill
-                          sizes="(max-width: 992px) 100vw, 20vw"
-                          className="object-fit-cover"
+                          className="position-absolute w-100 h-100 object-fit-cover"
                         />
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="row g-3">
-                  <div className="col-md-4">
-                    <div className="rounded-4 bg-white bg-opacity-10 border border-light-subtle p-3 h-100">
-                      <div className="d-flex align-items-center gap-2 mb-2">
-                        <Zap size={18} className="text-success" />
-                        <span className="small fw-black text-uppercase">WhatsApp multi‑agente</span>
-                      </div>
-                      <p className="small text-white-50 mb-0">Conversaciones simultáneas con clientes vía WhatsApp, sin límites de agentes.</p>
+                  <div className="col-6 col-md-4">
+              <div className="position-relative rounded-4 overflow-hidden" style={{ minHeight: '180px' }}>
+                <img src="/images/whatsapp_feature.png" alt="WhatsApp multi‑agente" className="position-absolute w-100 h-100 object-fit-cover" />
+                <div className="position-absolute bottom-0 start-0 w-100 text-center text-white bg-black bg-opacity-50 py-2" style={{ fontSize: '0.9rem' }}>
+                  Convierte WhatsApp<br/>en tu<br/>sistema comercial
+                </div>
+              </div>
+            </div>
+                  <div className="col-12 col-sm-6 col-md-4">
+                    <div className="position-relative rounded-4 overflow-hidden" style={{ minHeight: '180px' }}>
+                      <img src="/images/crm_feature.png" alt="CRM integrado" className="position-absolute w-100 h-100 object-fit-cover" />
                     </div>
                   </div>
-                  <div className="col-md-4">
-                    <div className="rounded-4 bg-white bg-opacity-10 border border-light-subtle p-3 h-100">
-                      <div className="d-flex align-items-center gap-2 mb-2">
-                        <Database size={18} className="text-success" />
-                        <span className="small fw-black text-uppercase">CRM integrado</span>
-                      </div>
-                      <p className="small text-white-50 mb-0">Registra leads, sigue oportunidades y genera reportes en tiempo real.</p>
-                    </div>
-                  </div>
-                  <div className="col-md-4">
-                    <div className="rounded-4 bg-white bg-opacity-10 border border-light-subtle p-3 h-100">
-                      <div className="d-flex align-items-center gap-2 mb-2">
-                        <BarChart3 size={18} className="text-success" />
-                        <span className="small fw-black text-uppercase">Dashboard analítico</span>
-                      </div>
-                      <p className="small text-white-50 mb-0">Visualiza KPIs críticos y controla la operación con gráficos interactivos.</p>
+                  <div className="col-12 col-sm-6 col-md-4">
+                    <div className="position-relative rounded-4 overflow-hidden" style={{ minHeight: '180px' }}>
+                      <img src="/images/dashboard_feature.png" alt="Dashboard analítico" className="position-absolute w-100 h-100 object-fit-cover" />
                     </div>
                   </div>
                 </div>
