@@ -32,6 +32,14 @@ export default function SupabaseAuth({
     }
 
     let mounted = true;
+    const unlockTimer = window.setTimeout(() => {
+      if (!mounted) {
+        return;
+      }
+
+      setLoading(false);
+      setMessage((current) => current ?? 'La validación de sesión tardó demasiado. Puedes continuar manualmente.');
+    }, 1800);
 
     supabase.auth
       .getSession()
@@ -39,6 +47,8 @@ export default function SupabaseAuth({
         if (!mounted) {
           return;
         }
+
+        window.clearTimeout(unlockTimer);
 
         if (error) {
           setMessage(error.message);
@@ -54,6 +64,7 @@ export default function SupabaseAuth({
           return;
         }
 
+        window.clearTimeout(unlockTimer);
         setMessage(error instanceof Error ? error.message : 'No fue posible leer la sesión.');
         setLoading(false);
       });
@@ -71,6 +82,7 @@ export default function SupabaseAuth({
 
     return () => {
       mounted = false;
+      window.clearTimeout(unlockTimer);
       subscription.unsubscribe();
     };
   }, []);
