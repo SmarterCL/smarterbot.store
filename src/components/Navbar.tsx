@@ -24,6 +24,7 @@ const Navbar = () => {
     { name: 'Operacion', href: '/#operacion' },
     { name: 'Sectores', href: '/#sectores' },
     { name: 'Diferencial', href: '/#diferencial' },
+    { name: 'QR Connect', href: '/connect' },
   ];
 
   return (
@@ -67,6 +68,9 @@ const Navbar = () => {
               <User size={14} className="text-success" />
               Login
             </Link>
+            <Link href="/connect" className="d-none d-sm-flex align-items-center gap-2 px-3 py-2 rounded-full bg-soft text-black text-[10px] font-black uppercase tracking-wider text-decoration-none transition-all hover:bg-subtle hover-scale cta-chip whitespace-nowrap">
+              QR Connect <ArrowRight size={14} className="text-success" />
+            </Link>
             <Link href="/register" className="btn btn-black rounded-full px-4 py-2 text-[10px] font-black uppercase tracking-wider d-flex align-items-center gap-2 hover-scale btn-cta-dynamic whitespace-nowrap">
               Solicitar demo <ArrowRight size={14} className="text-success" />
             </Link>
@@ -106,6 +110,9 @@ const Navbar = () => {
           <div className="mt-12 pt-12 border-t border-light">
              <Link href="/register" className="btn btn-success-premium w-100 py-4 fs-4 mb-4">
                 SOLICITAR DEMO
+             </Link>
+             <Link href="/connect" className="btn btn-soft w-100 py-4 fs-4 mb-4">
+                QR CONNECT
              </Link>
              <Link href="/login" className="btn btn-black w-100 py-4 fs-4">
                 LOGIN
