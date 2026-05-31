@@ -17,7 +17,7 @@
 
 ### Paso 1: Abrir Workflow
 
-1. Ir a: https://n8n.smarterbot.cl/workflows
+1. Ir a: https://n8n.smarterbot.store/workflows
 2. Buscar workflow pendiente (ej: "SmarterOS - Respuesta Automática B2B")
 3. Click para editar
 
@@ -57,7 +57,7 @@ Para cada workflow pendiente:
 
 #### 3.1 MCP Decision Engine
 
-1. Ir a: https://n8n.smarterbot.cl/workflow/jRWHFYLwR2VxD3pY
+1. Ir a: https://n8n.smarterbot.store/workflow/jRWHFYLwR2VxD3pY
 2. Click en nodo **"Actualizar en Supabase"**
 3. En **Credential**, seleccionar `supabase-smarteros`
 4. Click en nodo **"Preparar actualización"**
@@ -66,7 +66,7 @@ Para cada workflow pendiente:
 
 #### 3.2 CRON Auto-Actualización
 
-1. Ir a: https://n8n.smarterbot.cl/workflow/JKsfUHfTJuf4a2z5
+1. Ir a: https://n8n.smarterbot.store/workflow/JKsfUHfTJuf4a2z5
 2. Click en nodo **"Obtener eventos nuevos"**
 3. En **Credential**, seleccionar `supabase-smarteros`
 4. Click en nodo **"Guardar en Supabase"**
@@ -75,7 +75,7 @@ Para cada workflow pendiente:
 
 #### 3.3 Facturación Electrónica DTE
 
-1. Ir a: https://n8n.smarterbot.cl/workflow/lKXLlxZNFijhFfSH
+1. Ir a: https://n8n.smarterbot.store/workflow/lKXLlxZNFijhFfSH
 2. Click en nodo **"Actualizar en Supabase"**
 3. En **Credential**, seleccionar `supabase-smarteros`
 4. Click en **"Activate"**
@@ -87,7 +87,7 @@ Para cada workflow pendiente:
 ### Test MCP Decision Engine
 
 ```bash
-curl -X POST "https://n8n.smarterbot.cl/webhook/mcp-decision" \
+curl -X POST "https://n8n.smarterbot.store/webhook/mcp-decision" \
   -H "Content-Type: application/json" \
   -d '{
     "metadata": {

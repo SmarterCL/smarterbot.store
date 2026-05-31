@@ -1,6 +1,7 @@
-import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ArrowRight, CheckCircle2, LayoutTemplate, MonitorSmartphone } from 'lucide-react';
+
 interface DemoLandingHeroProps {
   title?: string;
   subtitle?: string;
@@ -8,42 +9,91 @@ interface DemoLandingHeroProps {
   secondaryCtaText?: string;
   primaryCtaHref?: string;
   secondaryCtaHref?: string;
-  onPrimaryClick?: () => void;
 }
 
+const heroHighlights = [
+  '4 plantillas alineadas al dashboard',
+  'Vista web para operación y vista móvil para seguimiento',
+  'Assets locales para evitar fallos de carga',
+];
+
 export default function DemoLandingHero({
-  title = 'Conecta WhatsApp y automatiza ventas con IA',
-  subtitle = 'La solución todo‑en‑uno: CRM, IA y automatizaciones en tu canal de ventas',
-  primaryCtaText = 'Reservar demo',
-  secondaryCtaText = 'Iniciar sesión',
-  primaryCtaHref = '/demo',
-  secondaryCtaHref = '/login',
-  onPrimaryClick,
+  title = 'Diseños de app para web y móvil conectados al dashboard',
+  subtitle = 'Una misma operación comercial, con layouts distintos según el dispositivo: escritorio para control y móvil para respuesta rápida.',
+  primaryCtaText = 'Ver plantillas',
+  secondaryCtaText = 'Ir al dashboard',
+  primaryCtaHref = '#plantillas',
+  secondaryCtaHref = '/dashboard',
 }: DemoLandingHeroProps) {
   return (
-    <section className="relative flex flex-col items-center justify-center min-h-[80vh] bg-gradient-to-br from-emerald-600 to-slate-900 text-white p-8 rounded-3xl glassmorphism">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1400&q=80"
-            alt="Hero background"
-            fill
-            style={{ objectFit: 'cover', opacity: 0.5 }}
-            priority
-          />
+    <section className="demo-hero-section">
+      <div className="container">
+        <div className="row align-items-center g-5">
+          <div className="col-lg-6">
+            <div className="badge-premium mb-4">Smarter Funnel OS · Showcase responsive</div>
+            <h1 className="display-3 mb-4">{title}</h1>
+            <p className="lead text-secondary mb-4">{subtitle}</p>
+            <div className="demo-hero-actions">
+              <Link href={primaryCtaHref} className="btn btn-success-premium btn-cta-dynamic">
+                {primaryCtaText}
+                <ArrowRight size={18} />
+              </Link>
+              <Link href={secondaryCtaHref} className="btn cta-outline-dynamic">
+                {secondaryCtaText}
+              </Link>
+            </div>
+            <div className="demo-hero-highlights">
+              {heroHighlights.map((item) => (
+                <div key={item} className="demo-hero-highlight">
+                  <CheckCircle2 size={18} className="text-success" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="col-lg-6">
+            <div className="demo-hero-preview">
+              <div className="demo-preview-browser">
+                <div className="demo-preview-browser__bar">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <Image
+                  src="/images/dashboard_feature.png"
+                  alt="Vista web del dashboard comercial"
+                  width={1024}
+                  height={1024}
+                  sizes="(max-width: 991px) 100vw, 48vw"
+                  className="demo-preview-browser__image"
+                  priority
+                />
+                <div className="demo-preview-browser__pill">
+                  <LayoutTemplate size={16} />
+                  Web operativo
+                </div>
+              </div>
+              <div className="demo-preview-phone">
+                <div className="demo-preview-phone__header">
+                  <MonitorSmartphone size={16} />
+                  Móvil supervisor
+                </div>
+                <div className="demo-preview-phone__card">
+                  <span>Inbox prioritario</span>
+                  <strong>12 chats activos</strong>
+                </div>
+                <div className="demo-preview-phone__card">
+                  <span>Seguimiento IA</span>
+                  <strong>4 leads listos</strong>
+                </div>
+                <div className="demo-preview-phone__card">
+                  <span>SLA premium</span>
+                  <strong>91%</strong>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-4 tracking-tight">
-        {title}
-      </h1>
-      <p className="text-lg md:text-xl text-center max-w-2xl mb-8 opacity-90">
-        {subtitle}
-      </p>
-      <div className="flex gap-4">
-        {onPrimaryClick ? (
-          <button onClick={onPrimaryClick} className="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl shadow-lg transition-colors">{primaryCtaText}</button>
-        ) : (
-          <Link href={primaryCtaHref} className="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl shadow-lg transition-colors">{primaryCtaText}</Link>
-        )}
-        <Link href={secondaryCtaHref} className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-xl border border-white/30 transition-colors">{secondaryCtaText}</Link>
       </div>
     </section>
   );

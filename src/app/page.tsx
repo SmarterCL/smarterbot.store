@@ -189,7 +189,6 @@ export default function HomePage() {
           <div className="brand-marquee">
             <div className="brand-marquee__track">
               {[
-                'CHATWOOT',
                 'WHATSAPP',
                 'N8N',
                 'ODOO',
@@ -204,7 +203,6 @@ export default function HomePage() {
                 'OPENAI',
                 'LITELLM',
                 'TWILIO',
-                'SUPABASE',
               ].map((brand, index) => (
                 <div key={`${brand}-${index}`} className="brand-pill h4 fw-black tracking-tighter grayscale mb-0">
                   {brand}

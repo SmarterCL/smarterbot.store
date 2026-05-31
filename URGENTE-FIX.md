@@ -13,7 +13,7 @@ Los workflows fueron importados con referencia a credencial `supabase-smarteros`
 Estos workflows están ACTIVADOS pero fallarán al ejecutarse:
 
 ### 1. SmarterOS - Respuesta Automática B2B
-- **URL:** https://n8n.smarterbot.cl/workflow/5FTYtHeoLEVLrcFT
+- **URL:** https://n8n.smarterbot.store/workflow/5FTYtHeoLEVLrcFT
 - **Estado:** ✅ Activado (pero nodos con credencial incorrecta)
 - **Nodos a fixear:**
   - [ ] `Fetch Eventos Pendientes` → Cambiar credential a `Supabase account`
@@ -24,20 +24,20 @@ Estos workflows están ACTIVADOS pero fallarán al ejecutarse:
 ## ⏸️ Workflows Inactivos
 
 ### 2. SmarterOS - MCP Decision Engine
-- **URL:** https://n8n.smarterbot.cl/workflow/jRWHFYLwR2VxD3pY
+- **URL:** https://n8n.smarterbot.store/workflow/jRWHFYLwR2VxD3pY
 - **Nodos a fixear:**
   - [ ] `Actualizar en Supabase` → Cambiar credential a `Supabase account`
 - **Luego:** Activar workflow
 
 ### 3. SmarterOS - CRON Auto-Actualización
-- **URL:** https://n8n.smarterbot.cl/workflow/JKsfUHfTJuf4a2z5
+- **URL:** https://n8n.smarterbot.store/workflow/JKsfUHfTJuf4a2z5
 - **Nodos a fixear:**
   - [ ] `Obtener eventos nuevos` → Cambiar credential a `Supabase account`
   - [ ] `Guardar en Supabase` → Cambiar credential a `Supabase account`
 - **Luego:** Activar workflow
 
 ### 4. SmarterOS - Facturación Electrónica DTE
-- **URL:** https://n8n.smarterbot.cl/workflow/lKXLlxZNFijhFfSH
+- **URL:** https://n8n.smarterbot.store/workflow/lKXLlxZNFijhFfSH
 - **Nodos a fixear:**
   - [ ] `Actualizar en Supabase` → Cambiar credential a `Supabase account`
 - **Luego:** Activar workflow

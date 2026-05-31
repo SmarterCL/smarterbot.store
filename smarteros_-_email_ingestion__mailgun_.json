@@ -1,6 +1,6 @@
 {
   "name": "SmarterOS - Email Ingestion (Mailgun)",
-  "description": "Workflow exportado desde n8n.smarterbot.cl\n\n⚠️ REQUIERE CONFIGURACIÓN:\n- Configurar credenciales de PostgreSQL/Supabase\n- Actualizar URLs de webhooks según entorno\n- Revisar nodos HTTP con autenticación",
+  "description": "Workflow exportado desde n8n.smarterbot.store\n\n⚠️ REQUIERE CONFIGURACIÓN:\n- Configurar credenciales de PostgreSQL/Supabase\n- Actualizar URLs de webhooks según entorno\n- Revisar nodos HTTP con autenticación",
   "active": false,
   "isArchived": false,
   "nodes": [
@@ -57,7 +57,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://n8n.smarterbot.cl/webhook/mcp-server/http",
+        "url": "https://n8n.smarterbot.store/webhook/mcp-server/http",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [

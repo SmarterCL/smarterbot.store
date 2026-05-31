@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function DashboardPage() {
   if (!hasSupabaseEnv) {
-    const demoData = await getDashboardData('smarterbot', null);
+    const demoData = await getDashboardData('smarterbot', null, null);
     return <SmarterDashboard data={demoData} />;
   }
 
@@ -19,6 +19,10 @@ export default async function DashboardPage() {
   }
 
   const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  const {
     data: { user },
   } = await supabase.auth.getUser();
 
@@ -27,7 +31,7 @@ export default async function DashboardPage() {
   }
 
   const tenantId = inferTenantId(user);
-  const dashboardData = await getDashboardData(tenantId, user.email ?? null);
+  const dashboardData = await getDashboardData(tenantId, user.email ?? null, session?.access_token ?? null);
 
   return <SmarterDashboard data={dashboardData} />;
 }

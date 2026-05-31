@@ -13,7 +13,6 @@ import {
   WalletCards,
   type LucideIcon,
 } from 'lucide-react';
-import type { SupabaseClient } from '@supabase/supabase-js';
 import {
   automations as mockAutomations,
   conversations as mockConversations,
@@ -31,38 +30,6 @@ import {
   type QuickAction,
   type TimelineEvent,
 } from '@/components/dashboard/mock-data';
-import { createSupabaseAdminClient } from '@/lib/supabase/server';
-
-type HealthRow = {
-  tenant_id: string;
-  total_events: number;
-  success_count: number;
-  error_count: number;
-  avg_trust: number | null;
-};
-
-type MCPEventRow = {
-  id: string;
-  tenant_id: string;
-  intent: string | null;
-  status: string | null;
-  trust_score: number | null;
-  created_at: string;
-};
-
-type ToolLogRow = {
-  id: string;
-  tool_name: string;
-  error_message: string | null;
-  duration_ms: number | null;
-  created_at: string;
-};
-
-type AgentMemoryRow = {
-  id: string;
-  key: string;
-  updated_at: string;
-};
 
 export type DashboardData = {
   source: 'live' | 'mixed' | 'mock';
@@ -86,6 +53,49 @@ export type DashboardData = {
   premiumSlaPercent: number;
 };
 
+type DashboardSummaryResponse = {
+  tenant: string;
+  user?: {
+    role?: string;
+  };
+  plan?: string;
+  waha?: {
+    status?: string;
+    phone?: string | null;
+    session?: string;
+    lastSeen?: string | null;
+    qrRequired?: boolean;
+  };
+  chatwoot?: {
+    configured?: boolean;
+    openConversations?: number | null;
+    contacts?: number | null;
+  };
+  system?: {
+    status?: string;
+    services?: Record<
+      string,
+      {
+        status?: string;
+        latencyMs?: number | null;
+      }
+    >;
+  };
+  automation?: {
+    n8n?: string;
+    executedEvents?: number;
+    pendingEvents?: number;
+  };
+  billing?: {
+    status?: string;
+  };
+  metrics?: {
+    mcpEvents?: number;
+    trustAverage?: number | null;
+    agentMemoryCount?: number;
+  };
+};
+
 function formatCurrency(value: number) {
   return new Intl.NumberFormat('es-CL', {
     style: 'currency',
@@ -105,50 +115,6 @@ function relativeTimeLabel(value: string) {
 
   const deltaHours = Math.round(deltaMinutes / 60);
   return `Hace ${deltaHours} h`;
-}
-
-async function probeUrl(
-  name: string,
-  target: string | undefined,
-  fallbackStatus: IntegrationStatus['status']
-): Promise<IntegrationStatus> {
-  if (!target) {
-    return { name, latency: 'n/a', uptime: 'n/a', status: fallbackStatus };
-  }
-
-  const start = Date.now();
-
-  try {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 2500);
-    const response = await fetch(target, {
-      method: 'GET',
-      cache: 'no-store',
-      signal: controller.signal,
-    });
-    clearTimeout(timer);
-
-    const latency = `${Date.now() - start} ms`;
-    const status: IntegrationStatus['status'] = response.ok
-      ? Date.now() - start > 500
-        ? 'Lento'
-        : 'Operativo'
-      : 'Atención';
-
-    return {
-      name,
-      latency,
-      uptime: response.ok ? 'reachable' : `http ${response.status}`,
-      status,
-    };
-  } catch {
-    return {
-      name,
-      latency: 'timeout',
-      uptime: 'sin respuesta',
-      status: 'Atención',
-    };
-  }
 }
 
 function buildMockDashboardData(tenantId: string, userEmail: string | null): DashboardData {
@@ -175,236 +141,326 @@ function buildMockDashboardData(tenantId: string, userEmail: string | null): Das
   };
 }
 
-async function fetchLiveDashboardData(admin: SupabaseClient, tenantId: string) {
-  const [healthResult, eventsResult, toolLogsResult, memoryResult, integrations] = await Promise.all([
-    admin.from('v_tenant_health').select('*').eq('tenant_id', tenantId).maybeSingle<HealthRow>(),
-    admin
-      .from('mcp_events')
-      .select('id, tenant_id, intent, status, trust_score, created_at')
-      .eq('tenant_id', tenantId)
-      .order('created_at', { ascending: false })
-      .limit(24)
-      .returns<MCPEventRow[]>(),
-    admin
-      .from('tool_logs')
-      .select('id, tool_name, error_message, duration_ms, created_at')
-      .order('created_at', { ascending: false })
-      .limit(24)
-      .returns<ToolLogRow[]>(),
-    admin
-      .from('agent_memory')
-      .select('id, key, updated_at')
-      .eq('tenant_id', tenantId)
-      .order('updated_at', { ascending: false })
-      .limit(12)
-      .returns<AgentMemoryRow[]>(),
-    Promise.all([
-      probeUrl('n8n orchestration', process.env.NEXT_PUBLIC_CLAW_API_URL, 'Operativo'),
-      probeUrl('Chatwoot inbox', process.env.NEXT_PUBLIC_CHATWOOT_BASE_URL, 'Operativo'),
-      probeUrl('Odoo revenue sync', process.env.NEXT_PUBLIC_ODOO_BASE_URL, 'Atención'),
-    ]),
-  ]);
-
-  if (healthResult.error) {
-    throw healthResult.error;
-  }
-  if (eventsResult.error) {
-    throw eventsResult.error;
-  }
-  if (toolLogsResult.error) {
-    throw toolLogsResult.error;
-  }
-  if (memoryResult.error) {
-    throw memoryResult.error;
+function mapIntegrationStatus(status?: string, latencyMs?: number | null): IntegrationStatus['status'] {
+  if (status === 'ok') {
+    return typeof latencyMs === 'number' && latencyMs > 800 ? 'Lento' : 'Operativo';
   }
 
-  const health = healthResult.data;
-  const events = eventsResult.data ?? [];
-  const toolLogs = toolLogsResult.data ?? [];
-  const memory = memoryResult.data ?? [];
+  if (status === 'degraded') {
+    return 'Lento';
+  }
 
-  const executedEvents = events.filter((event) => event.status === 'executed').length;
-  const failedEvents = events.filter((event) => event.status === 'failed').length;
-  const pendingEvents = events.filter((event) => event.status !== 'executed' && event.status !== 'failed').length;
-  const avgDuration =
-    toolLogs.filter((item) => typeof item.duration_ms === 'number').reduce((sum, item) => sum + (item.duration_ms ?? 0), 0) /
-      Math.max(1, toolLogs.filter((item) => typeof item.duration_ms === 'number').length) || 0;
-  const successfulLogs = toolLogs.filter((item) => !item.error_message).length;
-  const successRate = Math.round((successfulLogs / Math.max(1, toolLogs.length)) * 1000) / 10;
-  const avgTrust = health?.avg_trust ?? null;
-  const estimatedPipelineValue = (health?.total_events ?? events.length) * 120;
+  return 'Atención';
+}
 
-  const metrics: Metric[] = [
-    {
-      title: 'Eventos MCP',
-      value: String(health?.total_events ?? events.length),
-      delta: `${executedEvents} ejecutados`,
-      detail: `Tenant ${tenantId} con ${pendingEvents} en curso y ${failedEvents} fallidos`,
-      icon: CircleDollarSign,
-      tone: failedEvents > 0 ? 'amber' : 'emerald',
-    },
-    {
-      title: 'Memoria de agente',
-      value: String(memory.length),
-      delta: avgTrust === null ? 'sin trust' : `${avgTrust}/1 trust`,
-      detail: 'Snapshots de contexto persistidos en agent_memory',
-      icon: MessageSquareText,
-      tone: 'blue',
-    },
-    {
-      title: 'Tool logs',
-      value: String(toolLogs.length),
-      delta: `${successRate}% éxito`,
-      detail: 'Ejecuciones recientes de herramientas y automatizaciones',
-      icon: GitBranch,
-      tone: successRate >= 95 ? 'slate' : 'amber',
-    },
-    {
-      title: 'Duración media',
-      value: `${Math.round(avgDuration)} ms`,
-      delta: failedEvents > 0 ? `${failedEvents} errores` : 'sin errores recientes',
-      detail: 'Promedio de duración registrado en tool_logs',
-      icon: Clock3,
-      tone: avgDuration > 800 ? 'amber' : 'emerald',
-    },
-  ];
+function formatLatency(latencyMs?: number | null) {
+  return typeof latencyMs === 'number' ? `${latencyMs} ms` : 'n/a';
+}
 
-  const pipeline: PipelineStage[] = [
+function formatUptime(status?: string) {
+  if (status === 'ok') {
+    return 'reachable';
+  }
+
+  if (status === 'degraded') {
+    return 'degraded';
+  }
+
+  return 'sin respuesta';
+}
+
+function derivePipelineStages(summary: DashboardSummaryResponse): PipelineStage[] {
+  const totalEvents = summary.metrics?.mcpEvents ?? 0;
+  const executedEvents = summary.automation?.executedEvents ?? 0;
+  const pendingEvents = summary.automation?.pendingEvents ?? 0;
+  const openConversations = summary.chatwoot?.openConversations ?? 0;
+  const observationCount = Math.max(0, totalEvents - executedEvents - pendingEvents);
+
+  return [
     {
       name: 'Lead entrante',
-      leads: pendingEvents,
-      value: formatCurrency(pendingEvents * 120),
-      change: `${pendingEvents} pendientes`,
-      temperature: pendingEvents > 5 ? 'warm' : 'cold',
+      leads: openConversations,
+      value: formatCurrency(openConversations * 120),
+      change: `${openConversations} abiertos`,
+      temperature: openConversations > 10 ? 'warm' : 'cold',
     },
     {
-      name: 'Decidido',
-      leads: events.filter((event) => event.status === 'decided').length,
-      value: formatCurrency(events.filter((event) => event.status === 'decided').length * 150),
-      change: 'routing listo',
-      temperature: 'cold',
+      name: 'Pendiente',
+      leads: pendingEvents,
+      value: formatCurrency(pendingEvents * 150),
+      change: 'automatización en curso',
+      temperature: pendingEvents > 0 ? 'warm' : 'cold',
     },
     {
       name: 'Ejecutado',
       leads: executedEvents,
       value: formatCurrency(executedEvents * 180),
-      change: 'automatizaciones completadas',
+      change: 'procesos completados',
       temperature: executedEvents > 0 ? 'warm' : 'cold',
     },
     {
       name: 'Observación',
-      leads: failedEvents,
-      value: formatCurrency(failedEvents * 90),
-      change: failedEvents > 0 ? 'requiere revisión' : 'sin incidentes',
-      temperature: failedEvents > 0 ? 'hot' : 'warm',
+      leads: observationCount,
+      value: formatCurrency(observationCount * 90),
+      change: observationCount > 0 ? 'requiere revisión' : 'sin incidentes',
+      temperature: observationCount > 0 ? 'hot' : 'cold',
     },
   ];
+}
 
-  const conversations: Conversation[] = events.slice(0, 4).map((event, index) => ({
-    account: event.tenant_id,
-    customer: event.intent || `Evento ${event.id.slice(0, 6)}`,
-    channel: 'MCP',
-    intent: event.intent || 'Sin intención declarada',
-    owner: index % 2 === 0 ? 'IA' : 'Operación',
-    status:
-      event.status === 'failed'
-        ? 'Escalado'
-        : event.status === 'executed'
-          ? 'En curso'
-          : event.status === 'decided'
-            ? 'Esperando pago'
-            : 'Nuevo',
-    waitTime: relativeTimeLabel(event.created_at),
-    sentiment: event.trust_score !== null && event.trust_score < 0.5 ? 'Crítica' : 'Media',
-  }));
+function deriveMetrics(summary: DashboardSummaryResponse, tenantId: string): Metric[] {
+  const trustAverage = summary.metrics?.trustAverage ?? null;
+  const mcpEvents = summary.metrics?.mcpEvents ?? 0;
+  const agentMemoryCount = summary.metrics?.agentMemoryCount ?? 0;
+  const openConversations = summary.chatwoot?.openConversations ?? 0;
+  const systemStatus = summary.system?.status ?? 'down';
+  const systemServices = summary.system?.services ?? {};
+  const systemSlowServices = Object.values(systemServices).filter((service) => service.status === 'degraded').length;
+  const systemDownServices = Object.values(systemServices).filter((service) => service.status === 'down').length;
 
-  const toolGroups = new Map<string, ToolLogRow[]>();
-  toolLogs.forEach((log) => {
-    const list = toolGroups.get(log.tool_name) ?? [];
-    list.push(log);
-    toolGroups.set(log.tool_name, list);
+  return [
+    {
+      title: 'Eventos MCP',
+      value: String(mcpEvents),
+      delta: `${summary.automation?.executedEvents ?? 0} ejecutados`,
+      detail: `Tenant ${tenantId} con ${summary.automation?.pendingEvents ?? 0} en curso`,
+      icon: CircleDollarSign,
+      tone: systemDownServices > 0 ? 'amber' : 'emerald',
+    },
+    {
+      title: 'Memoria de agente',
+      value: String(agentMemoryCount),
+      delta: trustAverage === null ? 'sin trust' : `${trustAverage}/1 trust`,
+      detail: 'Snapshots de contexto persistidos en Supabase',
+      icon: MessageSquareText,
+      tone: 'blue',
+    },
+    {
+      title: 'Conversaciones abiertas',
+      value: String(openConversations),
+      delta: summary.chatwoot?.configured ? 'Chatwoot conectado' : 'Chatwoot pendiente',
+      detail: 'Conversaciones operativas en inbox comercial',
+      icon: GitBranch,
+      tone: summary.chatwoot?.configured ? 'slate' : 'amber',
+    },
+    {
+      title: 'Estado del sistema',
+      value: systemStatus === 'ok' ? 'Operativo' : systemStatus === 'degraded' ? 'Degradado' : 'Caído',
+      delta:
+        systemDownServices > 0
+          ? `${systemDownServices} servicio(s) caídos`
+          : systemSlowServices > 0
+            ? `${systemSlowServices} servicio(s) lentos`
+            : 'sin incidentes',
+      detail: 'Resumen operativo del gateway e integraciones',
+      icon: Clock3,
+      tone: systemStatus === 'ok' ? 'emerald' : 'amber',
+    },
+  ];
+}
+
+function deriveIntegrations(summary: DashboardSummaryResponse): IntegrationStatus[] {
+  const services = summary.system?.services ?? {};
+  const mapping: Array<[string, string]> = [
+    ['n8n orchestration', 'n8n'],
+    ['Chatwoot inbox', 'chatwoot'],
+    ['Odoo revenue sync', 'odoo'],
+    ['WAHA session', 'waha'],
+  ];
+
+  return mapping.map(([name, key]) => {
+    const service = services[key];
+
+    return {
+      name,
+      latency: formatLatency(service?.latencyMs),
+      uptime: formatUptime(service?.status),
+      status: mapIntegrationStatus(service?.status, service?.latencyMs),
+    };
   });
+}
 
-  const automations: Automation[] = Array.from(toolGroups.entries())
-    .slice(0, 4)
-    .map(([toolName, logs], index) => {
-      const failures = logs.filter((log) => log.error_message).length;
-      const averageDuration =
-        logs.reduce((sum, log) => sum + (log.duration_ms ?? 0), 0) / Math.max(1, logs.length);
+function deriveAutomations(summary: DashboardSummaryResponse): Automation[] {
+  const systemServices = summary.system?.services ?? {};
+  const n8nLatency = systemServices.n8n?.latencyMs;
+  const wahaLatency = systemServices.waha?.latencyMs;
+  const executedEvents = summary.automation?.executedEvents ?? 0;
+  const pendingEvents = summary.automation?.pendingEvents ?? 0;
+  const configuredChatwoot = summary.chatwoot?.configured ?? false;
 
-      return {
-        name: toolName,
-        description: failures
-          ? `${failures} ejecuciones con error requieren revisión.`
-          : 'Ejecuciones recientes sin errores reportados.',
-        throughput: `${logs.length} ejecuciones`,
-        successRate: `${Math.round(((logs.length - failures) / Math.max(1, logs.length)) * 100)}% · ${Math.round(averageDuration)} ms`,
-        status: failures > 0 ? 'Observación' : 'Activo',
-        icon: [ScanSearch, Sparkles, CheckCheck, WalletCards][index] ?? Sparkles,
-      };
-    });
+  return [
+    {
+      name: 'Lead scoring + routing',
+      description: 'Centraliza el ruteo comercial desde WAHA y cola de automatización.',
+      throughput: `${pendingEvents} pendientes`,
+      successRate: `${summary.automation?.n8n ?? 'down'} · ${formatLatency(n8nLatency)}`,
+      status: summary.automation?.n8n === 'ok' ? 'Activo' : 'Observación',
+      icon: ScanSearch,
+    },
+    {
+      name: 'Seguimiento post-demo',
+      description: 'Mantiene continuidad de seguimiento sobre conversaciones activas.',
+      throughput: `${summary.chatwoot?.openConversations ?? 0} conversaciones`,
+      successRate: configuredChatwoot ? 'Chatwoot listo' : 'Chatwoot pendiente',
+      status: configuredChatwoot ? 'Activo' : 'Borrador',
+      icon: Sparkles,
+    },
+    {
+      name: 'Operación WAHA',
+      description: 'Monitorea la sesión de WhatsApp y su disponibilidad comercial.',
+      throughput: summary.waha?.status ?? 'unknown',
+      successRate: formatLatency(wahaLatency),
+      status: summary.waha?.status === 'connected' ? 'Activo' : 'Observación',
+      icon: CheckCheck,
+    },
+    {
+      name: 'Billing + gating',
+      description: 'Prepara estado comercial y feature gating por tenant.',
+      throughput: summary.billing?.status ?? 'active',
+      successRate: `${executedEvents} ejecuciones`,
+      status: summary.billing?.status === 'active' ? 'Activo' : 'Observación',
+      icon: WalletCards,
+    },
+  ];
+}
 
-  const timeline: TimelineEvent[] = toolLogs.slice(0, 4).map((log, index) => ({
-    title: log.error_message ? `Error en ${log.tool_name}` : `${log.tool_name} ejecutado`,
-    timestamp: relativeTimeLabel(log.created_at),
-    description: log.error_message || `Duración ${log.duration_ms ?? 'n/a'} ms`,
-    icon: [AlertTriangle, Sparkles, CheckCheck, WalletCards][index] ?? Activity,
-  }));
+function deriveTimeline(summary: DashboardSummaryResponse): TimelineEvent[] {
+  const wahaStatus = summary.waha?.status ?? 'unknown';
+  const wahaLastSeen = summary.waha?.lastSeen;
+  const n8nStatus = summary.automation?.n8n ?? 'down';
 
-  const dashboardHighlights = [
+  return [
+    {
+      title: `WAHA ${wahaStatus}`,
+      timestamp: wahaLastSeen ? relativeTimeLabel(wahaLastSeen) : 'Sin timestamp',
+      description: summary.waha?.phone ?? 'Sin número enlazado',
+      icon: summary.waha?.status === 'connected' ? CheckCheck : AlertTriangle,
+    },
+    {
+      title: 'Chatwoot inbox',
+      timestamp: 'Estado actual',
+      description: `${summary.chatwoot?.openConversations ?? 0} conversaciones abiertas`,
+      icon: Sparkles,
+    },
+    {
+      title: 'Automatización n8n',
+      timestamp: 'Estado actual',
+      description: `Motor ${n8nStatus}`,
+      icon: n8nStatus === 'ok' ? CheckCheck : AlertTriangle,
+    },
+    {
+      title: 'Billing tenant',
+      timestamp: 'Estado actual',
+      description: `Plan ${summary.plan ?? 'starter'} · ${summary.billing?.status ?? 'active'}`,
+      icon: WalletCards,
+    },
+  ];
+}
+
+function deriveHighlights(summary: DashboardSummaryResponse, tenantId: string) {
+  return [
     {
       label: 'Tenant',
       value: tenantId,
       icon: LayoutPanelTop,
     },
     {
-      label: 'Trust medio',
-      value: avgTrust === null ? 'sin dato' : `${avgTrust}/1`,
+      label: 'Rol',
+      value: summary.user?.role ?? 'owner',
       icon: Bot,
     },
     {
-      label: 'Valor estimado',
-      value: formatCurrency(estimatedPipelineValue),
+      label: 'Plan',
+      value: summary.plan ?? 'starter',
       icon: Activity,
     },
   ];
+}
 
-  const focusPoints = [
-    `${pendingEvents} eventos siguen pendientes de ejecución.`,
-    `${failedEvents} eventos fallidos necesitan revisión operativa.`,
-    `${memory.length} registros de memoria disponibles para contexto.`,
+function deriveFocusPoints(summary: DashboardSummaryResponse): string[] {
+  const pendingEvents = summary.automation?.pendingEvents ?? 0;
+  const openConversations = summary.chatwoot?.openConversations ?? 0;
+  const systemStatus = summary.system?.status ?? 'down';
+
+  return [
+    `${openConversations} conversaciones siguen abiertas en Chatwoot.`,
+    `${pendingEvents} automatizaciones siguen pendientes de ejecución.`,
+    `Estado global del sistema: ${systemStatus}.`,
   ];
+}
+
+async function fetchGatewayDashboardData(
+  tenantId: string,
+  accessToken: string
+): Promise<Omit<DashboardData, 'userEmail'>> {
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_GATEWAY_URL?.trim();
+
+  if (!apiBaseUrl) {
+    throw new Error('Falta NEXT_PUBLIC_API_GATEWAY_URL.');
+  }
+
+  const response = await fetch(`${apiBaseUrl}/api/v1/dashboard/summary/${tenantId}`, {
+    method: 'GET',
+    cache: 'no-store',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Dashboard summary respondió con HTTP ${response.status}.`);
+  }
+
+  const summary = (await response.json()) as DashboardSummaryResponse;
+  const metrics = deriveMetrics(summary, tenantId);
+  const pipeline = derivePipelineStages(summary);
+  const integrations = deriveIntegrations(summary);
+  const automations = deriveAutomations(summary);
+  const timeline = deriveTimeline(summary);
+  const totalEvents = summary.metrics?.mcpEvents ?? 0;
+  const executedEvents = summary.automation?.executedEvents ?? 0;
+  const monthlyTargetPercent = Math.min(100, Math.max(12, Math.round((executedEvents / Math.max(1, totalEvents)) * 100)));
+  const premiumSlaPercent = Math.min(
+    100,
+    Math.max(
+      10,
+      summary.system?.status === 'ok'
+        ? 96
+        : summary.system?.status === 'degraded'
+          ? 78
+          : 42
+    )
+  );
 
   return {
-    source: 'live' as const,
-    sourceLabel: 'Supabase live',
+    source: 'live',
+    sourceLabel: 'Gateway live',
     tenantId,
     metrics,
     pipeline,
-    conversations: conversations.length > 0 ? conversations : mockConversations,
-    automations: automations.length > 0 ? automations : mockAutomations,
+    conversations: mockConversations,
+    automations,
     quickActions,
-    timeline: timeline.length > 0 ? timeline : mockTimeline,
-    integrations: integrations.filter((item) => item.latency !== 'n/a').length > 0 ? integrations : mockIntegrations,
-    dashboardHighlights,
-    focusPoints,
-    monthlyTargetPercent: Math.min(100, Math.max(12, Math.round((executedEvents / Math.max(1, health?.total_events ?? 1)) * 100))),
-    premiumSlaPercent: Math.min(100, Math.max(10, Math.round(successRate))),
+    timeline,
+    integrations,
+    dashboardHighlights: deriveHighlights(summary, tenantId),
+    focusPoints: deriveFocusPoints(summary),
+    monthlyTargetPercent,
+    premiumSlaPercent,
   };
 }
 
 export async function getDashboardData(
   tenantId: string,
-  userEmail: string | null
+  userEmail: string | null,
+  accessToken: string | null
 ): Promise<DashboardData> {
-  const admin = createSupabaseAdminClient();
-
-  if (!admin) {
+  if (!accessToken) {
     return buildMockDashboardData(tenantId, userEmail);
   }
 
   try {
-    const liveData = await fetchLiveDashboardData(admin, tenantId);
+    const liveData = await fetchGatewayDashboardData(tenantId, accessToken);
 
     return {
       ...liveData,

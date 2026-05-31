@@ -64,7 +64,7 @@ export default function TelegramAuth() {
       const data = JSON.parse(session);
       setStatus({ message: `Sesión activa como ${data.first_name}`, type: 'info' });
       setTimeout(() => {
-        window.location.href = 'https://app.smarterbot.cl/demo';
+        window.location.href = 'https://app.smarterbot.store/demo';
       }, 1500);
     }
   };
@@ -99,7 +99,7 @@ export default function TelegramAuth() {
       if (response.ok) {
         setStatus({ message: `¡Bienvenido ${user.first_name}! Redirigiendo...`, type: 'success' });
         setTimeout(() => {
-          window.location.href = 'https://app.smarterbot.cl/demo';
+          window.location.href = 'https://app.smarterbot.store/demo';
         }, 2000);
       } else {
         throw new Error('Claw offline');
@@ -107,7 +107,7 @@ export default function TelegramAuth() {
     } catch (error) {
       setStatus({ message: `¡Bienvenido ${user.first_name}! (Modo Local)`, type: 'success' });
       setTimeout(() => {
-        window.location.href = 'https://app.smarterbot.cl/demo';
+        window.location.href = 'https://app.smarterbot.store/demo';
       }, 2000);
     }
   };
