@@ -1206,6 +1206,22 @@ section {
 .hover\:text-slate-600:hover { color: #475569 !important; }
 .hover\:text-success:hover { color: var(--bs-primary) !important; }
 .hover\:scale-105:hover { transform: scale(1.05) !important; }
+
+/* Hero Section Background */
+.demo-hero-section {
+  background-image: url('/images/dashboard_feature.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.demo-hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(16,185,129,0.4), rgba(251,191,36,0.2));
+  pointer-events: none;
+}
+
 .active\:scale-95:active { transform: scale(0.95) !important; }
 .group:hover .group-hover\:opacity-100 { opacity: 1 !important; }
 .group:hover .group-hover\:bg-success { background-color: var(--bs-primary) !important; }
