@@ -10,6 +10,9 @@
     "start": "next start",
     "lint": "eslint src scripts next.config.ts proxy.ts --ext .js,.cjs,.mjs,.ts,.tsx"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": ["sharp", "unrs-resolver"]
+  },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",
     "@supabase/supabase-js": "2.105.4",
