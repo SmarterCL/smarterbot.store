@@ -4,6 +4,9 @@ export const metadata: Metadata = {
   title: 'Eliminacion de datos | SmarterBOT',
   description:
     'Instrucciones para solicitar la eliminacion de datos asociados a SmarterBOT y sus integraciones con Meta.',
+  alternates: {
+    canonical: 'https://www.smarterbot.store/eliminacion',
+  },
   robots: {
     index: true,
     follow: true,
