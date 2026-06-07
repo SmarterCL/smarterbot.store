@@ -876,14 +876,21 @@ section {
   box-shadow: var(--shadow-2xl);
 }
 
-.layer-grid img {
+.layer-grid__media {
+  position: relative;
   width: 100%;
-  height: auto;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.layer-grid__image {
   object-fit: cover;
   transition: transform 0.4s ease;
 }
 
-.layer-grid figure:hover img {
+.layer-grid figure:hover .layer-grid__image {
   transform: scale(1.08);
 }
 

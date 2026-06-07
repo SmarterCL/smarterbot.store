@@ -62,6 +62,7 @@ const Footer = () => {
                   <li><Link href="/register" className="text-secondary small fw-bold hover-text-success transition-all">Solicitar demo</Link></li>
                   <li><Link href="/contact" className="text-secondary small fw-bold hover-text-success transition-all">Hablar con ventas</Link></li>
                   <li><Link href="/support" className="text-secondary small fw-bold hover-text-success transition-all">Soporte tecnico</Link></li>
+                  <li><Link href="/eliminacion" className="text-secondary small fw-bold hover-text-success transition-all">Eliminacion de datos</Link></li>
                 </ul>
               </div>
             </div>

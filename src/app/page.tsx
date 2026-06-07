@@ -102,6 +102,29 @@ const differentiators = [
   'Arquitectura regional, personalizable y lista para self-hosted o despliegue dedicado.',
 ];
 
+const layerCards = [
+  {
+    src: '/images/dashboard_feature.png',
+    alt: 'Captación comercial',
+    label: 'Captación',
+  },
+  {
+    src: '/images/whatsapp_feature.png',
+    alt: 'Inbox conversacional',
+    label: 'Inbox',
+  },
+  {
+    src: '/images/crm_feature.png',
+    alt: 'IA aplicada a leads',
+    label: 'IA',
+  },
+  {
+    src: '/images/dashboard.png',
+    alt: 'Automatización operacional',
+    label: 'Automatización',
+  },
+];
+
 export default function HomePage() {
   return (
     <div className="landing-wrapper">
@@ -258,23 +281,21 @@ export default function HomePage() {
                 WhatsApp deje de ser solo un canal y se convierta en tu centro de ventas.
               </p>
               {/* Six layers grid */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-                <figure className="text-center">
-                  <img src="/captacion_layer.png" alt="Captación" className="mx-auto rounded-lg shadow-lg" />
-                  <figcaption className="mt-2 text-white">Captación</figcaption>
-                </figure>
-                <figure className="text-center">
-                  <img src="/inbox_layer.png" alt="Inbox" className="mx-auto rounded-lg shadow-lg" />
-                  <figcaption className="mt-2 text-white">Inbox</figcaption>
-                </figure>
-                <figure className="text-center">
-                  <img src="/ia_layer.png" alt="IA" className="mx-auto rounded-lg shadow-lg" />
-                  <figcaption className="mt-2 text-white">IA</figcaption>
-                </figure>
-                <figure className="text-center">
-                  <img src="/automatizacion_layer.png" alt="Automatización" className="mx-auto rounded-lg shadow-lg" />
-                  <figcaption className="mt-2 text-white">Automatización</figcaption>
-                </figure>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6 layer-grid">
+                {layerCards.map((card) => (
+                  <figure key={card.label} className="text-center">
+                    <div className="layer-grid__media">
+                      <Image
+                        src={card.src}
+                        alt={card.alt}
+                        fill
+                        sizes="(max-width: 767px) 45vw, (max-width: 1199px) 30vw, 18vw"
+                        className="layer-grid__image"
+                      />
+                    </div>
+                    <figcaption className="mt-2 text-white">{card.label}</figcaption>
+                  </figure>
+                ))}
                 <figure className="text-center">
                   <div className="w-full h-48 bg-gray-300 rounded-lg flex items-center justify-center text-gray-700">Pipeline (próximo)</div>
                   <figcaption className="mt-2 text-white">Pipeline</figcaption>
