@@ -37,11 +37,9 @@ const Footer = () => {
                 <h5 className="text-[10px] font-black uppercase tracking-widest text-black mb-4">Plataforma</h5>
                 <ul className="list-unstyled space-y-3">
                   <li><Link href="/#problema" className="text-secondary small fw-bold hover-text-success transition-all">Problema</Link></li>
-                  <li><Link href="/#modulos" className="text-secondary small fw-bold hover-text-success transition-all">Modulos</Link></li>
                   <li><Link href="/#operacion" className="text-secondary small fw-bold hover-text-success transition-all">Operacion</Link></li>
                   <li><Link href="/#sectores" className="text-secondary small fw-bold hover-text-success transition-all">Sectores</Link></li>
-                  <li><Link href="/connect" className="text-secondary small fw-bold hover-text-success transition-all">QR Connect</Link></li>
-                  <li><Link href="/login" className="text-secondary small fw-bold hover-text-success transition-all">Login</Link></li>
+                  <li><Link href="/connect" className="text-secondary small fw-bold hover-text-success transition-all">WhatsApp</Link></li>
                 </ul>
               </div>
               
@@ -58,7 +56,7 @@ const Footer = () => {
               <div className="col-sm-4">
                 <h5 className="text-[10px] font-black uppercase tracking-widest text-black mb-4">Contacto</h5>
                 <ul className="list-unstyled space-y-3">
-                  <li><Link href="/connect" className="text-secondary small fw-bold hover-text-success transition-all">Conectar WhatsApp</Link></li>
+                  <li><Link href="/connect" className="text-secondary small fw-bold hover-text-success transition-all">WhatsApp</Link></li>
                   <li><Link href="/register" className="text-secondary small fw-bold hover-text-success transition-all">Solicitar demo</Link></li>
                   <li><Link href="/contact" className="text-secondary small fw-bold hover-text-success transition-all">Hablar con ventas</Link></li>
                   <li><Link href="/support" className="text-secondary small fw-bold hover-text-success transition-all">Soporte tecnico</Link></li>

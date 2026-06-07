@@ -27,7 +27,7 @@ const operatingLayers = [
     icon: <MessageSquareShare size={28} />,
     title: 'Conversacion',
     description:
-      'WhatsApp multiagente, asignacion de conversaciones y respuesta asistida por IA.',
+      'Inbox centralizado, asignacion de conversaciones y respuesta asistida por IA.',
   },
   {
     icon: <Workflow size={28} />,
@@ -59,47 +59,41 @@ const sectors = [
 
 const differentiators = [
   'No vendemos un bot aislado: implementamos una operación comercial completa.',
-  'Tu stack queda conectado de punta a punta: WhatsApp, CRM, workflows, ERP y analítica.',
+  'Tu stack queda conectado de punta a punta: WhatsApp, CRM, automatización, ERP y analítica.',
   'Puedes operar con equipos humanos, IA o ambos sin cambiar de interfaz.',
   'Arquitectura regional, personalizable y lista para self-hosted o despliegue dedicado.',
 ];
 
-const moduleShowcaseCards = [
+const heroTiles = [
   {
     src: '/images/dashboard_feature.png',
     alt: 'Captación comercial',
-    title: 'Front comercial',
-    items: ['Landing pages', 'Funnels', 'Formularios', 'Campañas y attribution'],
+    title: 'Captación',
   },
   {
     src: '/images/whatsapp_feature.png',
     alt: 'Inbox conversacional',
-    title: 'Inbox conversacional',
-    items: ['WhatsApp multiagente', 'Chatwoot como núcleo visual', 'Etiquetas y routing', 'Templates y macros'],
+    title: 'Inbox',
   },
   {
     src: '/images/crm_feature.png',
     alt: 'IA aplicada a leads',
     title: 'IA aplicada',
-    items: ['Clasificación de leads', 'Respuestas sugeridas', 'Resumen de conversaciones', 'Asignación inteligente'],
   },
   {
     src: '/images/whatsapp.png',
     alt: 'Automatización operacional',
-    title: 'Automatización operacional',
-    items: ['n8n workflows', 'Seguimiento automático', 'Recordatorios y SLA', 'Integraciones con tu stack'],
+    title: 'Automatización',
   },
   {
     src: '/images/crm.png',
     alt: 'Pipeline y reporting',
-    title: 'Pipeline y reporting',
-    items: ['Etapas comerciales', 'KPI por canal', 'Embudo de conversión', 'Visibilidad por ejecutivo'],
+    title: 'Pipeline',
   },
   {
     src: '/images/dashboard.png',
     alt: 'Backoffice y ERP',
-    title: 'Backoffice y ERP',
-    items: ['Odoo y facturación', 'Cotizaciones', 'Operación postventa', 'Dashboards ejecutivos'],
+    title: 'ERP',
   },
 ];
 
@@ -130,7 +124,7 @@ export default function HomePage() {
                   Solicitar demo <ArrowRight size={20} />
                 </Link>
                 <Link
-                  href="#modulos"
+                  href="#operacion"
                   className="btn btn-outline-dark rounded-pill px-5 py-3 fw-black uppercase tracking-widest d-flex align-items-center justify-content-center cta-outline-dynamic"
                 >
                   Ver plataforma
@@ -148,79 +142,20 @@ export default function HomePage() {
               </div>
             </div>
             <div className="col-lg-6">
-              <div className="home-hero-stage">
-                <div className="home-hero-stage__desktop float-anim">
-                  <div className="home-window-chrome" aria-hidden="true">
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-                  <div className="home-stage-frame">
+              <div className="home-hero-mosaic">
+                {heroTiles.map((tile) => (
+                  <div key={tile.title} className="home-hero-mosaic__tile">
                     <Image
-                      src="/images/dashboard_feature.png"
-                      alt="Dashboard comercial de Smarter Funnel OS"
+                      src={tile.src}
+                      alt={tile.alt}
                       fill
-                      sizes="(max-width: 991px) 100vw, 48vw"
-                      className="home-stage-image"
-                      priority
+                      sizes="(max-width: 991px) 50vw, 16vw"
+                      className="home-hero-mosaic__image"
+                      priority={tile.title === 'Captación'}
                     />
+                    <div className="home-hero-mosaic__label">{tile.title}</div>
                   </div>
-                  <div className="home-stage-pill">
-                    <ChartNoAxesCombined size={16} />
-                    Front comercial activo
-                  </div>
-                </div>
-
-                <div className="home-hero-stage__mobile">
-                  <div className="home-mobile-header">
-                    <span>WhatsApp operativo</span>
-                    <div className="home-mobile-header__dot" />
-                  </div>
-                  <div className="home-mobile-media">
-                    <Image
-                      src="/images/whatsapp_feature.png"
-                      alt="Inbox de WhatsApp multiagente"
-                      fill
-                      sizes="(max-width: 991px) 100vw, 22vw"
-                      className="home-role-card__image"
-                    />
-                  </div>
-                  <div className="home-mobile-card">
-                    <span>Inbox</span>
-                    <strong className="text-white">12 chats activos</strong>
-                  </div>
-                  <div className="home-mobile-card home-mobile-card--accent">
-                    <span>IA y routing</span>
-                    <strong className="text-white">4 leads listos</strong>
-                  </div>
-                </div>
-
-                <div className="home-hero-stage__sidebar">
-                  <div className="home-metric-card">
-                    <strong>+37%</strong>
-                    <span>más respuesta en hora</span>
-                  </div>
-                  <div className="home-role-card">
-                    <div className="home-role-card__media">
-                      <Image
-                        src="/images/crm_feature.png"
-                        alt="Vista CRM del pipeline comercial"
-                        fill
-                        sizes="(max-width: 991px) 100vw, 20vw"
-                        className="home-role-card__image"
-                      />
-                    </div>
-                    <div className="home-role-card__content">
-                      <p className="home-role-card__eyebrow">Pipeline y cierre</p>
-                      <h3>CRM conectado</h3>
-                      <ul className="list-unstyled mb-0">
-                        <li>Etapas comerciales</li>
-                        <li>Cotizaciones</li>
-                        <li>Seguimiento y handoff</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -233,19 +168,20 @@ export default function HomePage() {
             <div className="brand-marquee__track">
               {[
                 'WHATSAPP',
-                'N8N',
-                'ODOO',
-                'OPENAI',
-                'LITELLM',
-                'TWILIO',
-                'SUPABASE',
-                'CHATWOOT',
+                'CRM',
+                'AUTOMATION',
+                'AI',
+                'ERP',
+                'PIPELINE',
+                'LEADS',
+                'SUPPORT',
                 'WHATSAPP',
-                'N8N',
-                'ODOO',
-                'OPENAI',
-                'LITELLM',
-                'TWILIO',
+                'CRM',
+                'AUTOMATION',
+                'AI',
+                'ERP',
+                'PIPELINE',
+                'LEADS',
               ].map((brand, index) => (
                 <div key={`${brand}-${index}`} className="brand-pill h4 fw-black tracking-tighter grayscale mb-0">
                   {brand}
@@ -288,58 +224,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="modulos" className="py-7 bg-black text-white rounded-4xl mx-3 mx-lg-5 overflow-hidden position-relative">
-        <div className="container">
-          <div className="row justify-content-center text-center mb-6">
-            <div className="col-lg-8">
-              <div className="badge bg-white text-black mb-4 px-3 py-2 rounded-pill small fw-black tracking-widest">
-                Plataforma operacional
-              </div>
-              <h2 className="display-4 fw-black mb-4 text-white">Seis capas para operar ventas conversacionales</h2>
-              <p className="lead text-white-50 mb-0">
-                Smarter Funnel OS une captacion, inbox, IA, automatizacion, pipeline y ERP para que
-                WhatsApp deje de ser solo un canal y se convierta en tu centro de ventas.
-              </p>
-              <div className="module-showcase-grid mt-6">
-                {moduleShowcaseCards.map((card) => (
-                  <article key={card.title} className="module-showcase-card">
-                    <div className="module-showcase-card__content">
-                      <h3 className="h4 fw-black text-white mb-3">{card.title}</h3>
-                      <ul className="list-unstyled space-y-2 mb-0">
-                        {card.items.map((item) => (
-                          <li key={item} className="d-flex align-items-center gap-2 text-white-50 fw-bold">
-                            <span className="module-showcase-card__bullet" aria-hidden="true" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="module-showcase-card__media">
-                      <Image
-                        src={card.src}
-                        alt={card.alt}
-                        fill
-                        sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 32vw"
-                        className="module-showcase-card__image"
-                      />
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
       <section id="operacion" className="py-7">
         <div className="container">
           <div className="row align-items-center g-5">
             <div className="col-lg-6">
               <h2 className="display-4 mb-4">Una sola capa visible para tu equipo comercial</h2>
               <p className="lead text-secondary mb-5">
-                Chatwoot puede ser el frente operacional. Detrás conectamos n8n, Odoo, IA, WhatsApp
-                providers y tu stack de datos para que cada conversación dispare procesos reales.
+                Detrás conectamos inbox, automatización, ERP y datos para que cada conversación
+                dispare procesos reales.
               </p>
               <div className="d-grid gap-3">
                 {operatingLayers.map((layer) => (

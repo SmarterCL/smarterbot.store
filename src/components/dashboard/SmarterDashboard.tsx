@@ -416,15 +416,15 @@ export default function SmarterDashboard({ data }: SmarterDashboardProps) {
                 <div className={styles.nextStepsGrid}>
                   {[
                     'Reemplazar mocks por queries reales desde Supabase o APIs internas.',
-                    'Conectar inbox y SLA con Chatwoot/WAHA para métricas reales.',
-                    'Sincronizar pipeline con CRM/Odoo y jobs de n8n.',
+                    'Conectar inbox y SLA con la capa operativa real para métricas reales.',
+                    'Sincronizar pipeline con el backoffice y automatizaciones.',
                     'Agregar filtros por vertical, owner y estado operacional.',
                   ].map((step) => (
                     <div key={step} className={styles.nextStepCard}>
                       <span className={styles.stepIndex}>0{[
                         'Reemplazar mocks por queries reales desde Supabase o APIs internas.',
-                        'Conectar inbox y SLA con Chatwoot/WAHA para métricas reales.',
-                        'Sincronizar pipeline con CRM/Odoo y jobs de n8n.',
+                        'Conectar inbox y SLA con la capa operativa real para métricas reales.',
+                        'Sincronizar pipeline con el backoffice y automatizaciones.',
                         'Agregar filtros por vertical, owner y estado operacional.',
                       ].indexOf(step) + 1}</span>
                       <p>{step}</p>

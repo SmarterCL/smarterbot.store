@@ -80,7 +80,7 @@ const translations: Record<Language, any> = {
             getStarted: 'Empezar',
         },
         footer: {
-            description: 'Ecosistema de IA soberana y automatización para empresas modernas. Despliega tu propio Claw OS, conecta Odoo, Chatwoot y más.',
+            description: 'Ecosistema de IA soberana y automatización para empresas modernas. Despliega tu propia plataforma y conecta tu operación comercial.',
             product: 'Producto',
             integrations: 'Integraciones',
             company: 'Empresa',
@@ -114,12 +114,12 @@ const translations: Record<Language, any> = {
                 titleAccent: 'Escalar',
                 description: 'Desde agentes de IA hasta hosting soberano, te cubrimos con soluciones de nivel empresarial.',
                 n8n: {
-                    title: 'Claw OS App Grid',
-                    description: 'Accede a Odoo, Chatwoot, y FastAPI pre-configurados en tu propia infraestructura.',
+                    title: 'App Grid',
+                    description: 'Accede a módulos pre-configurados en tu propia infraestructura.',
                 },
                 ecommerce: {
-                    title: 'Listo para Odoo',
-                    description: 'Integraciones fluidas con el ERP líder para tu negocio en tiempo real.',
+                    title: 'Listo para ERP',
+                    description: 'Integraciones fluidas con tu backoffice para operar en tiempo real.',
                 },
                 meta: {
                     title: 'Marketing Intelligence',
@@ -250,7 +250,7 @@ const translations: Record<Language, any> = {
             getStarted: 'Get Started',
         },
         footer: {
-            description: 'Sovereign AI ecosystem and automation for modern businesses. Deploy your own Claw OS, connect Odoo, Chatwoot, and more.',
+            description: 'Sovereign AI ecosystem and automation for modern businesses. Deploy your own platform and connect your commercial operation.',
             product: 'Product',
             integrations: 'Integrations',
             company: 'Company',
@@ -284,12 +284,12 @@ const translations: Record<Language, any> = {
                 titleAccent: 'Scale',
                 description: 'From AI agents to sovereign hosting, we cover you with enterprise-grade solutions.',
                 n8n: {
-                    title: 'Claw OS App Grid',
-                    description: 'Access Odoo, Chatwoot, and FastAPI pre-configured in your own infrastructure.',
+                    title: 'App Grid',
+                    description: 'Access pre-configured modules in your own infrastructure.',
                 },
                 ecommerce: {
-                    title: 'Odoo Ready',
-                    description: 'Seamless integrations with the leading ERP for your business in real-time.',
+                    title: 'ERP Ready',
+                    description: 'Seamless integrations with your backoffice in real time.',
                 },
                 meta: {
                     title: 'Marketing Intelligence',
@@ -312,8 +312,8 @@ const translations: Record<Language, any> = {
             integrations: {
                 title: 'Powerful',
                 titleAccent: 'Integrations',
-                description: 'We connect your Claw OS with the tools you already master.',
-                viewAll: 'View All Ecosystem',
+                description: 'We connect your platform with what you need to operate.',
+                viewAll: 'View all',
             },
             benefits: {
                 badge: 'Deploy in minutes, not days',

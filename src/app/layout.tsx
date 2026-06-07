@@ -1,10 +1,7 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import FacebookSDK from '@/components/FacebookSDK';
-import ChatWidget from '@/components/ChatWidget';
 import WhatsAppContactButton from '@/components/WhatsAppContactButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/index.css';
@@ -16,11 +13,10 @@ export const metadata: Metadata = {
   keywords: [
     'WhatsApp sales OS',
     'ventas conversacionales',
-    'Chatwoot',
-    'n8n',
-    'Odoo',
     'CRM',
     'automatizacion comercial',
+    'pipeline',
+    'inbox',
   ],
   authors: [{ name: 'SmarterBOT', url: 'https://www.smarterbot.store' }],
   openGraph: {
@@ -46,38 +42,14 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body>
-        <FacebookSDK />
         <LanguageProvider>
           <div className="app-shell">
             <Navbar />
             <main className="app-shell__main">{children}</main>
             <Footer />
             <WhatsAppContactButton />
-            <ChatWidget />
           </div>
         </LanguageProvider>
-
-        <Script
-          id="chatwoot-script"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(d,t) {
-                var BASE_URL="https://chat.smarterbot.store";
-                var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-                g.src=BASE_URL+"/packs/js/sdk.js";
-                g.async = true;
-                s.parentNode.insertBefore(g,s);
-                g.onload=function(){
-                  window.chatwootSDK.run({
-                    websiteToken: '86pn4aCm614h4P9JehpbqNoe',
-                    baseUrl: BASE_URL
-                  })
-                }
-              })(document,"script");
-            `,
-          }}
-        />
       </body>
     </html>
   );

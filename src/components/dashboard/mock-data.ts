@@ -254,10 +254,10 @@ export const timeline: TimelineEvent[] = [
 ];
 
 export const integrations: IntegrationStatus[] = [
-  { name: 'Chatwoot inbox', latency: '132 ms', uptime: '99.98%', status: 'Operativo' },
-  { name: 'WAHA / WhatsApp bridge', latency: '248 ms', uptime: '99.64%', status: 'Lento' },
-  { name: 'n8n orchestration', latency: '89 ms', uptime: '99.99%', status: 'Operativo' },
-  { name: 'Odoo revenue sync', latency: '410 ms', uptime: '98.72%', status: 'Atención' },
+  { name: 'Inbox central', latency: '132 ms', uptime: '99.98%', status: 'Operativo' },
+  { name: 'WhatsApp bridge', latency: '248 ms', uptime: '99.64%', status: 'Lento' },
+  { name: 'Automation orchestration', latency: '89 ms', uptime: '99.99%', status: 'Operativo' },
+  { name: 'ERP sync', latency: '410 ms', uptime: '98.72%', status: 'Atención' },
 ];
 
 export const dashboardHighlights = [

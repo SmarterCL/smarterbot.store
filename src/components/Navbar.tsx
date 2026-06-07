@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Zap, Menu, X, ArrowRight, User } from 'lucide-react';
+import { Zap, Menu, X, ArrowRight, MessageCircleMore } from 'lucide-react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -20,11 +20,10 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Problema', href: '/#problema' },
-    { name: 'Modulos', href: '/#modulos' },
     { name: 'Operacion', href: '/#operacion' },
     { name: 'Sectores', href: '/#sectores' },
     { name: 'Diferencial', href: '/#diferencial' },
-    { name: 'QR Connect', href: '/connect' },
+    { name: 'WhatsApp', href: '/connect' },
   ];
 
   return (
@@ -64,12 +63,9 @@ const Navbar = () => {
 
           {/* Actions */}
           <div className="d-flex align-items-center gap-2 pe-1">
-            <Link href="/login" className="d-none d-sm-flex align-items-center gap-2 px-3 py-2 rounded-full bg-soft text-black text-[10px] font-black uppercase tracking-wider text-decoration-none transition-all hover:bg-subtle hover-scale cta-chip whitespace-nowrap">
-              <User size={14} className="text-success" />
-              Login
-            </Link>
             <Link href="/connect" className="d-none d-sm-flex align-items-center gap-2 px-3 py-2 rounded-full bg-soft text-black text-[10px] font-black uppercase tracking-wider text-decoration-none transition-all hover:bg-subtle hover-scale cta-chip whitespace-nowrap">
-              QR Connect <ArrowRight size={14} className="text-success" />
+              <MessageCircleMore size={14} className="text-success" />
+              WhatsApp
             </Link>
             <Link href="/register" className="btn btn-black rounded-full px-4 py-2 text-[10px] font-black uppercase tracking-wider d-flex align-items-center gap-2 hover-scale btn-cta-dynamic whitespace-nowrap">
               Solicitar demo <ArrowRight size={14} className="text-success" />
@@ -112,10 +108,7 @@ const Navbar = () => {
                 SOLICITAR DEMO
              </Link>
              <Link href="/connect" className="btn btn-soft w-100 py-4 fs-4 mb-4">
-                QR CONNECT
-             </Link>
-             <Link href="/login" className="btn btn-black w-100 py-4 fs-4">
-                LOGIN
+                WHATSAPP
              </Link>
           </div>
         </div>
