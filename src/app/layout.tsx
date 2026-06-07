@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FacebookSDK from '@/components/FacebookSDK';
 import ChatWidget from '@/components/ChatWidget';
+import WhatsAppContactButton from '@/components/WhatsAppContactButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/index.css';
 
@@ -21,12 +22,12 @@ export const metadata: Metadata = {
     'CRM',
     'automatizacion comercial',
   ],
-  authors: [{ name: 'SmarterBOT', url: 'https://smarterbot.store' }],
+  authors: [{ name: 'SmarterBOT', url: 'https://www.smarterbot.store' }],
   openGraph: {
     title: 'Smarter Funnel OS',
     description:
       'Plataforma operacional para ventas conversacionales por WhatsApp.',
-    url: 'https://smarterbot.store',
+    url: 'https://www.smarterbot.store',
     siteName: 'SmarterBOT.store',
     locale: 'es_ES',
     type: 'website',
@@ -51,6 +52,7 @@ export default function RootLayout({
             <Navbar />
             <main className="app-shell__main">{children}</main>
             <Footer />
+            <WhatsAppContactButton />
             <ChatWidget />
           </div>
         </LanguageProvider>
