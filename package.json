@@ -2,16 +2,18 @@
   "name": "smarterbot-store-web",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@11.5.0",
+  "packageManager": "pnpm@11.5.2",
   "scripts": {
-
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint src scripts next.config.ts proxy.ts --ext .js,.cjs,.mjs,.ts,.tsx"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["sharp", "unrs-resolver"]
+    "onlyBuiltDependencies": [
+      "sharp",
+      "unrs-resolver"
+    ]
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",
