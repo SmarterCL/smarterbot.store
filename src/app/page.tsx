@@ -65,26 +65,42 @@ const differentiators = [
   'Arquitectura regional, personalizable y lista para self-hosted o despliegue dedicado.',
 ];
 
-const layerCards = [
+const moduleShowcaseCards = [
   {
     src: '/images/dashboard_feature.png',
     alt: 'Captación comercial',
-    label: 'Captación',
+    title: 'Front comercial',
+    items: ['Landing pages', 'Funnels', 'Formularios', 'Campañas y attribution'],
   },
   {
     src: '/images/whatsapp_feature.png',
     alt: 'Inbox conversacional',
-    label: 'Inbox',
+    title: 'Inbox conversacional',
+    items: ['WhatsApp multiagente', 'Chatwoot como núcleo visual', 'Etiquetas y routing', 'Templates y macros'],
   },
   {
     src: '/images/crm_feature.png',
     alt: 'IA aplicada a leads',
-    label: 'IA',
+    title: 'IA aplicada',
+    items: ['Clasificación de leads', 'Respuestas sugeridas', 'Resumen de conversaciones', 'Asignación inteligente'],
+  },
+  {
+    src: '/images/whatsapp.png',
+    alt: 'Automatización operacional',
+    title: 'Automatización operacional',
+    items: ['n8n workflows', 'Seguimiento automático', 'Recordatorios y SLA', 'Integraciones con tu stack'],
+  },
+  {
+    src: '/images/crm.png',
+    alt: 'Pipeline y reporting',
+    title: 'Pipeline y reporting',
+    items: ['Etapas comerciales', 'KPI por canal', 'Embudo de conversión', 'Visibilidad por ejecutivo'],
   },
   {
     src: '/images/dashboard.png',
-    alt: 'Automatización operacional',
-    label: 'Automatización',
+    alt: 'Backoffice y ERP',
+    title: 'Backoffice y ERP',
+    items: ['Odoo y facturación', 'Cotizaciones', 'Operación postventa', 'Dashboards ejecutivos'],
   },
 ];
 
@@ -243,30 +259,31 @@ export default function HomePage() {
                 Smarter Funnel OS une captacion, inbox, IA, automatizacion, pipeline y ERP para que
                 WhatsApp deje de ser solo un canal y se convierta en tu centro de ventas.
               </p>
-              {/* Six layers grid */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6 layer-grid">
-                {layerCards.map((card) => (
-                  <figure key={card.label} className="text-center">
-                    <div className="layer-grid__media">
+              <div className="module-showcase-grid mt-6">
+                {moduleShowcaseCards.map((card) => (
+                  <article key={card.title} className="module-showcase-card">
+                    <div className="module-showcase-card__content">
+                      <h3 className="h4 fw-black text-white mb-3">{card.title}</h3>
+                      <ul className="list-unstyled space-y-2 mb-0">
+                        {card.items.map((item) => (
+                          <li key={item} className="d-flex align-items-center gap-2 text-white-50 fw-bold">
+                            <span className="module-showcase-card__bullet" aria-hidden="true" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="module-showcase-card__media">
                       <Image
                         src={card.src}
                         alt={card.alt}
                         fill
-                        sizes="(max-width: 767px) 45vw, (max-width: 1199px) 30vw, 18vw"
-                        className="layer-grid__image"
+                        sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 32vw"
+                        className="module-showcase-card__image"
                       />
                     </div>
-                    <figcaption className="mt-2 text-white">{card.label}</figcaption>
-                  </figure>
+                  </article>
                 ))}
-                <figure className="text-center">
-                  <div className="w-full h-48 bg-gray-300 rounded-lg flex items-center justify-center text-gray-700">Pipeline (próximo)</div>
-                  <figcaption className="mt-2 text-white">Pipeline</figcaption>
-                </figure>
-                <figure className="text-center">
-                  <div className="w-full h-48 bg-gray-300 rounded-lg flex items-center justify-center text-gray-700">ERP (próximo)</div>
-                  <figcaption className="mt-2 text-white">ERP</figcaption>
-                </figure>
               </div>
             </div>
           </div>
