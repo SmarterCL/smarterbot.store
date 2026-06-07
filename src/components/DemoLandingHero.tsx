@@ -30,7 +30,7 @@ export default function DemoLandingHero({
       <div className="container">
         <div className="row align-items-center g-5">
           <div className="col-lg-6">
-            <div className="badge-premium mb-4">Smarter Funnel OS · Showcase responsive</div>
+            <div className="badge-premium mb-4 mt-8">Smarter Funnel OS · Showcase responsive</div>
             <h1 className="display-3 mb-4">{title}</h1>
             <p className="lead text-secondary mb-4">{subtitle}</p>
             <div className="demo-hero-actions">

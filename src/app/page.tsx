@@ -257,6 +257,33 @@ export default function HomePage() {
                 Smarter Funnel OS une captacion, inbox, IA, automatizacion, pipeline y ERP para que
                 WhatsApp deje de ser solo un canal y se convierta en tu centro de ventas.
               </p>
+              {/* Six layers grid */}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
+                <figure className="text-center">
+                  <img src="/captacion_layer.png" alt="Captación" className="mx-auto rounded-lg shadow-lg" />
+                  <figcaption className="mt-2 text-white">Captación</figcaption>
+                </figure>
+                <figure className="text-center">
+                  <img src="/inbox_layer.png" alt="Inbox" className="mx-auto rounded-lg shadow-lg" />
+                  <figcaption className="mt-2 text-white">Inbox</figcaption>
+                </figure>
+                <figure className="text-center">
+                  <img src="/ia_layer.png" alt="IA" className="mx-auto rounded-lg shadow-lg" />
+                  <figcaption className="mt-2 text-white">IA</figcaption>
+                </figure>
+                <figure className="text-center">
+                  <img src="/automatizacion_layer.png" alt="Automatización" className="mx-auto rounded-lg shadow-lg" />
+                  <figcaption className="mt-2 text-white">Automatización</figcaption>
+                </figure>
+                <figure className="text-center">
+                  <div className="w-full h-48 bg-gray-300 rounded-lg flex items-center justify-center text-gray-700">Pipeline (próximo)</div>
+                  <figcaption className="mt-2 text-white">Pipeline</figcaption>
+                </figure>
+                <figure className="text-center">
+                  <div className="w-full h-48 bg-gray-300 rounded-lg flex items-center justify-center text-gray-700">ERP (próximo)</div>
+                  <figcaption className="mt-2 text-white">ERP</figcaption>
+                </figure>
+              </div>
             </div>
           </div>
 
