@@ -436,6 +436,10 @@ section {
 .home-hero-stage {
   position: relative;
   min-height: 640px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.8fr);
+  gap: 1.25rem;
+  align-items: end;
 }
 
 .home-hero-stage__desktop,
@@ -455,6 +459,14 @@ section {
   border-radius: 2rem;
 }
 
+.home-stage-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.55rem;
+  background: #f8fafc;
+  aspect-ratio: 4 / 3;
+}
+
 .home-window-chrome {
   display: flex;
   gap: 0.45rem;
@@ -470,10 +482,17 @@ section {
 
 .home-stage-image,
 .home-role-card__image {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 1.55rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+.home-mobile-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  margin: 0.75rem 0;
+  border-radius: 1.45rem;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .home-stage-pill {
@@ -495,8 +514,8 @@ section {
 
 .home-hero-stage__mobile {
   position: absolute;
-  right: -0.75rem;
-  bottom: -1.25rem;
+  right: 1rem;
+  bottom: -1rem;
   width: min(280px, 54vw);
   padding: 1rem;
   border-radius: 2rem;
@@ -556,6 +575,11 @@ section {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.26), rgba(15, 23, 42, 0.9));
 }
 
+.home-hero-stage__sidebar {
+  display: grid;
+  gap: 1rem;
+}
+
 .home-metric-card {
   height: 100%;
   padding: 1.2rem 1.3rem;
@@ -583,7 +607,10 @@ section {
 }
 
 .home-role-card__media {
-  padding: 1rem 1rem 0;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .home-role-card__content {
@@ -622,6 +649,11 @@ section {
 
 .home-role-card__content li + li {
   margin-top: 0.45rem;
+}
+
+.home-role-card__image {
+  width: 100%;
+  height: 100%;
 }
 
 .home-dark-card {
@@ -1115,12 +1147,20 @@ section {
 
   .home-hero-stage {
     min-height: auto;
-    padding-bottom: 7rem;
+    grid-template-columns: 1fr;
+    padding-bottom: 0;
   }
 
   .home-hero-stage__mobile {
+    position: relative;
     right: 0;
     bottom: 0;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .home-hero-stage__sidebar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .demo-hero-section {
@@ -1153,6 +1193,10 @@ section {
     position: relative;
     width: 100%;
     margin-top: 1rem;
+  }
+
+  .home-hero-stage__sidebar {
+    grid-template-columns: 1fr;
   }
 
   .demo-hero-actions {

@@ -5,7 +5,6 @@ import {
   Building2,
   ChartNoAxesCombined,
   CheckCircle2,
-  CircleDashed,
   Factory,
   HeartPulse,
   LayoutTemplate,
@@ -149,35 +148,77 @@ export default function HomePage() {
               </div>
             </div>
             <div className="col-lg-6">
-              <div className="position-relative">
-                <div className="absolute top-0 start-0 w-100 h-100 bg-success opacity-10 rounded-4xl blur-3xl" />
-                <div className="relative bg-white p-2 rounded-4xl shadow-2xl border border-light float-anim">
-                  <Image
-                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80"
-                    alt="Equipo comercial operando conversaciones y pipeline"
-                    width={800}
-                    height={620}
-                    className="img-premium"
-                    priority
-                  />
-                  <div className="position-absolute top-0 end-0 m-4 p-4 bg-white rounded-3xl shadow-xl border border-light">
-                    <div className="small text-secondary fw-bold mb-2">Pipeline activo</div>
-                    <div className="d-flex align-items-center gap-3">
-                      <div className="bg-success-subtle p-2 rounded-circle">
-                        <ChartNoAxesCombined size={22} className="text-success" />
-                      </div>
-                      <div>
-                        <div className="h4 mb-0 fw-black">+37%</div>
-                        <div className="small text-secondary">más respuesta en hora</div>
-                      </div>
-                    </div>
+              <div className="home-hero-stage">
+                <div className="home-hero-stage__desktop float-anim">
+                  <div className="home-window-chrome" aria-hidden="true">
+                    <span />
+                    <span />
+                    <span />
                   </div>
-                  <div className="position-absolute bottom-0 start-0 m-4 p-3 bg-black text-white rounded-3xl shadow-xl">
-                    <div className="d-flex align-items-center gap-2 small text-white-50 mb-2">
-                      <CircleDashed size={16} className="text-success" />
-                      Automatizacion activa
+                  <div className="home-stage-frame">
+                    <Image
+                      src="/images/dashboard_feature.png"
+                      alt="Dashboard comercial de Smarter Funnel OS"
+                      fill
+                      sizes="(max-width: 991px) 100vw, 48vw"
+                      className="home-stage-image"
+                      priority
+                    />
+                  </div>
+                  <div className="home-stage-pill">
+                    <ChartNoAxesCombined size={16} />
+                    Front comercial activo
+                  </div>
+                </div>
+
+                <div className="home-hero-stage__mobile">
+                  <div className="home-mobile-header">
+                    <span>WhatsApp operativo</span>
+                    <div className="home-mobile-header__dot" />
+                  </div>
+                  <div className="home-mobile-media">
+                    <Image
+                      src="/images/whatsapp_feature.png"
+                      alt="Inbox de WhatsApp multiagente"
+                      fill
+                      sizes="(max-width: 991px) 100vw, 22vw"
+                      className="home-role-card__image"
+                    />
+                  </div>
+                  <div className="home-mobile-card">
+                    <span>Inbox</span>
+                    <strong className="text-white">12 chats activos</strong>
+                  </div>
+                  <div className="home-mobile-card home-mobile-card--accent">
+                    <span>IA y routing</span>
+                    <strong className="text-white">4 leads listos</strong>
+                  </div>
+                </div>
+
+                <div className="home-hero-stage__sidebar">
+                  <div className="home-metric-card">
+                    <strong>+37%</strong>
+                    <span>más respuesta en hora</span>
+                  </div>
+                  <div className="home-role-card">
+                    <div className="home-role-card__media">
+                      <Image
+                        src="/images/crm_feature.png"
+                        alt="Vista CRM del pipeline comercial"
+                        fill
+                        sizes="(max-width: 991px) 100vw, 20vw"
+                        className="home-role-card__image"
+                      />
                     </div>
-                    <div className="fw-bold">Lead captado → IA clasifica → ejecutivo toma cierre</div>
+                    <div className="home-role-card__content">
+                      <p className="home-role-card__eyebrow">Pipeline y cierre</p>
+                      <h3>CRM conectado</h3>
+                      <ul className="list-unstyled mb-0">
+                        <li>Etapas comerciales</li>
+                        <li>Cotizaciones</li>
+                        <li>Seguimiento y handoff</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
