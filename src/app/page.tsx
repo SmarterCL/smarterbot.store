@@ -2,18 +2,14 @@
 
 import {
   ArrowRight,
-  Bot,
-  BrainCircuit,
   Building2,
   ChartNoAxesCombined,
   CheckCircle2,
-  ChevronRight,
   CircleDashed,
   Factory,
   HeartPulse,
   LayoutTemplate,
   MessageSquareShare,
-  Route,
   ShieldCheck,
   Store,
   Workflow,
@@ -53,39 +49,6 @@ const problemPoints = [
   'Equipos vendiendo por chats sueltos sin ownership, historial ni métricas.',
   'Seguimientos manuales que dependen de memoria y terminan perdiendo negocios.',
   'Bots aislados que responden, pero no conectan con CRM, cotizaciones ni operación.',
-];
-
-const modules = [
-  {
-    icon: <LayoutTemplate size={30} />,
-    title: 'Front comercial',
-    items: ['Landing pages', 'Funnels', 'Formularios', 'Campañas y attribution'],
-  },
-  {
-    icon: <Bot size={30} />,
-    title: 'Inbox conversacional',
-    items: ['WhatsApp multiagente', 'Chatwoot como núcleo visual', 'Etiquetas y routing', 'Templates y macros'],
-  },
-  {
-    icon: <BrainCircuit size={30} />,
-    title: 'IA aplicada',
-    items: ['Clasificación de leads', 'Respuestas sugeridas', 'Resumen de conversaciones', 'Asignación inteligente'],
-  },
-  {
-    icon: <Route size={30} />,
-    title: 'Automatización operacional',
-    items: ['n8n workflows', 'Seguimiento automático', 'Recordatorios y SLA', 'Integraciones con tu stack'],
-  },
-  {
-    icon: <ChartNoAxesCombined size={30} />,
-    title: 'Pipeline y reporting',
-    items: ['Etapas comerciales', 'KPI por canal', 'Embudo de conversión', 'Visibilidad por ejecutivo'],
-  },
-  {
-    icon: <Workflow size={30} />,
-    title: 'Backoffice y ERP',
-    items: ['Odoo y facturación', 'Cotizaciones', 'Operación postventa', 'Dashboards ejecutivos'],
-  },
 ];
 
 const sectors = [
@@ -308,26 +271,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="row g-4">
-            {modules.map((module) => (
-              <div key={module.title} className="col-md-6 col-xl-4">
-                <div className="h-100 p-4 rounded-4xl bg-white bg-opacity-10 border border-white border-opacity-10">
-                  <div className="d-inline-flex p-3 rounded-3xl bg-white bg-opacity-10 text-success mb-4">
-                    {module.icon}
-                  </div>
-                  <h3 className="h4 fw-black text-white mb-3">{module.title}</h3>
-                  <ul className="list-unstyled space-y-2 mb-0">
-                    {module.items.map((item) => (
-                      <li key={item} className="d-flex align-items-center gap-2 text-white-50 fw-bold">
-                        <ChevronRight size={18} className="text-success flex-shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
