@@ -59,15 +59,17 @@ export default function DemoLandingHero({
                   <span />
                   <span />
                 </div>
-                <Image
-                  src="/images/dashboard_feature.png"
-                  alt="Vista web del dashboard comercial"
-                  width={1024}
-                  height={1024}
-                  sizes="(max-width: 991px) 100vw, 48vw"
-                  className="demo-preview-browser__image"
-                  priority
-                />
+                <div className="demo-preview-browser__media">
+                  <Image
+                    src="/images/dashboard_feature.png"
+                    alt="Vista web del dashboard comercial"
+                    width={1024}
+                    height={1024}
+                    sizes="(max-width: 991px) 100vw, 48vw"
+                    className="demo-preview-browser__image"
+                    priority
+                  />
+                </div>
                 <div className="demo-preview-browser__pill">
                   <LayoutTemplate size={16} />
                   Web operativo

@@ -696,12 +696,27 @@ section {
   background: rgba(15, 23, 42, 0.14);
 }
 
+.demo-preview-browser__media,
+.demo-canvas-card__media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: #f8fafc;
+}
+
+.demo-preview-browser__media {
+  aspect-ratio: 4 / 3;
+}
+
+.demo-canvas-card__media {
+  aspect-ratio: 16 / 10;
+}
+
 .demo-preview-browser__image,
 .demo-canvas-card__image {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 1.5rem;
+  object-fit: cover;
+  object-position: center;
 }
 
 .demo-preview-browser__pill {
@@ -948,9 +963,7 @@ section {
 }
 
 .demo-canvas-card__media {
-  border-radius: 1.5rem;
-  overflow: hidden;
-  background: #f8fafc;
+  margin-top: 0.25rem;
 }
 
 .demo-mobile-card {
